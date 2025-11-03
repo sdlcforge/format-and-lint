@@ -42,7 +42,7 @@ $(FANDL_LIB): package.json $(ALL_LIB_JS_FILES_SRC)
 FANDL_EXEC:=$(DIST)/fandl-exec.js
 FANDL_EXEC_ENTRY:=$(SRC)/cli/index.mjs
 
-$(FANDL_EXEC): package.json $(ALL_JS_FILES_SRC)
+$(FANDL_EXEC): package.json $(ALL_JS_FILES_SRC) $(BABEL_CONFIG_DIST)
 	JS_BUILD_TARGET=$(FANDL_EXEC_ENTRY) \
 		JS_OUT=$@ \
 		JS_FORMAT=cjs \

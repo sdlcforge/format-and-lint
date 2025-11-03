@@ -22,7 +22,7 @@ import babelParser from '@babel/eslint-parser'
 import { fixupPluginRules } from '@eslint/compat'
 import js from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
-import standardPlugin from 'eslint-config-standard'
+import standardConfig from 'eslint-config-standard-kit'
 
 import { linebreakTypesExcept } from './lib/linebreak-types-except'
 import { allExts, allExtsStr, jsxExtsStr } from './js-extensions'
@@ -50,6 +50,15 @@ const {
   engines = { node : true },
 } = packageJSON
 
+const standardPlugin = standardConfig({
+  prettier : true,
+  sortImports : true,
+  jsx: true,
+  node: true,
+  react: true,
+  typescript: true,
+})
+
 const usesReact =
   dependencies.react !== undefined || devDependencies.react !== undefined
 const reactSettings = usesReact ? { version : 'detect' } : {}
@@ -58,7 +67,6 @@ const stylisticConfig = stylistic.configs['recommended-flat']
 
 const plugins = Object.assign(
   {
-    // the 'standard' rules plugins
     standard : standardPlugin,
     import   : importPlugin,
     promise  : promisePlugin,
@@ -288,8 +296,9 @@ const defaultJsdocConfig = {
     ...jsdocPlugin.configs['flat/recommended-error'].rules,
     'jsdoc/require-description' : 'error',
     // there is some indication that jsdoc should be able to divine default from ES6 default parameter settings (
-    // e.g., func(foo = true)), but if this is possible, it's not working for us.
+    // e.g., func(foo = true)), but if this is possible, it's not working for us. (Prior to 2025)
     'jsdoc/no-defaults'         : 'off',
+    // allow the dmd-readme-api plugin to define the 'category' tag
     'jsdoc/check-tag-names'     : ['error', { definedTags : ['category'] }],
   },
 }
@@ -305,7 +314,7 @@ const defaultTestsConfig = {
   // adds correct globals when processing jest tests
   languageOptions : { globals : globalsPkg.jest },
   rules           : {
-    // override default check for tests; Jest 'describe' functions can get very long, nad that's OK
+    // override default check for tests; Jest 'describe' functions can get very long, and that's OK
     'max-lines-per-function' : 'off',
   },
 }

@@ -1,4 +1,4 @@
-# @pkgdev/format-and-lint
+# @sdlcforge/format-and-lint
 [![coverage: 97%](./.readme-assets/coverage.svg)](https://github.com/liquid-labs/format-and-lint/pulls?q=is%3Apr+is%3Aclosed)
 
 Pre-configured formatting and lint tool combining the best of prettier and eslint. Aka, fandl.
@@ -14,7 +14,7 @@ Pre-configured formatting and lint tool combining the best of prettier and eslin
 ## Install
 
 ```bash
-npm i @pkgdev/format-and-lint
+npm i @sdlcforge/format-and-lint
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ npx fandl --files '**/weird-src/**/*.{js,mjs,cjs,jsx}' # specify files pattern
 ### API
 
 ```javascript
-import { formatAndLint } from '@pkgdev/format-and-lint'
+import { formatAndLint } from '@sdlcforge/format-and-lint'
 
 // in the API, we provide actual file paths, which may be relative or absolute
 const files = ['index.js', 'src/foo.js', 'src/bar.js']
@@ -80,10 +80,10 @@ points to an array of [`LintResult`](https://eslint.org/docs/latest/integrate/no
 <a id="linebreakTypesExcept"></a>
 ### `linebreakTypesExcept(...types)` ⇒ `Array.<string>` <sup>↱<sup>[source code](./src/lib/default-config/lib/linebreak-types-except.mjs#L67)</sup></sup> <sup>⇧<sup>[global index](#global-function-index)</sup></sup>
 
-A helper function used to sanely build 'blankline' entries in the '@stylistic/padding-line-between-statements' rule. 
-Basically, what we often want is to say "we want a blank line between expression type A and all other expression 
-except for B, C, and D." This is useful because the '@stylistic/padding-line-between-statements' rule requires you 
-specify each type where a blank line is required, but it's generally easier to specify a set of expression types for 
+A helper function used to sanely build 'blankline' entries in the '@stylistic/padding-line-between-statements' rule.
+Basically, what we often want is to say "we want a blank line between expression type A and all other expression
+except for B, C, and D." This is useful because the '@stylistic/padding-line-between-statements' rule requires you
+specify each type where a blank line is required, but it's generally easier to specify a set of expression types for
 which a blank line is _NOT_ required.E.g.:
 
 ```javascript
@@ -98,9 +98,9 @@ which a blank line is _NOT_ required.E.g.:
 ]
 ```
 
-Would require (and/or add) a blank line between a class declaration and anything else, and a blank line between 
-`import` statements and all other statements except `import` or `cjs-import` statements. That way, all your `import` 
-statements would be grouped together, but would have a blank line between the last `import` and whatever the next 
+Would require (and/or add) a blank line between a class declaration and anything else, and a blank line between
+`import` statements and all other statements except `import` or `cjs-import` statements. That way, all your `import`
+statements would be grouped together, but would have a blank line between the last `import` and whatever the next
 non-import statement is.
 
 

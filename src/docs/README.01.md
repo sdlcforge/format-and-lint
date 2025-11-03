@@ -1,4 +1,4 @@
-# @pkgdev/format-and-lint
+# @sdlcforge/format-and-lint
 [![coverage: 97%](./.readme-assets/coverage.svg)](https://github.com/liquid-labs/format-and-lint/pulls?q=is%3Apr+is%3Aclosed)
 
 Pre-configured formatting and lint tool combining the best of prettier and eslint. Aka, fandl.
@@ -14,7 +14,7 @@ Pre-configured formatting and lint tool combining the best of prettier and eslin
 ## Install
 
 ```bash
-npm i @pkgdev/format-and-lint
+npm i @sdlcforge/format-and-lint
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ npx fandl --files '**/weird-src/**/*.{js,mjs,cjs,jsx}' # specify files pattern
 ### API
 
 ```javascript
-import { formatAndLint } from '@pkgdev/format-and-lint'
+import { formatAndLint } from '@sdlcforge/format-and-lint'
 
 // in the API, we provide actual file paths, which may be relative or absolute
 const files = ['index.js', 'src/foo.js', 'src/bar.js']
