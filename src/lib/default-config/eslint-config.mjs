@@ -51,12 +51,12 @@ const {
 } = packageJSON
 
 const standardPlugin = standardConfig({
-  prettier : true,
+  prettier    : true,
   sortImports : true,
-  jsx: true,
-  node: true,
-  react: true,
-  typescript: true,
+  jsx         : true,
+  node        : true,
+  react       : true,
+  typescript  : true,
 })
 
 const usesReact =
@@ -72,8 +72,8 @@ const plugins = Object.assign(
     promise  : promisePlugin,
     n        : nPlugin,
   },
-  stylisticConfig.plugins
-) // this names the plugin '@stylistic'
+  stylisticConfig.plugins // this names the plugin '@stylistic'
+)
 
 const rules = {
   ...js.configs.recommended.rules,

@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.22",
   "description": "Pre-configured formatting and style tool combining prettier and eslint.",
   "main": "./dist/fandl.js",
+  "type": "module",
   "bin": {
     "fandl": "./dist/fandl-exec.js"
   },

@@ -36,7 +36,6 @@ FANDL_LIB_ENTRY:=$(SRC)/lib/index.mjs
 $(FANDL_LIB): package.json $(ALL_LIB_JS_FILES_SRC)
 	JS_BUILD_TARGET=$(FANDL_LIB_ENTRY) \
 		JS_OUT=$@ \
-		JS_FORMAT=cjs \
 	  $(ROLLUP) --config $(ROLLUP_CONFIG)
 
 FANDL_EXEC:=$(DIST)/fandl-exec.js
@@ -45,7 +44,6 @@ FANDL_EXEC_ENTRY:=$(SRC)/cli/index.mjs
 $(FANDL_EXEC): package.json $(ALL_JS_FILES_SRC) $(BABEL_CONFIG_DIST)
 	JS_BUILD_TARGET=$(FANDL_EXEC_ENTRY) \
 		JS_OUT=$@ \
-		JS_FORMAT=cjs \
 		JS_OUT_PREAMBLE='#!/usr/bin/env -S node --enable-source-maps' \
 	  $(ROLLUP) --config $(ROLLUP_CONFIG)
 	chmod a+x $@

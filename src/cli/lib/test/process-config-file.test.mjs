@@ -7,8 +7,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 describe('processConfigFile', () => {
   test.each([
-    'config.cjs',
-    'config.js',
+    // CJS files are not currently supported; see https://github.com/sdlcforge/format-and-lint/issues/52
+    // 'config.cjs',
+    // 'config.js',
     'config.json',
     'config.mjs',
     'config.yaml',

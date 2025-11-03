@@ -19,6 +19,8 @@ npm i @sdlcforge/format-and-lint
 
 ## Usage
 
+Note this is an ESM only package. We would [like to support CJS](https://github.com/sdlcforge/format-and-lint/issues/52) in the production release.
+
 ### CLI
 
 ```bash

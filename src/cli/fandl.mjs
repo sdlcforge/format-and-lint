@@ -77,13 +77,13 @@ const extractFormatOrLintOptions = (command, mainOpts) =>
   mainOpts._unknown === undefined
     ? mainOpts
     : Object.assign(
-      {},
-      mainOpts,
-      commandLineArgs(
-        cliSpec.commands.find((c) => c.name === command).arguments,
-        { argv : mainOpts._unknown, camelCase : true }
+        {},
+        mainOpts,
+        commandLineArgs(
+          cliSpec.commands.find((c) => c.name === command).arguments,
+          { argv : mainOpts._unknown, camelCase : true }
+        )
       )
-    )
 
 const verifyArgs = ({ eslintConfigPath, eslintConfigComponentsPath }) => {
   if (
