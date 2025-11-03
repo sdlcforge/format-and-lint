@@ -1,6 +1,6 @@
 {
   "name": "@sdlcforge/format-and-lint",
-  "version": "1.0.0-alpha.25",
+  "version": "1.0.0-alpha.26",
   "description": "Pre-configured formatting and style tool combining prettier and eslint.",
   "main": "./dist/fandl.js",
   "type": "module",
