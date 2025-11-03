@@ -142,17 +142,17 @@ Note, the component structure is essentially a prototype at this point. Future v
   ```
   - places `else if`/`else`/`catch`, etc. on a newline; e.g.:
   ```js
-  if (a === 1) { // fandl style (Stroustrup); more consistent and allows for end comments
+  if (a === 1) { // fandl style (Stroustrup); more consistent IMO
     ...
-  } // here we can say something about what the preceding block did
-  else { // and here we can say something about what this block will do
-
+  } // and for me it's odd to start a content containing line with a block divider
+  else {
+  ...
   }
   // vs
-  if (a === 1) { // prettier style ("one true brace style")
+  if (a === 1) { // prettier default style ("one true brace style")
     ...
-  } /* I gess you could do this */ else { // but IDK, just looks weird
-
+  } else { // but IDK, just looks weird
+  ...
   }
   ```
   - aligns the colons in object declarations; e.g.:
@@ -167,6 +167,5 @@ Note, the component structure is essentially a prototype at this point. Future v
     longFieldName : 'how are you?',
   }
   ```
-- The dual-formatting is also compatible with the eslint configuration, so the code final format will pass the eslint based lint checking.
 
 [^1]: I perhaps falsely remember eslint actually doing a better re indenting code, but in any case there are two issue with the latest eslint based reformatting. First, it miscounts the correct indention level where '('s were involved in boolean expressions. Second, eslint failed automatically break up long lines. (As of @stylistic/eslint-plugin: 2.6.4, eslint: 8.50.0; have since upgraded but not retested since it's working as is.)
