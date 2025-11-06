@@ -52,7 +52,6 @@
     "find-plus": "^2.0.0",
     "gitignore-to-glob": "^0.3.0",
     "globals": "^14.0.0",
-    "jest": "^29.7.0",
     "js-yaml": "^4.1.0",
     "prettier": "^3.3.3",
     "standard-error-set": "^1.0.0-beta.2"
@@ -60,8 +59,9 @@
   "devDependencies": {
     "@liquid-labs/dmd": "^6.3.1",
     "@liquid-labs/jsdoc-to-markdown": "^8.1.1",
-    "@liquid-labs/sdlc-resource-jest": "^1.0.0-alpha.8",
-    "dmd-readme-api": "^1.0.0-beta.8"
+    "@liquid-labs/sdlc-resource-jest": "^1.0.0-alpha.9",
+    "dmd-readme-api": "^1.0.0-beta.8",
+    "jest": "^30.2.0"
   },
   "_comply": {
     "orgKey": "@liquid-labs"
