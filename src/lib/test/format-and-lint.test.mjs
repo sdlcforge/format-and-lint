@@ -62,9 +62,7 @@ describe('formatAndLint', () => {
       const formattedFileContents = await readFile(testFile, {
         encoding : 'utf8',
       })
-      const formattedExampleConents = await getFormattedTextFor(
-        join(testDirSrc, 'index.mjs')
-      )
+      const formattedExampleConents = await getFormattedTextFor(join(testDirSrc, 'index.mjs'))
 
       expect(formattedFileContents).toBe(formattedExampleConents)
     }

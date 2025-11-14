@@ -28,14 +28,7 @@ describe('processGitignore', () => {
     const results = processGitignore({
       path : join(__dirname, 'data', 'test-gitignore.txt'),
     })
-    expect(results).toEqual([
-      'qa',
-      'qa/**',
-      '**/foo',
-      '**/foo/**',
-      '**/*.a',
-      '**/*.a/**',
-    ])
+    expect(results).toEqual(['qa', 'qa/**', '**/foo', '**/foo/**', '**/*.a', '**/*.a/**'])
   })
 
   test('throws error by default on negative ignore pattern', () => {
@@ -46,9 +39,7 @@ describe('processGitignore', () => {
       throw new Error('Did not throw as expected.')
     }
     catch (e) {
-      expect(e.message).toMatch(
-        /'.gitignore' contains un-usable negative ignore pattern\./
-      )
+      expect(e.message).toMatch(/'.gitignore' contains un-usable negative ignore pattern\./)
     }
   })
 

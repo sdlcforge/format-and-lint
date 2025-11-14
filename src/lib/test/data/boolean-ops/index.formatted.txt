@@ -2,18 +2,22 @@ const variable1 = 1
 const variable2 = 2
 const variable3 = 3
 const variable4 = 4
-const variable5 = 5
-const variable6 = 6
+const longVariableName1 = 1
+const longVariableName2 = 2
+const longVariableName3 = 3
+const longVariableName4 = 4
+const longVariableName5 = 5
+const longVariableName6 = 6
 
 const foo = () =>
   variable1
   || (variable2 && variable3)
-  || (variable1
-    && variable2
-    && variable3
-    && variable4
-    && variable5
-    && variable6)
+  || (longVariableName1
+    && longVariableName2
+    && longVariableName3
+    && longVariableName4
+    && longVariableName5
+    && longVariableName6)
   || variable4
   || !(variable4 && !variable3)
 

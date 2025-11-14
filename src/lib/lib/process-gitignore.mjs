@@ -8,26 +8,21 @@ const processGitignore = ({ path = '.gitignore', warnOnNotIgnore }) => {
       warnOnNotIgnore === true
         ? (pattern) => {
             if (pattern.charAt(0) !== '!') {
-              process.stderr.write(
-                `Negated '.gitignore' pattern '${pattern}' will be ignored.`
-              )
+              process.stderr.write(`Negated '.gitignore' pattern '${pattern}' will be ignored.`)
             }
           }
         : (pattern) => {
             if (pattern.charAt(0) !== '!') {
               throw new CommonError({
                 // TODO: Use ConditionsNotMetError when implemented
-                message :
-                  "'.gitignore' contains un-usable negative ignore pattern. These patterns are ignored.",
-                hint : "Rewrite the '.gitignore' patterns to factor out the negative patterns.",
+                message : "'.gitignore' contains un-usable negative ignore pattern. These patterns are ignored.",
+                hint    : "Rewrite the '.gitignore' patterns to factor out the negative patterns.",
               })
             }
           }
     patterns.some(checkNotIgnore)
     // we process these patters as ignore patterns, so we remove the '!', which flips the semantics
-    const ignorePatterns = patterns
-      .filter((p) => p.charAt(0) === '!')
-      .map((p) => p.slice(1))
+    const ignorePatterns = patterns.filter((p) => p.charAt(0) === '!').map((p) => p.slice(1))
 
     return ignorePatterns
   }

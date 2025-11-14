@@ -73,30 +73,18 @@ const formatAndLint = async (options) => {
   prettierParseConfig.parser = 'babel'
   processOptions.prettierConfig = prettierParseConfig
 
-  const lintResults = (
-    await Promise.all(files.map((file) => processSource(file, processOptions)))
-  ).flat()
+  const lintResults = (await Promise.all(files.map((file) => processSource(file, processOptions)))).flat()
 
   return { eslint : processOptions.eslint, lintResults }
 }
 
 const processSource = async (
   file,
-  {
-    check = false,
-    eslint,
-    noWrite = false,
-    outputDir,
-    prettierConfig,
-    relativeStem = process.cwd(),
-  }
+  { check = false, eslint, noWrite = false, outputDir, prettierConfig, relativeStem = process.cwd() }
 ) => {
   const readPromise = readFile(file, { encoding : 'utf8' })
   const inputSource = await readPromise
-  const prettierSource =
-    check === true
-      ? inputSource
-      : await prettierFormat(inputSource, prettierConfig)
+  const prettierSource = check === true ? inputSource : await prettierFormat(inputSource, prettierConfig)
   const lintResults = await eslint.lintText(
     // we must specify the file path in order for the proper rules from the flat config to attach
     prettierSource,
@@ -110,11 +98,7 @@ const processSource = async (
   }
   const formattedText = lintResults[0].output
 
-  if (
-    check !== true
-    && noWrite !== true
-    && (formattedText !== undefined || outputDir !== undefined)
-  ) {
+  if (check !== true && noWrite !== true && (formattedText !== undefined || outputDir !== undefined)) {
     let outputPath = file
     if (outputDir !== undefined) {
       if (!file.startsWith(outputPath)) {
