@@ -32,17 +32,13 @@ const selectFilesFromOptions = async ({
     }
     else {
       throw new ArgumentInvalidError({
-        message :
-          "Did not find root index nor 'src' directory to indicate default matching pattern.",
-        hint : "Specify '--files' or '--files-paths'.",
+        message : "Did not find root index nor 'src' directory to indicate default matching pattern.",
+        hint    : "Specify '--files' or '--files-paths'.",
       })
     }
   }
 
-  const ignorePatterns = await processFilePatterns(
-    ignoreFiles,
-    ignoreFilesPaths
-  )
+  const ignorePatterns = await processFilePatterns(ignoreFiles, ignoreFilesPaths)
   if (noStandardIgnores !== true) {
     ignorePatterns.push(...standardIgnores)
     ignorePatterns.push(...processGitignore({ warnOnNotIgnore : true }))

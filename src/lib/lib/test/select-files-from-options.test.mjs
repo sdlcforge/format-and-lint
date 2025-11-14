@@ -10,11 +10,7 @@ describe('selectFilesFromOptions', () => {
     [
       'selects files from CWD by default',
       { files : ['src/test/lib/**'] },
-      [
-        'copy-dir-to-tmp.mjs',
-        'get-formatted-text-for.mjs',
-        'my-dir-from-import.mjs',
-      ].map((f) => `src/test/lib/${f}`),
+      ['copy-dir-to-tmp.mjs', 'get-formatted-text-for.mjs', 'my-dir-from-import.mjs'].map((f) => `src/test/lib/${f}`),
     ],
     [
       'can set root explicitly',
@@ -36,9 +32,7 @@ describe('selectFilesFromOptions', () => {
     expect(selectedFiles).toHaveLength(expectedFiles.length)
     for (let i = 0; i < selectedFiles.length; i += 1) {
       if (selectedFiles[i].endsWith(expectedFiles[i]) !== true) {
-        throw new Error(
-          `Expected to match '${expectedFiles[i]}', but got '${selectedFiles[i]}' (position ${i}).`
-        )
+        throw new Error(`Expected to match '${expectedFiles[i]}', but got '${selectedFiles[i]}' (position ${i}).`)
       }
     }
   })

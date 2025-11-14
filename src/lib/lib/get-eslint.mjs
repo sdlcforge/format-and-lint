@@ -6,8 +6,7 @@ import { getEslintConfig } from '../default-config/eslint-config'
 const getEslint = ({ check, eslintConfig, eslintConfigComponents }) => {
   if (eslintConfig !== undefined && eslintConfigComponents !== undefined) {
     throw new ArgumentInvalidError({
-      message :
-        "You cannot define 'eslintConfig' and 'eslintConfigComponents' simultaneously.",
+      message : "You cannot define 'eslintConfig' and 'eslintConfigComponents' simultaneously.",
     })
   }
 

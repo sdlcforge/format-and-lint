@@ -17,15 +17,13 @@ const lintArgs = [
     description : 'A file pattern selecting files to ignore.',
   },
   {
-    name     : 'ignore-files-paths',
-    multiple : true,
-    description :
-      'A path to a file containing a list of newline separated file patterns selecting files to ignore.',
+    name        : 'ignore-files-paths',
+    multiple    : true,
+    description : 'A path to a file containing a list of newline separated file patterns selecting files to ignore.',
   },
   {
-    name : 'eslint-config-path',
-    description :
-      'Specifies the path to a eslint configuration file to replace the default base eslint configuration.',
+    name        : 'eslint-config-path',
+    description : 'Specifies the path to a eslint configuration file to replace the default base eslint configuration.',
   },
   {
     name : 'eslint-config-components-path',
@@ -33,16 +31,14 @@ const lintArgs = [
       "Specifies the path to a configuration file that resolves to an object keyed to 'base', 'jsx', 'node', and 'test' configuration components.",
   },
   {
-    name : 'ignore-package-settings',
-    type : Boolean,
-    description :
-      "Suppresses merging settings from 'package.json:devPkg.linting'.",
+    name        : 'ignore-package-settings',
+    type        : Boolean,
+    description : "Suppresses merging settings from 'package.json:devPkg.linting'.",
   },
   {
-    name : 'no-standard-ignores',
-    type : Boolean,
-    description :
-      "Suppresses default .gitignore and '**/test/data/**/*' ignore patterns.",
+    name        : 'no-standard-ignores',
+    type        : Boolean,
+    description : "Suppresses default .gitignore and '**/test/data/**/*' ignore patterns.",
   },
   {
     name        : 'root',
@@ -52,9 +48,8 @@ const lintArgs = [
 
 const cliSpec = {
   mainCommand : 'fandl',
-  description :
-    'Optimized, single command out of the box JavaScript format and lint tool.',
-  arguments : [
+  description : 'Optimized, single command out of the box JavaScript format and lint tool.',
+  arguments   : [
     {
       name          : 'command',
       defaultOption : true,

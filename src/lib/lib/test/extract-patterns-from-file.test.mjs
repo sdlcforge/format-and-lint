@@ -3,9 +3,7 @@ import './mock-read-file'
 describe('extractPatternsFromFile', () => {
   let extractPatternsFromFile
   beforeAll(async () => {
-    ({ extractPatternsFromFile } = await import(
-      '../extract-patterns-from-file'
-    ))
+    ({ extractPatternsFromFile } = await import('../extract-patterns-from-file'))
   })
 
   test('excludes comment and blank lines', async () => {

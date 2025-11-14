@@ -10,15 +10,7 @@ const __dirname = myDirFromImport(import.meta.url)
 
 describe('fandl', () => {
   test('will update files in place', async () => {
-    const testDirSrc = resolve(
-      __dirname,
-      '..',
-      '..',
-      'lib',
-      'test',
-      'data',
-      'boolean-ops'
-    )
+    const testDirSrc = resolve(__dirname, '..', '..', 'lib', 'test', 'data', 'boolean-ops')
     let tmpDir
 
     try {
@@ -41,9 +33,7 @@ describe('fandl', () => {
       const formattedFileContents = await readFile(testFile, {
         encoding : 'utf8',
       })
-      const formattedExampleConents = await getFormattedTextFor(
-        join(testDirSrc, 'index.mjs')
-      )
+      const formattedExampleConents = await getFormattedTextFor(join(testDirSrc, 'index.mjs'))
 
       expect(formattedFileContents).toBe(formattedExampleConents)
       expect(output).toBe('')
@@ -58,12 +48,7 @@ describe('fandl', () => {
   test("raises error if both '--eslint-config-path' and '--eslint-config-components-path' are specified", async () => {
     try {
       await fandl({
-        argv : [
-          '--eslint-config-path',
-          '/foo',
-          '--eslint-config-components-path',
-          '/foo',
-        ],
+        argv : ['--eslint-config-path', '/foo', '--eslint-config-components-path', '/foo'],
       })
       throw new Error('Did not throw error as expected.')
     }

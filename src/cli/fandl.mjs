@@ -32,20 +32,12 @@ const fandl = async ({ argv = process.argv, stdout = process.stdout } = {}) => {
 
     const filePaths = await selectFilesFromOptions(remainderOptions)
 
-    const eslintConfig =
-      eslintConfigPath === undefined
-        ? undefined
-        : await processConfigFile(eslintConfigPath)
+    const eslintConfig = eslintConfigPath === undefined ? undefined : await processConfigFile(eslintConfigPath)
 
     const eslintComfigComponents =
-      eslintConfigComponentsPath === undefined
-        ? undefined
-        : await processConfigFile(eslintConfigComponentsPath)
+      eslintConfigComponentsPath === undefined ? undefined : await processConfigFile(eslintConfigComponentsPath)
 
-    const prettierConfig =
-      prettierConfigPath === undefined
-        ? undefined
-        : await processConfigFile(prettierConfigPath)
+    const prettierConfig = prettierConfigPath === undefined ? undefined : await processConfigFile(prettierConfigPath)
 
     const eslint = getEslint({ check, eslintConfig, eslintComfigComponents })
 
@@ -79,17 +71,14 @@ const extractFormatOrLintOptions = (command, mainOpts) =>
     : Object.assign(
         {},
         mainOpts,
-        commandLineArgs(
-          cliSpec.commands.find((c) => c.name === command).arguments,
-          { argv : mainOpts._unknown, camelCase : true }
-        )
+        commandLineArgs(cliSpec.commands.find((c) => c.name === command).arguments, {
+          argv      : mainOpts._unknown,
+          camelCase : true,
+        })
       )
 
 const verifyArgs = ({ eslintConfigPath, eslintConfigComponentsPath }) => {
-  if (
-    eslintConfigPath !== undefined
-    && eslintConfigComponentsPath !== undefined
-  ) {
+  if (eslintConfigPath !== undefined && eslintConfigComponentsPath !== undefined) {
     throw new ArgumentInvalidError({
       message :
         "Specifying both '--eslint-config-path' and '--eslint-config-components-path' is invalid. Please specify one or the other.",

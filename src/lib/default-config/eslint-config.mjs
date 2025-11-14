@@ -44,11 +44,7 @@ if (babelConfigPath === undefined) {
 
 const packageContents = readFileSync('./package.json', { encoding : 'utf8' })
 const packageJSON = JSON.parse(packageContents)
-const {
-  dependencies = {},
-  devDependencies = {},
-  engines = { node : true },
-} = packageJSON
+const { dependencies = {}, devDependencies = {}, engines = { node : true } } = packageJSON
 
 const standardPlugin = standardConfig({
   prettier    : true,
@@ -59,8 +55,7 @@ const standardPlugin = standardConfig({
   typescript  : true,
 })
 
-const usesReact =
-  dependencies.react !== undefined || devDependencies.react !== undefined
+const usesReact = dependencies.react !== undefined || devDependencies.react !== undefined
 const reactSettings = usesReact ? { version : 'detect' } : {}
 
 const stylisticConfig = stylistic.configs['recommended-flat']
@@ -80,16 +75,9 @@ const rules = {
   ...standardPlugin.rules,
   ...stylisticConfig.rules, // the stylistic rules also cover react rules
   // override key spacing to get things aligned
-  '@stylistic/key-spacing' : [
-    'error',
-    { align : 'colon', afterColon : true, beforeColon : true },
-  ],
+  '@stylistic/key-spacing'           : ['error', { align : 'colon', afterColon : true, beforeColon : true }],
   // override to allow avoiding escapes
-  '@stylistic/quotes' : [
-    'error',
-    'single',
-    { allowTemplateLiterals : true, avoidEscape : true },
-  ],
+  '@stylistic/quotes'                : ['error', 'single', { allowTemplateLiterals : true, avoidEscape : true }],
   // additional rules
   '@stylistic/arrow-parens'          : ['error', 'always'], // I like this to be consistent
   '@stylistic/array-bracket-newline' : ['error', 'consistent'],
@@ -133,15 +121,11 @@ const rules = {
       VariableDeclarator       : 4,
     },
   ],
-  '@stylistic/linebreak-style'         : ['error', 'unix'],
+  '@stylistic/linebreak-style'                 : ['error', 'unix'],
   // '@stylistic/indent-binary-ops': ['error', 4], // same as default, but since we define indent, these two go together
-  '@stylistic/max-statements-per-line' : ['error', { max : 2 }], // allow for short one-liners
+  '@stylistic/max-statements-per-line'         : ['error', { max : 2 }], // allow for short one-liners
   // The default is just 'before'; but equals are special. IMO.
-  '@stylistic/operator-linebreak'      : [
-    'error',
-    'before',
-    { overrides : { '=' : 'after', '-=' : 'after', '+=' : 'after' } },
-  ],
+  '@stylistic/operator-linebreak'              : ['error', 'before', { overrides : { '=' : 'after', '-=' : 'after', '+=' : 'after' } }],
   '@stylistic/padding-line-between-statements' : [
     'error',
     { blankLine : 'always', prev : '*', next : 'class' },
@@ -182,11 +166,8 @@ const rules = {
   // The @stylistic default of 'always' for all seems at odd with general standards, which don't have space before
   // named functions. I like that because when we invoke a function, you never see a space, and I see no reason to
   // write the declaration different.
-  '@stylistic/space-before-function-paren' : [
-    'error',
-    { anonymous : 'always', asyncArrow : 'always', named : 'never' },
-  ],
-  '@stylistic/switch-colon-spacing' : ['error', { after : true, before : false }],
+  '@stylistic/space-before-function-paren' : ['error', { anonymous : 'always', asyncArrow : 'always', named : 'never' }],
+  '@stylistic/switch-colon-spacing'        : ['error', { after : true, before : false }],
   // one-true-brace-style /is/ the more common, but i just don't like it. I think Stroustrup is easier to read *and*,
   // most important, with 1tbs, you can't do these kind of comments:
   //
@@ -197,42 +178,43 @@ const rules = {
   // and I do those kind of comments sometime.
   // 'standard/brace-style'    : ['errer', 'stroustrup', { allowSingleLine: true }],
   // TODO; looks like it's failing on the `export * from './foo'` statements; even though we have the babel pluggin`
-  'import/export'                   : 'off',
+  'import/export'                          : 'off',
+  'import/extensions'                      : [
+    'error', // or 'warn'
+    'never', // Default: disallow all extensions
+    {
+      svg : 'always', // Override: always allow .svg extension
+    },
+  ],
   // the standard 'no-unused-vars ignores unused args, which we'd rather catch. We also want to exclude 'React',
   // which we need to import for react to work, even when not used
-  'no-unused-vars'                  : ['error', { varsIgnorePattern : 'React' }],
+  'no-unused-vars'         : ['error', { varsIgnorePattern : 'React' }],
   // style/consistency rules
   // this modifies JS Standard style
-  'prefer-regex-literals'           : 'error',
-  'yoda'                            : ['error', 'never'],
+  'prefer-regex-literals'  : 'error',
+  'yoda'                   : ['error', 'never'],
   // use 'process.stdout'/'process.stderr' when you really want to communicate to the user
-  'no-console'                      : 'error',
+  'no-console'             : 'error',
   // efficiency rules
-  'no-await-in-loop'                : 'error',
+  'no-await-in-loop'       : 'error',
   // rules for odd code/possible red flags/unintentional logic
-  'no-lonely-if'                    : 'error',
-  'no-return-assign'                : 'error',
-  'no-shadow'                       : 'error',
-  'no-extra-label'                  : 'error',
-  'no-label-var'                    : 'error',
-  'no-invalid-this'                 : 'error',
-  'no-unreachable-loop'             : 'error',
-  'no-extra-bind'                   : 'error',
-  'require-await'                   : 'error',
-  'consistent-return'               : 'error',
-  'default-case-last'               : 'error',
-  'eqeqeq'                          : 'error',
+  'no-lonely-if'           : 'error',
+  'no-return-assign'       : 'error',
+  'no-shadow'              : 'error',
+  'no-extra-label'         : 'error',
+  'no-label-var'           : 'error',
+  'no-invalid-this'        : 'error',
+  'no-unreachable-loop'    : 'error',
+  'no-extra-bind'          : 'error',
+  'require-await'          : 'error',
+  'consistent-return'      : 'error',
+  'default-case-last'      : 'error',
+  'eqeqeq'                 : 'error',
   // limit code complexity
-  'complexity'                      : ['error', 20], // default val
-  'max-depth'                       : ['error', 4], // default val
-  'max-lines'                       : [
-    'error',
-    { max : 300, skipBlankLines : true, skipComments : true },
-  ], // default val,
-  'max-lines-per-function' : [
-    'error',
-    { max : 50, skipBlankLines : true, skipComments : true },
-  ],
+  'complexity'             : ['error', 20], // default val
+  'max-depth'              : ['error', 4], // default val
+  'max-lines'              : ['error', { max : 300, skipBlankLines : true, skipComments : true }], // default val,
+  'max-lines-per-function' : ['error', { max : 50, skipBlankLines : true, skipComments : true }],
 }
 
 // OK, so the standard plugin provides lots of nice rules, but there are some conflicts, so we delete them (and let the
@@ -316,6 +298,7 @@ const defaultTestsConfig = {
   rules           : {
     // override default check for tests; Jest 'describe' functions can get very long, and that's OK
     'max-lines-per-function' : 'off',
+    'max-lines'              : ['error', { max : 500, skipBlankLines : true, skipComments : true }],
   },
 }
 
