@@ -198,6 +198,13 @@ const rules = {
   // 'standard/brace-style'    : ['errer', 'stroustrup', { allowSingleLine: true }],
   // TODO; looks like it's failing on the `export * from './foo'` statements; even though we have the babel pluggin`
   'import/export'                   : 'off',
+  'import/extensions': [
+    'error', // or 'warn'
+    'never', // Default: disallow all extensions
+    { 
+      svg: 'always', // Override: always allow .svg extension
+    },
+  ],
   // the standard 'no-unused-vars ignores unused args, which we'd rather catch. We also want to exclude 'React',
   // which we need to import for react to work, even when not used
   'no-unused-vars'                  : ['error', { varsIgnorePattern : 'React' }],
@@ -316,6 +323,10 @@ const defaultTestsConfig = {
   rules           : {
     // override default check for tests; Jest 'describe' functions can get very long, and that's OK
     'max-lines-per-function' : 'off',
+    'max-lines'                       : [
+    'error',
+      { max : 500, skipBlankLines : true, skipComments : true },
+    ],
   },
 }
 
