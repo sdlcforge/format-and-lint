@@ -1,0 +1,41 @@
+Test git rev: c4433f240acb8926d308a8c41ce02e060d7e3b0b
+PASS src/lib/lib/test/extract-patterns-from-file.test.mjs
+PASS src/lib/lib/test/process-package-ignores.test.mjs
+PASS src/lib/lib/test/process-file-patterns.test.mjs
+PASS src/cli/lib/test/process-config-file.test.mjs
+PASS src/lib/lib/test/process-gitignore.test.mjs
+PASS src/lib/lib/test/select-files-from-options.test.mjs
+PASS src/lib/default-config/test/eslint.config.test.mjs
+PASS src/lib/test/format-and-lint.test.mjs
+PASS src/cli/test/fandl.test.mjs
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |   96.68 |    75.89 |   95.83 |   96.59 |                   
+ cli                             |   92.59 |    60.86 |      75 |   92.59 |                   
+  cli-spec.mjs                   |     100 |      100 |     100 |     100 |                   
+  fandl.mjs                      |      92 |    60.86 |      75 |      92 | 63,74             
+ cli/lib                         |     100 |      100 |     100 |     100 |                   
+  process-config-file.mjs        |     100 |      100 |     100 |     100 |                   
+ lib                             |   94.44 |    80.64 |     100 |   94.11 |                   
+  format-and-lint.mjs            |   94.44 |    80.64 |     100 |   94.11 | 52,105            
+ lib/default-config              |   97.82 |     61.9 |     100 |   97.82 |                   
+  eslint-config.mjs              |   97.43 |     61.9 |     100 |   97.43 | 42                
+  js-extensions.mjs              |     100 |      100 |     100 |     100 |                   
+  prettier.config.mjs            |     100 |      100 |     100 |     100 |                   
+ lib/default-config/lib          |     100 |      100 |     100 |     100 |                   
+  linebreak-types-except.mjs     |     100 |      100 |     100 |     100 |                   
+ lib/lib                         |   98.27 |     87.5 |     100 |   98.18 |                   
+  extract-patterns-from-file.mjs |     100 |      100 |     100 |     100 |                   
+  get-eslint.mjs                 |     100 |    83.33 |     100 |     100 | 13                
+  process-file-patterns.mjs      |     100 |      100 |     100 |     100 |                   
+  process-gitignore.mjs          |   93.75 |    88.88 |     100 |   92.85 | 34                
+  process-package-ignores.mjs    |     100 |      100 |     100 |     100 |                   
+  select-files-from-options.mjs  |     100 |    81.81 |     100 |     100 | 42-46             
+---------------------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 9 passed, 9 total
+Tests:       26 passed, 26 total
+Snapshots:   0 total
+Time:        1.335 s, estimated 2 s
+Ran all test suites.

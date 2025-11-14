@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1763101290235" clover="3.2.0">
+  <project timestamp="1763101290235" name="All files">
+    <metrics statements="176" coveredstatements="170" conditionals="112" coveredconditionals="85" methods="24" coveredmethods="23" elements="312" coveredelements="278" complexity="0" loc="176" ncloc="176" packages="6" files="14" classes="14"/>
+    <package name="cli">
+      <metrics statements="27" coveredstatements="25" conditionals="23" coveredconditionals="14" methods="4" coveredmethods="3"/>
+      <file name="cli-spec.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/cli/cli-spec.mjs">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+      </file>
+      <file name="fandl.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/cli/fandl.mjs">
+        <metrics statements="25" coveredstatements="23" conditionals="23" coveredconditionals="14" methods="4" coveredmethods="3"/>
+        <line num="10" count="1" type="cond" truecount="1" falsecount="2"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="62" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="69" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="82" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="cli.lib">
+      <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+      <file name="process-config-file.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/cli/lib/process-config-file.mjs">
+        <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="cond" truecount="5" falsecount="0"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="lib">
+      <metrics statements="34" coveredstatements="32" conditionals="31" coveredconditionals="25" methods="4" coveredmethods="4"/>
+      <file name="format-and-lint.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/format-and-lint.mjs">
+        <metrics statements="34" coveredstatements="32" conditionals="31" coveredconditionals="25" methods="4" coveredmethods="4"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="49" count="7" type="stmt"/>
+        <line num="51" count="7" type="cond" truecount="3" falsecount="1"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="60" count="7" type="stmt"/>
+        <line num="62" count="7" type="stmt"/>
+        <line num="64" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="6" type="stmt"/>
+        <line num="72" count="6" type="stmt"/>
+        <line num="73" count="6" type="stmt"/>
+        <line num="74" count="6" type="stmt"/>
+        <line num="76" count="6" type="stmt"/>
+        <line num="78" count="6" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="85" count="6" type="stmt"/>
+        <line num="86" count="6" type="stmt"/>
+        <line num="87" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="88" count="6" type="stmt"/>
+        <line num="96" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="99" count="6" type="stmt"/>
+        <line num="101" count="6" type="cond" truecount="5" falsecount="1"/>
+        <line num="102" count="3" type="stmt"/>
+        <line num="103" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="104" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="112" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
+        <line num="120" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="121" count="3" type="stmt"/>
+        <line num="124" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="lib.default-config">
+      <metrics statements="46" coveredstatements="45" conditionals="21" coveredconditionals="13" methods="1" coveredmethods="1"/>
+      <file name="eslint-config.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/default-config/eslint-config.mjs">
+        <metrics statements="39" coveredstatements="38" conditionals="21" coveredconditionals="13" methods="1" coveredmethods="1"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="36" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="47" count="3" type="cond" truecount="0" falsecount="3"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="58" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="222" count="3" type="stmt"/>
+        <line num="223" count="3" type="stmt"/>
+        <line num="224" count="3" type="stmt"/>
+        <line num="225" count="3" type="stmt"/>
+        <line num="226" count="3" type="stmt"/>
+        <line num="227" count="3" type="stmt"/>
+        <line num="228" count="3" type="stmt"/>
+        <line num="229" count="3" type="stmt"/>
+        <line num="230" count="3" type="stmt"/>
+        <line num="231" count="3" type="stmt"/>
+        <line num="232" count="3" type="stmt"/>
+        <line num="234" count="3" type="stmt"/>
+        <line num="236" count="3" type="stmt"/>
+        <line num="238" count="3" type="stmt"/>
+        <line num="255" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="256" count="3" type="stmt"/>
+        <line num="258" count="3" type="stmt"/>
+        <line num="259" count="3" type="stmt"/>
+        <line num="273" count="3" type="stmt"/>
+        <line num="288" count="3" type="stmt"/>
+        <line num="294" count="3" type="stmt"/>
+        <line num="305" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="312" count="9" type="stmt"/>
+        <line num="314" count="9" type="stmt"/>
+      </file>
+      <file name="js-extensions.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/default-config/js-extensions.mjs">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+      </file>
+      <file name="prettier.config.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/default-config/prettier.config.mjs">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="lib.default-config.lib">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="linebreak-types-except.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/default-config/lib/linebreak-types-except.mjs">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="68" count="12" type="stmt"/>
+        <line num="69" count="12" type="stmt"/>
+        <line num="70" count="36" type="stmt"/>
+        <line num="73" count="12" type="stmt"/>
+      </file>
+    </package>
+    <package name="lib.lib">
+      <metrics statements="55" coveredstatements="54" conditionals="32" coveredconditionals="28" methods="13" coveredmethods="13"/>
+      <file name="extract-patterns-from-file.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/lib/extract-patterns-from-file.mjs">
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+      </file>
+      <file name="get-eslint.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/lib/get-eslint.mjs">
+        <metrics statements="6" coveredstatements="6" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="13" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+      </file>
+      <file name="process-file-patterns.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/lib/process-file-patterns.mjs">
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="3" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="12" type="stmt"/>
+        <line num="6" count="12" type="stmt"/>
+        <line num="7" count="12" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="12" type="stmt"/>
+        <line num="13" count="12" type="stmt"/>
+      </file>
+      <file name="process-gitignore.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/lib/process-gitignore.mjs">
+        <metrics statements="14" coveredstatements="13" conditionals="9" coveredconditionals="8" methods="5" coveredmethods="5"/>
+        <line num="4" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="8" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="66" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="25" count="72" type="stmt"/>
+        <line num="27" count="7" type="stmt"/>
+        <line num="30" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+      </file>
+      <file name="process-package-ignores.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/lib/process-package-ignores.mjs">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="7" count="6" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="select-files-from-options.mjs" path="/Users/zane/playground/sdlcforge/format-and-lint/src/lib/lib/select-files-from-options.mjs">
+        <metrics statements="18" coveredstatements="18" conditionals="11" coveredconditionals="9" methods="2" coveredmethods="2"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="25" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="30" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="42" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="43" count="5" type="stmt"/>
+        <line num="44" count="5" type="stmt"/>
+        <line num="46" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="5" type="stmt"/>
+        <line num="50" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
