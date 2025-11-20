@@ -1,6 +1,8 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+// lint thinks this is extraneous because 'jest' is a defined global; but just only pushes into the global space for
+// tests, not tests libraries so we have to disable the check.
 import { jest } from '@jest/globals' // eslint-disable-line node/no-extraneous-import
 
 import { processGitignore } from '../process-gitignore'

@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 
-import { ArgumentInvalidError } from 'standard-error-set'
 import { find } from 'find-plus'
+import { ArgumentInvalidError } from 'standard-error-set'
 
 import { allExts } from '../default-config/js-extensions'
 import { processFilePatterns } from './process-file-patterns'
@@ -18,7 +18,7 @@ const selectFilesFromOptions = async ({
   noStandardIgnores,
   root = process.cwd(),
 }) => {
-  const standardIgnores = ['**/test/data/**/*', 'doc/**', 'dist/**']
+  const standardIgnores = ['**/test/data/**/*', '**/tests/data/**/*', '**/tests/fixtures/**/*', 'doc/**', 'dist/**']
   const allExtsMatch = `@(${allExts.join('|')})`
 
   const targetPatterns = await processFilePatterns(files, filesPaths)
@@ -28,7 +28,7 @@ const selectFilesFromOptions = async ({
       targetPatterns.push(`**/*${allExtsMatch}`)
     }
     else if (existsSync(join(root, 'src'))) {
-      targetPatterns.push(`src/**/*${allExtsMatch}`)
+      targetPatterns.push(`@(src|tests)/**/*${allExtsMatch}`)
     }
     else {
       throw new ArgumentInvalidError({
@@ -36,7 +36,7 @@ const selectFilesFromOptions = async ({
         hint    : "Specify '--files' or '--files-paths'.",
       })
     }
-  }
+  } // end if (targetPatterns.length === 0)
 
   const ignorePatterns = await processFilePatterns(ignoreFiles, ignoreFilesPaths)
   if (noStandardIgnores !== true) {

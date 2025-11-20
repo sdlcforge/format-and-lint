@@ -12,20 +12,20 @@ import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import globalsPkg from 'globals'
-import importPlugin from 'eslint-plugin-import'
-import jsdocPlugin from 'eslint-plugin-jsdoc'
-import nodePlugin from 'eslint-plugin-node'
-import promisePlugin from 'eslint-plugin-promise'
-import nPlugin from 'eslint-plugin-n'
 import babelParser from '@babel/eslint-parser'
 import { fixupPluginRules } from '@eslint/compat'
 import js from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
 import standardConfig from 'eslint-config-standard-kit'
+import importPlugin from 'eslint-plugin-import'
+import jsdocPlugin from 'eslint-plugin-jsdoc'
+import nPlugin from 'eslint-plugin-n'
+import nodePlugin from 'eslint-plugin-node'
+import promisePlugin from 'eslint-plugin-promise'
+import globalsPkg from 'globals'
 
+import { allExtsStr, jsxExtsStr } from './js-extensions'
 import { linebreakTypesExcept } from './lib/linebreak-types-except'
-import { allExts, allExtsStr, jsxExtsStr } from './js-extensions'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -186,6 +186,13 @@ const rules = {
       svg : 'always', // Override: always allow .svg extension
     },
   ],
+  'import/no-unresolved' : [
+    'error',
+    {
+      // this is needed for the babel-module resolver to work
+      caseSensitive : true,
+    },
+  ],
   // the standard 'no-unused-vars ignores unused args, which we'd rather catch. We also want to exclude 'React',
   // which we need to import for react to work, even when not used
   'no-unused-vars'         : ['error', { varsIgnorePattern : 'React' }],
@@ -247,7 +254,20 @@ const defaultBaseConfig = {
     },
     ecmaVersion : 'latest',
   },
-  settings : { react : reactSettings },
+  settings : {
+    'import/resolver' : {
+      'babel-module' : {
+        alias : {
+          // the examples in the plugin docs are relative paths, the transpiled code was always one '..' too few when we
+          // did it that way, so we use the absolute path
+          _lib : join(process.cwd(), 'test-staging', 'lib'),
+          _cli : join(process.cwd(), 'test-staging', 'cli'),
+        },
+        extensions : ['.js', '.jsx', '.es', '.es6', '.mjs', '.cjs'],
+      },
+    },
+    'react' : reactSettings,
+  },
   plugins,
   rules,
 }
@@ -261,12 +281,7 @@ if (engines?.node !== undefined) {
     'node/no-unsupported-features/es-syntax' : 'off', // we expect teh code to run through Babel, so it's fine
     'node/prefer-promises/dns'               : 'error',
     'node/prefer-promises/fs'                : 'error',
-    'node/no-missing-import'                 : [
-      'error',
-      {
-        tryExtensions : allExts,
-      },
-    ],
+    'node/no-missing-import'                 : 'off', // 'import/no-unresolved' is used instead
   })
 }
 

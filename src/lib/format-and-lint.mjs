@@ -4,8 +4,8 @@ import * as path from 'node:path'
 import { format as prettierFormat } from 'prettier'
 import { ArgumentInvalidError, ArgumentMissingError } from 'standard-error-set'
 
-import { getEslint } from './lib/get-eslint'
 import { prettierConfig as defaultPrettierConfig } from './default-config/prettier.config'
+import { getEslint } from './lib/get-eslint'
 
 /**
  * Parses, lints, and (when `check` is false) reformats the `files` text. By default, this function will update the
