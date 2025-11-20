@@ -5,9 +5,9 @@ import { readFile, rm } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
 import { copyDirToTmp, getTmpDir } from '../../test/lib/copy-dir-to-tmp'
-import { formatAndLint } from '../format-and-lint'
 import { getFormattedTextFor } from '../../test/lib/get-formatted-text-for'
 import { myDirFromImport } from '../../test/lib/my-dir-from-import'
+import { formatAndLint } from '../format-and-lint'
 
 const __dirname = myDirFromImport(import.meta.url)
 

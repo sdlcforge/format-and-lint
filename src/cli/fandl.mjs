@@ -1,11 +1,11 @@
 import commandLineArgs from 'command-line-args'
 import { ArgumentInvalidError } from 'standard-error-set'
 
-import { cliSpec } from './cli-spec'
 import { formatAndLint } from '../lib/format-and-lint'
 import { getEslint } from '../lib/lib/get-eslint'
-import { processConfigFile } from './lib/process-config-file'
 import { selectFilesFromOptions } from '../lib/lib/select-files-from-options'
+import { cliSpec } from './cli-spec'
+import { processConfigFile } from './lib/process-config-file'
 
 const fandl = async ({ argv = process.argv, stdout = process.stdout } = {}) => {
   const mainOpts = commandLineArgs(cliSpec.arguments, {

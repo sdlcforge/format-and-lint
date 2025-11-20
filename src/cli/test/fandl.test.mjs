@@ -2,9 +2,9 @@ import { readFile, rm } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
 import { copyDirToTmp } from '../../test/lib/copy-dir-to-tmp'
-import { fandl } from '../fandl'
 import { getFormattedTextFor } from '../../test/lib/get-formatted-text-for'
 import { myDirFromImport } from '../../test/lib/my-dir-from-import'
+import { fandl } from '../fandl'
 
 const __dirname = myDirFromImport(import.meta.url)
 
