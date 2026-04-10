@@ -1,7 +1,8 @@
-/qa
-/node_modules
-/yalc.lock
+/.claude
 /.yalc
-/dist
-/test-staging
 /coverage
+/dist
+/node_modules
+/qa
+/test-staging
+/yalc.lock
