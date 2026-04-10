@@ -13,10 +13,10 @@ ALL_LIB_JS_FILES_SRC:=$(shell find $(SRC)/lib -name "*.js" -o -name "*.cjs" -o -
 ALL_NON_TEST_JS_FILES_SRC:=$(shell find $(SRC) \( -name "*.js" -o -name "*.cjs" -o -name "*.mjs" \) -not -path "**/test/**")
 
 BABEL_CONFIG_DIST:=$(DIST)/babel/babel-shared.config.cjs $(DIST)/babel/babel.config.cjs
-BABEL_PKG:=$(shell npm explore @liquid-labs/sdlc-resource-babel-and-rollup -- pwd)
+BABEL_PKG:=$(shell npm explore @sdlcforge/packjs -- pwd)
 
 ROLLUP:=npx rollup
-ROLLUP_CONFIG:=$(shell npm explore @liquid-labs/sdlc-resource-babel-and-rollup -- pwd)/dist/rollup/rollup.config.mjs
+ROLLUP_CONFIG:=$(shell npm explore @sdlcforge/packjs -- pwd)/dist/rollup/rollup.config.mjs
 
 default: all
 
@@ -100,7 +100,6 @@ $(README_MD): $(README_MD_SRC)
 	  --global-index-format grouped \
 	  --name-format \
 	  --plugin dmd-readme-api \
-	  --plugin @liquid-labs/dmd \
 	  --clever-links \
 	  --no-cache \
 	  >> $@

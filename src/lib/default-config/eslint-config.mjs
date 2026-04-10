@@ -58,7 +58,7 @@ const standardPlugin = standardConfig({
 const usesReact = dependencies.react !== undefined || devDependencies.react !== undefined
 const reactSettings = usesReact ? { version : 'detect' } : {}
 
-const stylisticConfig = stylistic.configs['recommended-flat']
+const stylisticConfig = stylistic.configs['recommended']
 
 const plugins = Object.assign(
   {
@@ -77,7 +77,7 @@ const rules = {
   // override key spacing to get things aligned
   '@stylistic/key-spacing'           : ['error', { align : 'colon', afterColon : true, beforeColon : true }],
   // override to allow avoiding escapes
-  '@stylistic/quotes'                : ['error', 'single', { allowTemplateLiterals : true, avoidEscape : true }],
+  '@stylistic/quotes'                : ['error', 'single', { allowTemplateLiterals : 'always', avoidEscape : true }],
   // additional rules
   '@stylistic/arrow-parens'          : ['error', 'always'], // I like this to be consistent
   '@stylistic/array-bracket-newline' : ['error', 'consistent'],
