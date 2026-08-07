@@ -10,3 +10,13 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'PLAN-ARTIFACT DEFECT: plan/notes/typescript-rule-conflicts.md and task 002''s own Requirement 2 prescribe ''TSEnumBody'' which is inert under @babel/eslint-parser (it emits TSEnumDeclaration, not TSEnumBody) - the implementer added TSEnumDeclaration instead. Task 005 (documentation) must describe the actual shipped fix (TSEnumDeclaration), not the plan note''s inert prescription.'
+    - title: Known limitation confirmed for task 005 to do
+      id: RwsR
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Known limitation confirmed for task 005 to document: no-unused-vars false-positives on TS constructor parameter properties (e.g. `constructor(public name: string)`) even though used via `this`; args:''none'' deliberately not added per the task''s own instruction to keep the default.'
