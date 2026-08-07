@@ -16,3 +16,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 2
+          slug: add-typescript-eslint-configuration
+          title: Add TypeScript Eslint Configuration
+          path: phase-01-typescript-support/002-add-typescript-eslint-configuration.md
+          done: false
+          tier: opus-med
+          git:
+            branch: null
+            commit: []
+            merge: null
