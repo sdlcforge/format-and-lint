@@ -143,13 +143,14 @@ non-import statement is.
 
 ## Component based configuration
 
-Fandl breaks up the configuration into 7 components:
+Fandl breaks up the configuration into 8 components:
 - 'base' which applies to all Javascript src files,
 - 'jsdoc' which defines JSDoc specific configuration and rules for all src files,
 - 'tsJsdoc' which defines TypeScript-flavored JSDoc rules (it supersedes 'jsdoc' for TypeScript files, since the JavaScript JSDoc rules demand JSDoc types that a TypeScript type annotation already provides),
 - 'jsx' which defines additional configuration and rules for JSX files -- and, since it supplies the browser globals JSX and TSX both need, for TSX files as well,
 - 'test' which defines additional configuration and rules for test files,
-- 'ts' which defines TypeScript-specific rule overrides, and
+- 'ts' which defines TypeScript-specific rule overrides,
+- 'cli' which exempts CLI entrypoints from `no-console` and `no-process-exit` (printing to the console and exiting with a status code is exactly what a CLI entrypoint is for, so both rules are false positives there); a file counts as a CLI entrypoint if it either sits under a `cli/` path segment (the `src/lib` + `src/cli` layout convention) or carries a `-cli` basename suffix (`bump-version-cli.js`, `eval-flow-cli.ts`) for a single-file script that doesn't warrant a lib/cli split, and
 - 'additional' which is just a catch all for whatever else you might want to add.
 
 Rather than being forced to redefine the entire default configuration, you can override any one of the components individually by specifying `options.eslintConfigComponents`.
@@ -157,14 +158,19 @@ Rather than being forced to redefine the entire default configuration, you can o
 The components are combined, in order, into a single flat-config array:
 
 ```
-[base, jsdoc, tsJsdoc, jsx, test, ts, additional]
+[base, jsdoc, tsJsdoc, jsx, test, ts, cli, additional]
 ```
 
 Order matters: for a given file, a later component's matching rules win over an earlier
 component's. This is why 'tsJsdoc' sits right after 'jsdoc' (its rules supersede 'jsdoc' for
 TypeScript files while staying overridable by anything later), why 'ts' sits after 'jsx' and
-'test' (its overrides win for TypeScript files), and why 'additional' stays last (it can override
-everything). Keep this ordering in mind when overriding an individual component.
+'test' (its overrides win for TypeScript files), why 'cli' sits after 'base' (its 'off' entries
+have to win over base's 'error' for CLI entrypoints), and why 'additional' stays last (it can
+override everything). Keep this ordering in mind when overriding an individual component.
+
+Overriding a component also lets you turn it off: passing `eslintConfigComponents: { cli: {} }`
+replaces the CLI exemption with an empty config, so `no-console` and `no-process-exit` apply to
+CLI entrypoints too.
 
 Note, the component structure is essentially a prototype at this point. Future versions will:
 - Break up 'base' (which is very large) into different semantic types such "correctness", "complexity", and "style".
