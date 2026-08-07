@@ -61,6 +61,7 @@ phases:
           path: phase-01-typescript-support/005-update-typescript-documentation.md
           done: false
           tier: sonnet-med
+          digest: Documented fandl's shipped TypeScript/TSX support across README.01.md, README.02.md, DEVELOPER_NOTES.md, and regenerated README.md. Covers default extensions, component list (7 components incl. tsJsdoc/ts), known limitations (no-unused-vars constructor-property false positive, disabled no-undef, no type-aware rules, comma-dangle/enum cosmetic quirk). All docs cross-checked against actual shipped source, not stale plan notes.
           git:
             branch: plan/typescript-support-01-005
             commit:
