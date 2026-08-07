@@ -51,7 +51,8 @@ phases:
           tier: sonnet-high
           git:
             branch: plan/typescript-support-01-004
-            commit: []
+            commit:
+                - 10c502e
             merge: null
         - number: 5
           slug: update-typescript-documentation
