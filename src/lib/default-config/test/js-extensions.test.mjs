@@ -12,7 +12,7 @@ import {
   tsExts,
   tsExtsStr,
   tsxExts,
-  tsxExtsStr,
+  tsxExtsStr
 } from '../js-extensions'
 
 describe('js-extensions', () => {
