@@ -54,7 +54,7 @@ phases:
             branch: plan/typescript-support-01-004
             commit:
                 - 10c502e
-            merge: null
+            merge: 7af55eeb4877d7a269f74d5509230e618a56284f
         - number: 5
           slug: update-typescript-documentation
           title: Update TypeScript Documentation
