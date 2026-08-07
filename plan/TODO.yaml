@@ -81,3 +81,7 @@ phases:
             branch: null
             commit: []
             merge: null
+    - number: 3
+      slug: cli-rule-exemption
+      title: CLI Rule Exemption
+      tasks: []
