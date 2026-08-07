@@ -401,10 +401,8 @@ const defaultTsConfig = {
 // 'src/lib' + 'src/cli' layout convention) or a '-cli' basename suffix (a single-file script that
 // doesn't warrant a lib/cli directory split). 'allExtsStr' is reused for the suffix pattern so
 // TypeScript CLI entrypoints ('bump-version-cli.ts') are covered without a second extension list.
-const cliFilePatterns = ['**/cli/**', `**/*-cli{${allExtsStr}}`]
-
 const defaultCliConfig = {
-  files : cliFilePatterns,
+  files : ['**/cli/**', `**/*-cli{${allExtsStr}}`],
   rules : {
     // CLI entrypoints exist to print to the console and exit with a status code -- both rules are
     // false positives here. Library/business-logic code (everything NOT matching this component's
