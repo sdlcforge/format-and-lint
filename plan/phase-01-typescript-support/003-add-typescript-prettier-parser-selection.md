@@ -100,3 +100,40 @@ select `babel-ts`, and a file with no extension must fall through to `babel`. Us
 - `src/lib/default-config/prettier.config.mjs` — the default prettier options object that
   `parser` is layered onto; `@trivago/prettier-plugin-sort-imports` was verified to work unchanged
   with `babel-ts`.
+
+## Status
+
+- **Outcome:** succeeded
+- **Date:** 2026-08-07
+- **Summary:** Added a `getPrettierConfigFor(file, baseConfig)` helper in `src/lib/format-and-lint.mjs`
+  that clones the caller's prettier config and sets `parser` to `babel-ts` when
+  `path.extname(file).toLowerCase()` is in the set derived from `allTsExts`
+  (`src/lib/default-config/js-extensions.mjs`), and to `babel` otherwise. `formatAndLint` no longer
+  eagerly clones/forces `parser = 'babel'` before iterating files; it passes the caller's
+  `prettierConfig` (or the default) through unchanged, and `processSource` calls
+  `getPrettierConfigFor` per file, immediately before the prettier call — this both keeps each
+  concurrent `processSource` invocation's config object independent (`Promise.all` runs them
+  concurrently, so a single shared mutable clone risked a data race on `.parser`) and satisfies the
+  task's "clone moves into the per-file path" allowance. `formatAndLint`'s public signature and its
+  JSDoc block (original lines 10–41) are unchanged; `processSource`'s `check`/`noWrite`/`outputDir`/
+  `relativeStem` handling and the prettier/ESLint `output` backfill are untouched.
+- **Validation:**
+  - `make test`: passed (10 suites / 34 tests, including the pre-existing
+    `src/lib/test/format-and-lint.test.mjs` suite unmodified).
+  - `make lint`: passed (no findings).
+  - Scratch verification (not committed, deleted before finalizing): a temporary Jest test
+    confirmed (1) a `.ts` fixture (interface, typed props, generic arrow function) and (2) a `.tsx`
+    fixture (JSX + typed props) both format without a prettier parse error via `formatAndLint({
+    noWrite: true })`; (3) a mixed `[.mjs, .ts]` `files` array in one call formats both entries
+    correctly (the concurrency case the restructure most easily breaks); (4) a `notes.ts.bak` fixture
+    containing bare TS generic syntax **throws** under `formatAndLint`, confirming it resolved to the
+    `babel` parser (not `babel-ts`) — i.e., extension matching does not fall for the substring/suffix
+    trap.
+  - `git diff --stat`: exactly one file changed, `src/lib/format-and-lint.mjs`.
+  - `git diff src/lib/format-and-lint.mjs`: confirmed no modification to lines within the original
+    `formatAndLint` JSDoc block.
+- **Assumptions applied:** Task 001's `allTsExts` export was present and used as the single source of
+  extension truth (per `## Assumptions`). Task 002 had not landed in this worktree at implementation
+  time; per the task's `## Assumptions`, this was not treated as a defect — only the prettier-side
+  parse-success validation was performed, and ESLint diagnostics on TS syntax were not investigated.
+- **Files touched:** `src/lib/format-and-lint.mjs`.
