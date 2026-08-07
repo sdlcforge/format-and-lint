@@ -21,3 +21,32 @@ In order to get the test running, we had to add `@babel/plugin-proposal-class-pr
 ```
 
 This has been captured in [issue #2](https://github.com/liquid-labs/catalyst-resource-eslint/issues/2).
+
+## `eslint-config-standard-kit`'s `typescript: true` flag is a no-op
+
+`eslint-config.mjs` calls `standardConfig({ ..., typescript: true })` and consumes the result as
+`standardPlugin.rules`. As of `eslint-config-standard-kit@1.0.0`, `standardConfig()` returns a
+**flat-config array**, not a plugin object -- the export shape changed in the 0.x -> 1.0.0 upgrade
+and this call site was never updated for it. `standardPlugin.rules` on an array is `undefined`, so
+`...standardPlugin.rules` spreads nothing, and none of standard-kit's 244 rules (108 base
+Standard.js rules, 7 node, 23 jsx, 8 react, 1 sortImports, 97 TypeScript) actually reach fandl's
+effective configuration. The `delete rules['block-spacing']` / `delete rules['brace-style']` / etc.
+block immediately below it is deleting keys that were never added in the first place. The
+`plugins.standard` assignment is similarly inert -- no rule ID in fandl's config is namespaced
+`standard/`, so ESLint never dereferences it, and the configuration loads and runs without error.
+
+**Do not "fix" the array consumption in passing.** Merging the array in properly would
+simultaneously (a) activate all 244 previously-inactive rules across every JavaScript source in
+every consumer project -- a sweeping, unrelated behavior change -- and (b) activate
+`eslint-config-standard-kit/typescript`, which swaps TypeScript files onto
+`@typescript-eslint/parser` with `projectService: true`: full type-aware linting, requiring a
+resolvable `tsconfig.json` in every consumer project and pulling the TypeScript type checker into
+every lint run. Type-aware linting is explicitly out of scope for fandl's TypeScript support, and
+repairing the array-consumption bug is not a free cleanup here -- it is a separate, sweeping change
+that needs its own scoping and sign-off.
+
+`typescript: true` is also not currently a landmine, but is close to one: `standardConfig` throws
+`Cannot find TypeScript. Please run npm install --save-dev typescript` when `typescript` cannot be
+required. It resolves today only because `eslint-config-standard-kit` declares `typescript` as a
+direct dependency, not because fandl itself declares one. If `eslint-config-standard-kit` ever
+demotes `typescript` to a peer dependency, this call would throw at import time.
