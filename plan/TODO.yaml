@@ -25,6 +25,7 @@ phases:
           path: phase-01-typescript-support/002-add-typescript-eslint-configuration.md
           done: false
           tier: opus-med
+          digest: Added TypeScript support to fandl's ESLint config via two new TS-scoped flat-config components addressing the three verified rule conflicts (no-undef on type identifiers, circular key-spacing/type-annotation-spacing fixer loop, de-indented enum/namespace bodies) plus TS-aware JSDoc handling. JS behavior provably unchanged. One necessary deviation from the plan's prescribed fix (TSEnumDeclaration vs inert TSEnumBody).
           git:
             branch: plan/typescript-support-01-002
             commit:
