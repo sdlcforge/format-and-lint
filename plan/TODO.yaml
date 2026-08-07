@@ -37,7 +37,8 @@ phases:
           tier: sonnet-high
           git:
             branch: plan/typescript-support-01-003
-            commit: []
+            commit:
+                - f20e979
             merge: null
         - number: 4
           slug: add-typescript-fixture-tests
