@@ -397,21 +397,38 @@ const defaultTsConfig = {
   },
 }
 
+// A CLI entrypoint is identified by either of two independent signals: a 'cli/' path segment (the
+// 'src/lib' + 'src/cli' layout convention) or a '-cli' basename suffix (a single-file script that
+// doesn't warrant a lib/cli directory split). 'allExtsStr' is reused for the suffix pattern so
+// TypeScript CLI entrypoints ('bump-version-cli.ts') are covered without a second extension list.
+const defaultCliConfig = {
+  files : ['**/cli/**', `**/*-cli{${allExtsStr}}`],
+  rules : {
+    // CLI entrypoints exist to print to the console and exit with a status code -- both rules are
+    // false positives here. Library/business-logic code (everything NOT matching this component's
+    // 'files' glob) keeps both rules at 'error' via the base component.
+    'no-console'      : 'off',
+    'no-process-exit' : 'off',
+  },
+}
+
 // The order of the returned array is load-bearing: a later flat-config entry with a matching 'files'
 // glob overrides an earlier one. 'tsJsdoc' sits directly after 'jsdoc' so the TypeScript JSDoc rules
 // supersede the JavaScript ones for TS files while staying overridable by later components; 'ts'
-// sits after 'test' so its rule overrides win for TypeScript files; 'additional' stays last so
-// callers can still override everything.
+// sits after 'test' so its rule overrides win for TypeScript files; 'cli' sits after 'base' (and
+// after every other named component) so its 'off' entries win over base's 'error' for CLI
+// entrypoints; 'additional' stays last so callers can still override everything.
 const getEslintConfig = ({
   additional = {},
   base = defaultBaseConfig,
+  cli = defaultCliConfig,
   jsdoc = defaultJsdocConfig,
   jsx = defaultJsxConfig,
   test = defaultTestsConfig,
   ts = defaultTsConfig,
   tsJsdoc = defaultTsJsdocConfig,
 } = {}) => {
-  const eslintConfig = [base, jsdoc, tsJsdoc, jsx, test, ts, additional]
+  const eslintConfig = [base, jsdoc, tsJsdoc, jsx, test, ts, cli, additional]
 
   return eslintConfig
 }

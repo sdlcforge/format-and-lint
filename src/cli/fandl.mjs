@@ -60,7 +60,7 @@ const fandl = async ({ argv = process.argv, stdout = process.stdout } = {}) => {
     stdout.write(resultText)
     // if we had something to say, then that indicates an error/warning in the source
     if (resultText !== '') {
-      process.exit(1) // eslint-disable-line  no-process-exit
+      process.exit(1)
     }
   }
 }
