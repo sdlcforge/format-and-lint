@@ -4,8 +4,27 @@ import * as path from 'node:path'
 import { format as prettierFormat } from 'prettier'
 import { ArgumentInvalidError, ArgumentMissingError } from 'standard-error-set'
 
+import { allTsExts } from './default-config/js-extensions'
 import { prettierConfig as defaultPrettierConfig } from './default-config/prettier.config'
 import { getEslint } from './lib/get-eslint'
+
+const tsExtSet = new Set(allTsExts.map((ext) => ext.toLowerCase()))
+
+/**
+ * Determines the prettier config to use for `file`, based on its extension. TypeScript sources (per `allTsExts` in
+ * './default-config/js-extensions') use the `babel-ts` parser; everything else uses `babel`. Always returns a fresh
+ * clone of `baseConfig` so callers may safely invoke this once per file without sharing mutable state across
+ * concurrent calls.
+ * @param {string} file - The (absolute) path of the file being processed.
+ * @param {object} baseConfig - The prettier options object to clone and apply the `parser` field to.
+ * @returns {object} A clone of `baseConfig` with `parser` set appropriately for `file`.
+ */
+const getPrettierConfigFor = (file, baseConfig) => {
+  const config = structuredClone(baseConfig)
+  config.parser = tsExtSet.has(path.extname(file).toLowerCase()) ? 'babel-ts' : 'babel'
+
+  return config
+}
 
 /**
  * Parses, lints, and (when `check` is false) reformats the `files` text. By default, this function will update the
@@ -69,9 +88,7 @@ const formatAndLint = async (options) => {
     })
   }
 
-  const prettierParseConfig = structuredClone(prettierConfig)
-  prettierParseConfig.parser = 'babel'
-  processOptions.prettierConfig = prettierParseConfig
+  processOptions.prettierConfig = prettierConfig
 
   const lintResults = (await Promise.all(files.map((file) => processSource(file, processOptions)))).flat()
 
@@ -84,7 +101,8 @@ const processSource = async (
 ) => {
   const readPromise = readFile(file, { encoding : 'utf8' })
   const inputSource = await readPromise
-  const prettierSource = check === true ? inputSource : await prettierFormat(inputSource, prettierConfig)
+  const filePrettierConfig = getPrettierConfigFor(file, prettierConfig)
+  const prettierSource = check === true ? inputSource : await prettierFormat(inputSource, filePrettierConfig)
   const lintResults = await eslint.lintText(
     // we must specify the file path in order for the proper rules from the flat config to attach
     prettierSource,
