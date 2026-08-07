@@ -1,7 +1,7 @@
 /**
  * @file Tests the config works as expected based on a sampling of rules.
  */
-import { readFile, rm } from 'node:fs/promises'
+import { readFile, rm, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
 import { copyDirToTmp, getTmpDir } from '../../test/lib/copy-dir-to-tmp'
@@ -68,6 +68,49 @@ describe('formatAndLint', () => {
       const formattedExampleConents = await getFormattedTextFor(join(testDirSrc, 'index.mjs'))
 
       expect(formattedFileContents).toBe(formattedExampleConents)
+    }
+    finally {
+      if (tmpDir !== undefined) {
+        await rm(tmpDir, { recursive : true })
+      }
+    }
+  })
+
+  // Guards the prettier-vs-ESLint round-trip stability documented in
+  // 'plan/notes/typescript-parsing-layer.md': prettier and '@stylistic' disagree on a couple of
+  // TypeScript-specific formatting points (generic-arrow trailing commas, JSX collapsing), and the
+  // two are verified to converge after a single pass. Convergence happens by luck of rule
+  // interaction, not by design, so this test pins it: formatting an already-formatted TypeScript
+  // file must be a no-op.
+  const idempotenceTests = [
+    ['is idempotent for an already-formatted TypeScript source', 'ts-type-annotations', 'index.ts'],
+    ['is idempotent for an already-formatted TSX source', 'tsx-component', 'index.tsx'],
+  ]
+
+  test.each(idempotenceTests)('%s', async (description, testDir, fileName) => {
+    const srcFile = resolve(__dirname, 'data', testDir, fileName)
+
+    const { lintResults : firstPassResults } = await formatAndLint({
+      noWrite : true,
+      files   : [srcFile],
+    })
+    const firstPassOutput = firstPassResults[0].output
+
+    let tmpDir
+    try {
+      tmpDir = await getTmpDir()
+      const secondPassFile = join(tmpDir, fileName)
+      await writeFile(secondPassFile, firstPassOutput, { encoding : 'utf8' })
+
+      const { lintResults : secondPassResults } = await formatAndLint({
+        noWrite : true,
+        files   : [secondPassFile],
+      })
+      // 'output' is undefined when the pipeline made no changes at all; in that case the
+      // second-pass result is, by definition, identical to what was fed in.
+      const secondPassOutput = secondPassResults[0].output ?? firstPassOutput
+
+      expect(secondPassOutput).toBe(firstPassOutput)
     }
     finally {
       if (tmpDir !== undefined) {
