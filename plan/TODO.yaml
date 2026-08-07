@@ -46,3 +46,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 5
+          slug: update-typescript-documentation
+          title: Update TypeScript Documentation
+          path: phase-01-typescript-support/005-update-typescript-documentation.md
+          done: false
+          tier: sonnet-med
+          git:
+            branch: null
+            commit: []
+            merge: null
