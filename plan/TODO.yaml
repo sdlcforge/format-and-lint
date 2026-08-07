@@ -35,6 +35,7 @@ phases:
           path: phase-01-typescript-support/003-add-typescript-prettier-parser-selection.md
           done: false
           tier: sonnet-high
+          digest: 'Replaced the unconditional parser:''babel'' with per-file selection via getPrettierConfigFor: babel-ts for TypeScript extensions (from task 001''s allTsExts), babel otherwise. Fixes the TypeScript parsing hard-blocker without touching ESLint config (task 002''s scope) or formatAndLint''s public signature/JSDoc.'
           git:
             branch: plan/typescript-support-01-003
             commit:
