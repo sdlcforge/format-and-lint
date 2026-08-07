@@ -49,6 +49,7 @@ phases:
           path: phase-01-typescript-support/004-add-typescript-fixture-tests.md
           done: false
           tier: sonnet-high
+          digest: Added end-to-end TS/TSX fixture coverage across lint-detection, format/autofix, and idempotence axes. All 8 new tests pass alongside the 34 pre-existing ones; coverage improved; no production source touched; no defects found in tasks 001-003.
           git:
             branch: plan/typescript-support-01-004
             commit:
