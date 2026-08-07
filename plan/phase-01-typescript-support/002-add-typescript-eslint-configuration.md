@@ -244,3 +244,57 @@ architectural_impact: true
 - After adding `defaultTsConfig` and `defaultTsJsdocConfig`.
 - After the `defaultJsxConfig` widening and the import-resolver extension additions.
 - After wiring `getEslintConfig` and adding the standard-kit comment.
+
+## Status
+
+**Outcome: succeeded** — 2026-08-07.
+
+All nine requirements implemented in `src/lib/default-config/eslint-config.mjs` (the only source file
+changed). No dependencies added; `package.json` and `package-lock.json` are untouched.
+
+### Validation summary
+
+| Check | Result |
+|---|---|
+| `make test` (existing suite unchanged) | passed — 10 suites, 34 tests |
+| `make lint` on fandl's own sources | passed |
+| Scratch verification, 9 TS/TSX/MTS/CTS fixtures | passed — zero remaining diagnostics after `--fix` |
+| No `ESLintCircularFixesWarning` | passed — 0 occurrences |
+| Fixture C byte-exact vs the expected output above | passed |
+| `enum Color { Red, Green }` retains 2-space members | passed (see deviation below) |
+| Local import resolving to a `.ts` sibling | passed — no `import/no-unresolved` |
+| ESLint starts (no `ignoredNodes` schema failure) | passed |
+| `grep -n "typescript"` — `typescript : true` unchanged | passed, comment adjacent |
+| `git diff --stat` — one source file | passed |
+
+The scratch verification also confirmed the JavaScript rule set is unaffected: for a `.mjs` file
+`no-undef` is still `error`, `@stylistic/key-spacing` still carries no `ignoredNodes`, and
+`@stylistic/indent`'s `ignoredNodes` still holds exactly the original five entries. Every fixture was
+run through three full prettier→ESLint passes and was byte-stable from pass 1.
+
+### One deviation from `## Requirements` (requirement 2)
+
+Requirement 2 prescribed appending `'TSEnumBody'` and `'TSModuleBlock'` to the indent `ignoredNodes`.
+**`'TSModuleBlock'` is correct and verified.** `'TSEnumBody'` is not: `@babel/eslint-parser` (with
+`@babel/parser@7.29.2`) emits a `TSEnumDeclaration` whose `TSEnumMember`s hang off it directly and
+emits **no `TSEnumBody` node at all**, so that selector never matches and the enum body was still
+de-indented to `enum Color {\nRed,\nGreen\n}` — failing this task's own `## Validation` criterion.
+
+`'TSEnumDeclaration'` was added alongside the two prescribed entries; that is the entry that actually
+does the work. `'TSEnumBody'` was retained (it is the Babel 8 / TS-ESTree AST shape and costs nothing
+to also match), and the discrepancy is recorded as a code comment at the rule. This is the smallest
+change that satisfies the requirement's own stated rationale and the validation criterion together.
+
+### Notes for the maintainer
+
+- **Known limitation left in place as instructed (requirement 9).** `no-unused-vars` still reports
+  `'name' is defined but never used` for `constructor(public name: string)`. Reproduced and confirmed;
+  `args : 'none'` was deliberately **not** added. Task 005 documents it.
+- **`@stylistic/comma-dangle` strips the trailing comma from multiline `enum` bodies.** fandl's
+  `comma-dangle` options name `arrays`/`objects`/`imports`/`exports`/`functions` but not `enums`, so
+  `enums` falls back to the rule default of `'never'`; prettier emits `Green,` and ESLint removes it.
+  File content is byte-stable across passes, so this is cosmetic only, and requirement 2 restricted
+  the TS component to exactly three rules — so it was left alone. Worth a follow-up if the
+  `always-multiline` house style should extend to enums.
+- The `<T,>`/`<T>` prettier-vs-ESLint disagreement documented in the parsing-layer note was
+  reproduced and is stable, as predicted.

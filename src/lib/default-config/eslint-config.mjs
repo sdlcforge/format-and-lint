@@ -378,12 +378,21 @@ const defaultTsConfig = {
         ignoredNodes : ['TSTypeLiteral', 'TSInterfaceBody', 'ClassBody'],
       },
     ],
-    // Without the two extra ignored nodes, '--fix' rewrites prettier's correctly-indented
+    // Without the extra ignored nodes, '--fix' rewrites prettier's correctly-indented
     // 'enum Color {\n  Red,\n  Green,\n}' to 'enum Color {\nRed,\nGreen\n}'.
+    // NOTE on the enum entries: '@babel/eslint-parser' (@babel/parser 7.29.x) emits a
+    // 'TSEnumDeclaration' whose members hang off it directly -- it emits no 'TSEnumBody' node at
+    // all, so 'TSEnumBody' alone never matches and the de-indentation still happens.
+    // 'TSEnumDeclaration' is the entry that actually does the work here; 'TSEnumBody' is retained
+    // because that is the Babel 8 / TS-ESTree AST shape and it costs nothing to match both.
+    // 'TSModuleBlock' is emitted by this parser today and covers 'namespace'/'module' bodies.
     '@stylistic/indent' : [
       'error',
       2,
-      { ...baseIndentOptions, ignoredNodes : [...baseIndentOptions.ignoredNodes, 'TSEnumBody', 'TSModuleBlock'] },
+      {
+        ...baseIndentOptions,
+        ignoredNodes : [...baseIndentOptions.ignoredNodes, 'TSEnumDeclaration', 'TSEnumBody', 'TSModuleBlock'],
+      },
     ],
   },
 }
