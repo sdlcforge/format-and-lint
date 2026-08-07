@@ -60,3 +60,13 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: plan/notes/typescript-rule-conflicts.md remains stale on the TSEnumBody-vs-TSEnumDeclaration point; will be corrected as part of task 005's documentation pass.
+    - title: plan/notes/typescript-rule-conflicts.md still
+      id: azET
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: plan/notes/typescript-rule-conflicts.md still states TSEnumBody; shipped code uses TSEnumDeclaration. New user-facing docs are correct but the note itself wasn't in this task's file scope. Consider a follow-up to correct the note file directly.
