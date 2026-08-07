@@ -94,4 +94,4 @@ phases:
           git:
             branch: null
             commit: []
-            merge: null
+            merge: 86ea84c1375014b4c52cd0995643e7429b2f51f4
