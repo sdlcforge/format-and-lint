@@ -24,7 +24,7 @@ import nodePlugin from 'eslint-plugin-node'
 import promisePlugin from 'eslint-plugin-promise'
 import globalsPkg from 'globals'
 
-import { allExtsStr, jsxExtsStr } from './js-extensions'
+import { allExtsStr, allTsExtsStr, jsxLikeExtsStr } from './js-extensions'
 import { linebreakTypesExcept } from './lib/linebreak-types-except'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -46,6 +46,23 @@ const packageContents = readFileSync('./package.json', { encoding : 'utf8' })
 const packageJSON = JSON.parse(packageContents)
 const { dependencies = {}, devDependencies = {}, engines = { node : true } } = packageJSON
 
+// CAUTION: as of 'eslint-config-standard-kit@1.0.0' this call returns a *flat-config array*, not a
+// plugin object. That means 'standardPlugin.rules' is 'undefined', the '...standardPlugin.rules'
+// spread further below contributes nothing, and none of standard-kit's 244 rules are actually in
+// effect -- the 'delete rules[...]' block below it is deleting keys that were never added. The
+// export shape changed in the 0.x -> 1.0.0 upgrade and this call site was never updated.
+//
+// Do NOT "repair" this in passing. Consuming the array properly would (a) activate 244
+// previously-inactive rules across every JavaScript source in every consumer project, and (b)
+// activate 'eslint-config-standard-kit/typescript', which swaps TS files onto
+// '@typescript-eslint/parser' with 'projectService : true' -- full type-aware linting, requiring a
+// resolvable 'tsconfig.json' in every consumer project and pulling the TypeScript type checker into
+// every lint run. That is a deliberate, separately-scoped decision, not a cleanup.
+//
+// The 'typescript : true' flag below is therefore a no-op today and supplies neither parser nor
+// rules; TypeScript support here is built on the Babel parser plus our own rule overrides
+// ('defaultTsConfig'/'defaultTsJsdocConfig', below). It is left as-is rather than removed because
+// removing it would be a change to a call whose semantics we are deliberately not touching.
 const standardPlugin = standardConfig({
   prettier    : true,
   sortImports : true,
@@ -70,6 +87,32 @@ const plugins = Object.assign(
   stylisticConfig.plugins // this names the plugin '@stylistic'
 )
 
+// Hoisted out of the '@stylistic/indent' rule entry below so the TypeScript component
+// ('defaultTsConfig', further down) can extend this exact object rather than restate it; the two
+// would otherwise drift apart whenever these options change.
+const baseIndentOptions = {
+  ArrayExpression        : 1,
+  CallExpression         : { arguments : 1 },
+  flatTernaryExpressions : false,
+  FunctionDeclaration    : { body : 1, parameters : 1 },
+  FunctionExpression     : { body : 1, parameters : 1 },
+  ignoreComments         : false,
+  ignoredNodes           : [
+    'TSUnionType',
+    'TSIntersectionType',
+    'TSTypeParameterInstantiation',
+    'FunctionExpression > .params[decorators.length > 0]',
+    'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
+  ],
+  ImportDeclaration        : 1,
+  MemberExpression         : 1,
+  ObjectExpression         : 1,
+  offsetTernaryExpressions : true,
+  outerIIFEBody            : 1,
+  SwitchCase               : 1,
+  VariableDeclarator       : 4,
+}
+
 const rules = {
   ...js.configs.recommended.rules,
   ...standardPlugin.rules,
@@ -92,35 +135,10 @@ const rules = {
       functions : 'never',
     },
   ],
-  '@stylistic/function-call-argument-newline' : ['error', 'consistent'],
-  '@stylistic/function-call-spacing'          : ['error', 'never'],
-  '@stylistic/function-paren-newline'         : ['error', 'consistent'],
-  '@stylistic/indent'                         : [
-    'error',
-    2,
-    {
-      ArrayExpression        : 1,
-      CallExpression         : { arguments : 1 },
-      flatTernaryExpressions : false,
-      FunctionDeclaration    : { body : 1, parameters : 1 },
-      FunctionExpression     : { body : 1, parameters : 1 },
-      ignoreComments         : false,
-      ignoredNodes           : [
-        'TSUnionType',
-        'TSIntersectionType',
-        'TSTypeParameterInstantiation',
-        'FunctionExpression > .params[decorators.length > 0]',
-        'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
-      ],
-      ImportDeclaration        : 1,
-      MemberExpression         : 1,
-      ObjectExpression         : 1,
-      offsetTernaryExpressions : true,
-      outerIIFEBody            : 1,
-      SwitchCase               : 1,
-      VariableDeclarator       : 4,
-    },
-  ],
+  '@stylistic/function-call-argument-newline'  : ['error', 'consistent'],
+  '@stylistic/function-call-spacing'           : ['error', 'never'],
+  '@stylistic/function-paren-newline'          : ['error', 'consistent'],
+  '@stylistic/indent'                          : ['error', 2, baseIndentOptions],
   '@stylistic/linebreak-style'                 : ['error', 'unix'],
   // '@stylistic/indent-binary-ops': ['error', 4], // same as default, but since we define indent, these two go together
   '@stylistic/max-statements-per-line'         : ['error', { max : 2 }], // allow for short one-liners
@@ -263,7 +281,9 @@ const defaultBaseConfig = {
           _lib : join(process.cwd(), 'test-staging', 'lib'),
           _cli : join(process.cwd(), 'test-staging', 'cli'),
         },
-        extensions : ['.js', '.jsx', '.es', '.es6', '.mjs', '.cjs'],
+        // the TypeScript extensions are required or a local 'import ... from './helper'' resolving
+        // to 'helper.ts' raises 'import/no-unresolved'
+        extensions : ['.js', '.jsx', '.es', '.es6', '.mjs', '.cjs', '.ts', '.mts', '.cts', '.tsx'],
       },
     },
     'react' : reactSettings,
@@ -300,8 +320,25 @@ const defaultJsdocConfig = {
   },
 }
 
+// The JavaScript JSDoc rules above build on 'flat/recommended-error', which includes
+// 'jsdoc/require-param-type' and 'jsdoc/require-returns-type' -- meaningless demands against a
+// TypeScript function whose annotations already carry the types. This component is appended after
+// 'defaultJsdocConfig' in the returned array so its rules win for TypeScript files.
+const defaultTsJsdocConfig = {
+  files   : [`**/*{${allTsExtsStr}}`],
+  ignores : [`**/index{${allTsExtsStr}}`, '**/__tests__/**/*', '**/*.test.*'],
+  plugins : { jsdoc : jsdocPlugin },
+  rules   : {
+    ...jsdocPlugin.configs['flat/recommended-typescript-error'].rules,
+    'jsdoc/require-description' : 'error',
+    'jsdoc/no-defaults'         : 'off',
+    'jsdoc/check-tag-names'     : ['error', { definedTags : ['category'] }],
+  },
+}
+
 const defaultJsxConfig = {
-  files           : [`**/*{${jsxExtsStr}}`],
+  // covers '.jsx' *and* '.tsx'; TSX needs the same browser globals as JSX
+  files           : [`**/*{${jsxLikeExtsStr}}`],
   // add necessary globals when processing JSX files
   languageOptions : { globals : globalsPkg.browser },
 }
@@ -317,14 +354,55 @@ const defaultTestsConfig = {
   },
 }
 
+const defaultTsConfig = {
+  files : [`**/*{${allTsExtsStr}}`],
+  rules : {
+    // TypeScript type identifiers (type aliases, interface names, type parameters, enum members,
+    // interface member names) are invisible to core 'no-undef', which reports every one of them as
+    // undefined. Disabling it for TS files is the standard resolution; the TypeScript compiler is
+    // the right tool for that check.
+    'no-undef'               : 'off',
+    // Our aligned-colon 'key-spacing' override collides head-on with the @stylistic
+    // 'type-annotation-spacing' rule inside TS type containers, producing a circular fixer loop.
+    // Excluding the TS containers leaves 'type-annotation-spacing' in sole control of type
+    // annotations while 'key-spacing' keeps full control of object literals -- so TS sources get
+    // idiomatic `name: string` annotations and fandl's aligned `name : 'value'` object literals.
+    // NOTE: 'ignoredNodes' takes a closed enum; 'TSPropertySignature'/'TSIndexSignature' are NOT
+    // valid values and make ESLint refuse to start.
+    '@stylistic/key-spacing' : [
+      'error',
+      {
+        align        : 'colon',
+        afterColon   : true,
+        beforeColon  : true,
+        ignoredNodes : ['TSTypeLiteral', 'TSInterfaceBody', 'ClassBody'],
+      },
+    ],
+    // Without the two extra ignored nodes, '--fix' rewrites prettier's correctly-indented
+    // 'enum Color {\n  Red,\n  Green,\n}' to 'enum Color {\nRed,\nGreen\n}'.
+    '@stylistic/indent' : [
+      'error',
+      2,
+      { ...baseIndentOptions, ignoredNodes : [...baseIndentOptions.ignoredNodes, 'TSEnumBody', 'TSModuleBlock'] },
+    ],
+  },
+}
+
+// The order of the returned array is load-bearing: a later flat-config entry with a matching 'files'
+// glob overrides an earlier one. 'tsJsdoc' sits directly after 'jsdoc' so the TypeScript JSDoc rules
+// supersede the JavaScript ones for TS files while staying overridable by later components; 'ts'
+// sits after 'test' so its rule overrides win for TypeScript files; 'additional' stays last so
+// callers can still override everything.
 const getEslintConfig = ({
   additional = {},
   base = defaultBaseConfig,
   jsdoc = defaultJsdocConfig,
   jsx = defaultJsxConfig,
   test = defaultTestsConfig,
+  ts = defaultTsConfig,
+  tsJsdoc = defaultTsJsdocConfig,
 } = {}) => {
-  const eslintConfig = [base, jsdoc, jsx, test, additional]
+  const eslintConfig = [base, jsdoc, tsJsdoc, jsx, test, ts, additional]
 
   return eslintConfig
 }
