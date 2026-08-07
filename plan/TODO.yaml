@@ -36,3 +36,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 4
+          slug: add-typescript-fixture-tests
+          title: Add TypeScript Fixture Tests
+          path: phase-01-typescript-support/004-add-typescript-fixture-tests.md
+          done: false
+          tier: sonnet-high
+          git:
+            branch: null
+            commit: []
+            merge: null
