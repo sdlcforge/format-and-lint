@@ -40,7 +40,7 @@ phases:
             branch: plan/typescript-support-01-003
             commit:
                 - f20e979
-            merge: null
+            merge: d9a975aff579cb3eeb31e17752cdba3a302438b6
         - number: 4
           slug: add-typescript-fixture-tests
           title: Add TypeScript Fixture Tests
