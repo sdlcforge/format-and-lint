@@ -1,6 +1,14 @@
 export const stdExts = ['.js', '.cjs', '.mjs']
 export const jsxExts = ['.jsx']
-export const allExts = [...stdExts, ...jsxExts]
+export const tsExts = ['.ts', '.mts', '.cts']
+export const tsxExts = ['.tsx']
+export const allTsExts = [...tsExts, ...tsxExts]
+export const jsxLikeExts = [...jsxExts, ...tsxExts]
+export const allExts = [...stdExts, ...jsxExts, ...allTsExts]
 export const stdExtsStr = stdExts.join(',')
 export const jsxExtsStr = jsxExts.join(',')
+export const tsExtsStr = tsExts.join(',')
+export const tsxExtsStr = tsxExts.join(',')
+export const allTsExtsStr = allTsExts.join(',')
+export const jsxLikeExtsStr = jsxLikeExts.join(',')
 export const allExtsStr = allExts.join(',')

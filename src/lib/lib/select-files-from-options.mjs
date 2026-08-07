@@ -18,12 +18,12 @@ const selectFilesFromOptions = async ({
   noStandardIgnores,
   root = process.cwd(),
 }) => {
-  const standardIgnores = ['**/test/data/**/*', '**/tests/data/**/*', '**/tests/fixtures/**/*', 'doc/**', 'dist/**']
+  const standardIgnores = ['**/test/data/**/*', '**/tests/data/**/*', '**/tests/fixtures/**/*', 'doc/**', 'dist/**', '**/*.d.ts']
   const allExtsMatch = `@(${allExts.join('|')})`
 
   const targetPatterns = await processFilePatterns(files, filesPaths)
   if (targetPatterns.length === 0) {
-    const rootSrcIndicatorFiles = ['index.js', 'index.mjs', 'index.cjs']
+    const rootSrcIndicatorFiles = ['index.js', 'index.mjs', 'index.cjs', 'index.ts', 'index.mts', 'index.cts', 'index.tsx']
     if (rootSrcIndicatorFiles.some((f) => existsSync(join(root, f)))) {
       targetPatterns.push(`**/*${allExtsMatch}`)
     }

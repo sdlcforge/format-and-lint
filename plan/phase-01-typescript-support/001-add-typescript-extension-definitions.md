@@ -148,3 +148,33 @@ literals.
 - After extending `src/lib/default-config/js-extensions.mjs` and adding its unit test.
 - After updating `src/lib/lib/select-files-from-options.mjs`.
 - After updating the `Makefile` `find` patterns.
+
+## Status
+
+- **Outcome:** succeeded
+- **Date:** 2026-08-07
+- **Summary:** Extended `src/lib/default-config/js-extensions.mjs` with `tsExts`, `tsxExts`,
+  `allTsExts`, `jsxLikeExts` and their `*Str` counterparts; redefined `allExts` as
+  `[...stdExts, ...jsxExts, ...allTsExts]` (`.js`, `.cjs`, `.mjs`, `.jsx`, `.ts`, `.mts`, `.cts`,
+  `.tsx`, no duplicates). Added `index.ts`/`index.mts`/`index.cts`/`index.tsx` to
+  `rootSrcIndicatorFiles` and `**/*.d.ts` to `standardIgnores` in
+  `src/lib/lib/select-files-from-options.mjs`. Widened the three `find` invocations in `Makefile`
+  (`ALL_JS_FILES_SRC`, `ALL_LIB_JS_FILES_SRC`, `ALL_NON_TEST_JS_FILES_SRC`) to include
+  `.ts`/`.mts`/`.cts`/`.tsx`, keeping the existing parenthesization for the last one. Added
+  `src/lib/default-config/test/js-extensions.test.mjs` (100% coverage on the module).
+- **Validation:** `make test` (34/34 passed, including the new suite), `make lint` (clean, after one
+  self-fix — see below), `make` (build succeeded; `dist/fandl-exec.js` and `dist/fandl.js`
+  produced), `make -n test`/`make -n build` dry runs and a direct `find` count comparison (45 files
+  before and after — no `.ts`/`.tsx` fixtures exist yet at this commit) confirmed the Makefile
+  parenthesization is intact, `node -e` confirmed `allExts` contents and no duplicates, and a `grep`
+  across `src/` confirmed the only consumers of the extension exports are
+  `select-files-from-options.mjs` and `eslint-config.mjs` (task 002's responsibility, untouched
+  here). Pre-existing `select-files-from-options.test.mjs` passed unmodified.
+- **Assumptions applied:** Both `## Assumptions` entries held — fandl's own source tree has no
+  TypeScript files yet, so `make lint` reports exactly what it reported before, and widening
+  `allExts` ahead of tasks 002/003 is accepted as fine since no release happens mid-plan.
+- **Self-fix:** `js-extensions.test.mjs`'s multiline import destructure had a trailing comma, which
+  the project's `@stylistic/comma-dangle` rule (`imports: 'never'`) flagged; removed the trailing
+  comma (same file the task already added, no other file touched).
+- **Note:** Per the task doc, `.jsx` remains absent from the Makefile `find` patterns — that gap was
+  explicitly out of scope for this task and was left untouched.
