@@ -135,3 +135,34 @@ has shifted.
 - After updating `src/docs/README.02.md`.
 - After adding the `DEVELOPER_NOTES.md` section.
 - After regenerating `README.md` and reviewing its diff.
+
+## Status
+
+- **Outcome:** succeeded
+- **Date:** 2026-08-07
+- Updated `src/docs/README.01.md` (new "TypeScript support" subsection under Usage, updated CLI
+  example, ToC entry) and `src/docs/README.02.md` ("Component based configuration" expanded to the
+  7 components with the `[base, jsdoc, tsJsdoc, jsx, test, ts, additional]` ordering, a TypeScript
+  style-contrast note added to "Reformatting process overview", and a new "Known TypeScript
+  limitations" subsection). Added a `DEVELOPER_NOTES.md` section on the
+  `eslint-config-standard-kit` `typescript: true` no-op finding. Regenerated `README.md` via
+  `make README.md`.
+- Two corrections from the dispatch prompt were applied, superseding stale text in
+  `plan/notes/typescript-rule-conflicts.md`: (1) the shipped `@stylistic/indent` fix keys off
+  `'TSEnumDeclaration'` in `ignoredNodes`, not `'TSEnumBody'` — confirmed against
+  `src/lib/default-config/eslint-config.mjs`'s `defaultTsConfig`, which documents that
+  `@babel/eslint-parser` emits no `TSEnumBody` node; documented the `no-unused-vars` /
+  constructor-parameter-property limitation as a deliberately-unfixed known limitation (no
+  `args: 'none'`); and (2) added a "Trailing commas in multiline `enum` bodies" limitation entry for
+  `@stylistic/comma-dangle` not naming an `enums` node type (cosmetic only).
+- Validation: `make README.md` regenerated cleanly; reviewed `git diff README.md` — the only
+  JSDoc-generated-middle churn is the new `getPrettierConfigFor` entry and `formatAndLint`'s shifted
+  source-line link, both fully explained by task 003's addition of that function (confirmed via
+  `git log -- src/lib/format-and-lint.mjs`); `make lint` and `make test` both pass; extension list
+  cross-checked element-by-element against `allExts` in `js-extensions.mjs`; component names and
+  ordering cross-checked against `getEslintConfig` in `eslint-config.mjs`; the type-annotation
+  example matches `src/lib/test/data/ts-type-annotations/index.formatted.txt` exactly;
+  `grep -rn "js,mjs,cjs,jsx" src/docs/ README.md` returns no matches (the CLI example's extension
+  order was normalized to the canonical `js,cjs,mjs,jsx,ts,mts,cts,tsx` order to avoid a stale
+  4-extension substring match).
+- Assumption applied: tasks 001–004 landed; this task documents shipped behavior only.
