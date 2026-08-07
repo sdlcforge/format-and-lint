@@ -90,3 +90,13 @@ items:
         - plan/slug:typescript-support
         - effort:unspecified
       text: 'src/lib/default-config/eslint-config.mjs is now at exactly 300 counted lines against its own ''max-lines'' rule cap (max: 300, skipBlankLines/skipComments) — landed at the edge by the phase-03 cli-rule-exemption task, which had to inline a files-array literal instead of hoisting a const specifically to stay under the cap. The next line of code added to this file will fail `make lint`. Split the file (e.g. extract each named config component — base/jsdoc/jsx/test/ts/tsJsdoc/cli — into its own module) before adding another component, rather than raising the cap.'
+    - title: cli-rule-exemption minor notes
+      id: iTol
+      date: "2026-08-07"
+      tags:
+        - type:enhancement
+        - priority:low
+        - plan/phase:phase-03-cli-rule-exemption
+        - plan/slug:typescript-support
+        - effort:unspecified
+      text: 'Two minor notes from the cli-rule-exemption task (informational, no action forced): (1) the `**/cli/**` glob matches everything under any `cli/` directory, not just entrypoint scripts -- e.g. library helpers like src/cli/lib/*.mjs also lose no-console/no-process-exit, which is what the task doc specified but is broader than the "entrypoints" framing implies; consumers with a large cli/ tree should be aware. (2) plan/phase-03-cli-rule-exemption/001-add-cli-rule-exemption.md''s requirement-2 code snippet shows a pre-phase-01 getEslintConfig signature (missing the ts/tsJsdoc components phase-01 added) -- stale if that doc is ever reused as a reference.'
