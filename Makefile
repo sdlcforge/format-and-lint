@@ -8,9 +8,9 @@ BIN_SRC:=$(SRC)/cli
 DIST:=dist
 QA:=qa
 
-ALL_JS_FILES_SRC:=$(shell find $(SRC) -name "*.js" -o -name "*.cjs" -o -name "*.mjs")
-ALL_LIB_JS_FILES_SRC:=$(shell find $(SRC)/lib -name "*.js" -o -name "*.cjs" -o -name "*.mjs")
-ALL_NON_TEST_JS_FILES_SRC:=$(shell find $(SRC) \( -name "*.js" -o -name "*.cjs" -o -name "*.mjs" \) -not -path "**/test/**")
+ALL_JS_FILES_SRC:=$(shell find $(SRC) -name "*.js" -o -name "*.cjs" -o -name "*.mjs" -o -name "*.ts" -o -name "*.mts" -o -name "*.cts" -o -name "*.tsx")
+ALL_LIB_JS_FILES_SRC:=$(shell find $(SRC)/lib -name "*.js" -o -name "*.cjs" -o -name "*.mjs" -o -name "*.ts" -o -name "*.mts" -o -name "*.cts" -o -name "*.tsx")
+ALL_NON_TEST_JS_FILES_SRC:=$(shell find $(SRC) \( -name "*.js" -o -name "*.cjs" -o -name "*.mjs" -o -name "*.ts" -o -name "*.mts" -o -name "*.cts" -o -name "*.tsx" \) -not -path "**/test/**")
 
 BABEL_CONFIG_DIST:=$(DIST)/babel/babel-shared.config.cjs $(DIST)/babel/babel.config.cjs
 BABEL_PKG:=$(shell npm explore @sdlcforge/packjs -- pwd)
