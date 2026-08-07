@@ -32,11 +32,14 @@ describe('formatAndLint', () => {
     ['correctly handles prettier only formatting', 'basic-indent'],
     ['correctly formats boolean operators in if statement', 'boolean-ops'],
     ['correctly places required semicolon', 'necessary-semicolon'],
+    ['correctly formats TypeScript type annotations', 'ts-type-annotations', 'index.ts'],
+    ['correctly indents TypeScript enum bodies', 'ts-enum-indent', 'index.ts'],
+    ['correctly formats a TSX component', 'tsx-component', 'index.tsx'],
   ]
 
-  test.each(formatTests)('%s', async (description, testDir) => {
+  test.each(formatTests)('%s', async (description, testDir, fileName = 'index.mjs') => {
     testDir = resolve(__dirname, 'data', testDir)
-    const testFile = resolve(testDir, 'index.mjs')
+    const testFile = resolve(testDir, fileName)
 
     const { lintResults } = await formatAndLint({
       noWrite : true,
