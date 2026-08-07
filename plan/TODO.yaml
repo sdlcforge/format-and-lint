@@ -84,4 +84,14 @@ phases:
     - number: 3
       slug: cli-rule-exemption
       title: CLI Rule Exemption
-      tasks: []
+      tasks:
+        - number: 1
+          slug: add-cli-rule-exemption
+          title: Add CLI Rule Exemption
+          path: phase-03-cli-rule-exemption/001-add-cli-rule-exemption.md
+          done: false
+          tier: opus-med
+          git:
+            branch: null
+            commit: []
+            merge: null
