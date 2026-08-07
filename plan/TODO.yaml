@@ -26,3 +26,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 3
+          slug: add-typescript-prettier-parser-selection
+          title: Add TypeScript Prettier Parser Selection
+          path: phase-01-typescript-support/003-add-typescript-prettier-parser-selection.md
+          done: false
+          tier: sonnet-high
+          git:
+            branch: null
+            commit: []
+            merge: null
