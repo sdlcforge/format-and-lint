@@ -13,6 +13,7 @@ phases:
           path: phase-01-typescript-support/001-add-typescript-extension-definitions.md
           done: false
           tier: sonnet-med
+          digest: Extended js-extensions.mjs with tsExts/tsxExts/allTsExts/jsxLikeExts and widened allExts to all 8 extensions with no duplicates; threaded through select-files-from-options.mjs and the Makefile's find patterns; added a full unit test at 100% coverage. Deliberately did not touch eslint-config.mjs (task 002 scope) or the .jsx Makefile gap (out of scope).
           git:
             branch: plan/typescript-support-01-001
             commit:
