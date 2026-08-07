@@ -80,3 +80,13 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: src/lib/format-and-lint.mjs's JSDoc on options.eslintConfigComponents still lists only the original 5 component keys, not tsJsdoc/ts — that file wasn't in this task's scope (task 003 was required to leave its JSDoc untouched). Worth a follow-up to update that JSDoc comment so the generated API reference lists all 7 keys.
+    - title: eslint-config.mjs at max-lines cap
+      id: t0xt
+      date: "2026-08-07"
+      tags:
+        - type:enhancement
+        - priority:medium
+        - plan/phase:phase-03-cli-rule-exemption
+        - plan/slug:typescript-support
+        - effort:unspecified
+      text: 'src/lib/default-config/eslint-config.mjs is now at exactly 300 counted lines against its own ''max-lines'' rule cap (max: 300, skipBlankLines/skipComments) — landed at the edge by the phase-03 cli-rule-exemption task, which had to inline a files-array literal instead of hoisting a const specifically to stay under the cap. The next line of code added to this file will fail `make lint`. Split the file (e.g. extract each named config component — base/jsdoc/jsx/test/ts/tsJsdoc/cli — into its own module) before adding another component, rather than raising the cap.'
