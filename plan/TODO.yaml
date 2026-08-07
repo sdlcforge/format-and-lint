@@ -30,7 +30,7 @@ phases:
             branch: plan/typescript-support-01-002
             commit:
                 - a2c0a18
-            merge: null
+            merge: 769240d366ca4b27b82e83cdbc0e25df6587ff8a
         - number: 3
           slug: add-typescript-prettier-parser-selection
           title: Add TypeScript Prettier Parser Selection
