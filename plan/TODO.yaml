@@ -5,6 +5,7 @@ phases:
     - number: 1
       slug: typescript-support
       title: TypeScript Support
+      diff_base: 8b73bd44f94d08dfb363618ed94a93c21e5d2d47
       tasks:
         - number: 1
           slug: add-typescript-extension-definitions
