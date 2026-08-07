@@ -18,7 +18,7 @@ phases:
             branch: plan/typescript-support-01-001
             commit:
                 - 7f48943
-            merge: null
+            merge: 7e3edfe2037eb241f25ea9fb29828b895dc92d86
         - number: 2
           slug: add-typescript-eslint-configuration
           title: Add TypeScript Eslint Configuration
