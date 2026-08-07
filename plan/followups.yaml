@@ -20,3 +20,13 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'Known limitation confirmed for task 005 to document: no-unused-vars false-positives on TS constructor parameter properties (e.g. `constructor(public name: string)`) even though used via `this`; args:''none'' deliberately not added per the task''s own instruction to keep the default.'
+    - title: 'Minor: plan doc''s fixture-C ''expected output'''
+      id: LA4q
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Minor: plan doc''s fixture-C ''expected output'' pairing with a single-line source fixture isn''t reachable as prettier (printWidth 120) keeps that source on one line - output is still correct, just unpadded. Doc/fixture pairing is slightly off; not an implementation defect.'
