@@ -14,6 +14,9 @@ describe('eslint-config.mjs', () => {
       'windows-style-newline',
       ['@stylistic/linebreak-style', '@stylistic/linebreak-style'],
     ],
+    ['idiomatic TypeScript lints clean', 'ts-clean', []],
+    ['idiomatic TSX lints clean', 'tsx-clean', []],
+    ['detects issues in TypeScript sources', 'ts-detects-issue', ['prefer-regex-literals']],
   ]
 
   test.each(lintTests)('%s', async (description, testDir, ruleIds) => {

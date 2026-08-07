@@ -146,3 +146,67 @@ here. A test task that also patches the code under test hides the regression it 
 - After threading the fixture extension through the `format-and-lint.test.mjs` table and helper.
 - After adding the format/autofix fixtures and their `.formatted.txt` expectations.
 - After adding the idempotence test.
+
+## Status
+
+**Outcome:** succeeded — 2026-08-07.
+
+Added 8 new fixture-driven tests (34 → 42 total), all green, with no changes to production
+source. `git diff --stat` against the pre-task HEAD shows exactly the file set the Validation
+section predicted.
+
+- Lint-detection (`src/lib/default-config/test/data/`): `ts-clean/index.ts`, `tsx-clean/index.tsx`,
+  `ts-detects-issue/index.ts`, wired into
+  `src/lib/default-config/test/eslint.config.test.mjs`'s `lintTests` table.
+- Format/autofix (`src/lib/test/data/`): `ts-type-annotations/`, `ts-enum-indent/`,
+  `tsx-component/`, each with a generated-and-verified `index.formatted.txt` (trailing newline
+  confirmed), wired into `src/lib/test/format-and-lint.test.mjs`'s `formatTests` table via a new
+  third tuple element (filename), defaulting to `'index.mjs'` for the pre-existing rows.
+  `src/test/lib/get-formatted-text-for.mjs` needed no change — its extension-replacement regex was
+  already extension-agnostic.
+- Idempotence: two new `test.each` cases in `format-and-lint.test.mjs` (one `.ts`, one `.tsx`) that
+  run `formatAndLint` twice — once on the raw fixture, once on the first pass's output written to a
+  tmp file — and assert byte-identical results.
+
+**Deviation from the plan note, per the dispatch's carried-forward correction:** the `ts-enum-indent`
+fixture pins `TSEnumDeclaration` in `@stylistic/indent`'s `ignoredNodes` (what tasks 002/003 actually
+shipped), not `TSEnumBody` as `plan/notes/typescript-rule-conflicts.md` still says. Verified by
+temporarily removing `'TSEnumDeclaration'` from the shipped `ignoredNodes` list (leaving
+`'TSEnumBody'` in place) and confirming the `ts-enum-indent` format test fails; restored afterward
+with a clean `git status`.
+
+**Validation performed:**
+- `make test` — 10 suites / 42 tests passed. Coverage held or improved versus the pre-task baseline
+  captured before any fixtures were added (all-files stmts 96.95%→96.95%, branch 75.86%→76.72%,
+  funcs 96.15%→96.15%, lines 96.85%→96.85%; `format-and-lint.mjs` branch coverage rose from 78.78%
+  to 81.81% thanks to the idempotence tests exercising the no-op path).
+- `make lint` — clean, zero reported issues; confirms `standardIgnores` (`**/test/data/**/*`) still
+  excludes the new fixtures from fandl's own dogfooding lint pass.
+- `ts-clean`/`tsx-clean` genuinely pin the fix: temporarily flipping `no-undef` back to `'error'` in
+  `eslint-config.mjs` reproduced the historical `no-undef` storm on both fixtures (confirmed via a
+  throwaway scratch test, not committed); restored afterward with a clean `git status`.
+- Confirmed the new `index.ts`/`index.tsx`/`index.formatted.txt` fixture files are not picked up as
+  Jest test files (suite count stayed at 10) and do not appear in the coverage table (Jest's
+  `collectCoverageFrom` is `['**/*.{js,cjs,mjs,jsx}']`, which does not match `.ts`/`.tsx`).
+- `git diff --stat` against the pre-task HEAD (`5aa3f72`) touches only the two test files
+  (`eslint.config.test.mjs`, `format-and-lint.test.mjs`) plus new fixture files under
+  `src/lib/default-config/test/data/` and `src/lib/test/data/` — no production source.
+
+**Files touched (repo-relative):**
+- `src/lib/default-config/test/eslint.config.test.mjs`
+- `src/lib/default-config/test/data/ts-clean/index.ts`
+- `src/lib/default-config/test/data/tsx-clean/index.tsx`
+- `src/lib/default-config/test/data/ts-detects-issue/index.ts`
+- `src/lib/test/format-and-lint.test.mjs`
+- `src/lib/test/data/ts-type-annotations/index.ts`
+- `src/lib/test/data/ts-type-annotations/index.formatted.txt`
+- `src/lib/test/data/ts-enum-indent/index.ts`
+- `src/lib/test/data/ts-enum-indent/index.formatted.txt`
+- `src/lib/test/data/tsx-component/index.tsx`
+- `src/lib/test/data/tsx-component/index.formatted.txt`
+
+**Assumptions applied:** tasks 001–003 landed as prerequisites (confirmed by inspecting the merged
+`eslint-config.mjs`/`js-extensions.mjs`/`format-and-lint.mjs`); existing JavaScript fixtures were
+left untouched.
+
+No defects found in tasks 001–003's implementation; nothing to halt-and-report on requirement 5.
