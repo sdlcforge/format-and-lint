@@ -40,3 +40,13 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'Follow-up candidate (out of scope for this task): @stylistic/comma-dangle strips trailing commas from multiline enum bodies since fandl''s comma-dangle options don''t name ''enums'' (or ''generics''/''tuples''). Cosmetic only, file content byte-stable.'
+    - title: 'Minor robustness note (out of scope): src/lib'
+      id: 8Wi2
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Minor robustness note (out of scope): src/lib/default-config/eslint-config.mjs''s babelConfigPathTest fallback is a relative path that fails when the module is imported from outside this repo''s cwd; harmless for all shipped paths since the installed dist/ layout hits the absolute branch first.'
