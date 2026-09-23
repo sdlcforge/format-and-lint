@@ -176,3 +176,5 @@ Note, the component structure is essentially a prototype at this point. Future v
   }
   ```
 [^1]: I perhaps falsely remember eslint actually doing a better re indenting code, but in any case there are two issue with the latest eslint based reformatting. First, it miscounts the correct indention level where '('s were involved in boolean expressions. Second, eslint failed automatically break up long lines. (As of @stylistic/eslint-plugin: 2.6.4, eslint: 8.50.0; have since upgraded but not retested since it's working as is.)
+
+See [DEVELOPER_NOTES.md](./DEVELOPER_NOTES.md) for maintainer-facing implementation notes and known gotchas.
