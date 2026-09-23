@@ -150,7 +150,7 @@ Fandl breaks up the configuration into 8 components:
 - 'jsx' which defines additional configuration and rules for JSX files -- and, since it supplies the browser globals JSX and TSX both need, for TSX files as well,
 - 'test' which defines additional configuration and rules for test files,
 - 'ts' which defines TypeScript-specific rule overrides,
-- 'cli' which exempts CLI entrypoints from `no-console` and `no-process-exit` (printing to the console and exiting with a status code is exactly what a CLI entrypoint is for, so both rules are false positives there); a file counts as a CLI entrypoint if it either sits under a `cli/` path segment (the `src/lib` + `src/cli` layout convention) or carries a `-cli` basename suffix (`bump-version-cli.js`, `eval-flow-cli.ts`) for a single-file script that doesn't warrant a lib/cli split, and
+- 'cli' which turns off `no-console` and `no-process-exit` for CLI code (printing to the console and exiting with a status code is exactly what CLI code is for, so both rules are false positives there); the exemption covers every file under a `cli/` path segment -- not just entrypoint scripts, but any file there, e.g. library helpers like `src/cli/lib/*.mjs` (the `src/lib` + `src/cli` layout convention) -- plus any file with a `-cli` basename suffix (`bump-version-cli.js`, `eval-flow-cli.ts`), a genuine single-file entrypoint that doesn't warrant a lib/cli split, and
 - 'additional' which is just a catch all for whatever else you might want to add.
 
 Rather than being forced to redefine the entire default configuration, you can override any one of the components individually by specifying `options.eslintConfigComponents`.
