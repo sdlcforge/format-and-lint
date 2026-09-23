@@ -87,6 +87,7 @@ phases:
     - number: 3
       slug: cli-rule-exemption
       title: CLI Rule Exemption
+      diff_base: dcea25bdf294b07e2af50766525f5e6669af9a1c
       tasks:
         - number: 1
           slug: add-cli-rule-exemption
