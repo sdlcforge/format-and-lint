@@ -40,7 +40,7 @@ const getPrettierConfigFor = (file, baseConfig) => {
  *   object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects) to be used in
  *   place of the default, out of the box configuration. This may not be specified along with `eslintConfigComponents`.
  * @param {object} [options.eslintConfigComponents = undefined] - An object with zero or more keys corresponding to the
- *   `base`, `jsdoc`, `jsx`, `test`, or `additional` as discussed in the [component based
+ *   `base`, `jsdoc`, `tsJsdoc`, `jsx`, `test`, `ts`, `cli`, or `additional` as discussed in the [component based
  *   configuration](#component-based-configuration). This may not be specified along with `eslintConfig`.
  * @param {object} [options.prettierConfig = <default prettier config>] - A prettier [options
  *   object](https://prettier.io/docs/en/options).

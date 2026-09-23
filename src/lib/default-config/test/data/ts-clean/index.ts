@@ -9,7 +9,7 @@ const identity = <T>(value: T): T => value
 enum Color {
   Red,
   Green,
-  Blue
+  Blue,
 }
 
 class Widget {

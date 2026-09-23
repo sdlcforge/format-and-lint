@@ -1,7 +1,7 @@
 enum Status {
   Active,
   Inactive,
-  Pending
+  Pending,
 }
 
 export { Status }
