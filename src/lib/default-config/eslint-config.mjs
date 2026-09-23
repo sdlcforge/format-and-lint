@@ -344,7 +344,7 @@ const defaultJsxConfig = {
 }
 
 const defaultTestsConfig = {
-  files           : ['**/_tests_/**', `**/*.test{${allExtsStr}}`],
+  files           : ['**/__tests__/**/*', `**/*.test{${allExtsStr}}`],
   // adds correct globals when processing jest tests
   languageOptions : { globals : globalsPkg.jest },
   rules           : {
