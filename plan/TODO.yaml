@@ -80,7 +80,8 @@ phases:
           tier: sonnet-high
           git:
             branch: plan/typescript-support-02-001
-            commit: []
+            commit:
+                - da13869
             merge: null
     - number: 3
       slug: cli-rule-exemption
