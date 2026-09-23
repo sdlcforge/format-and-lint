@@ -83,7 +83,7 @@ phases:
             branch: plan/typescript-support-02-001
             commit:
                 - da13869
-            merge: null
+            merge: b0218c1adcd462cfd03afac89057df5144bce13b
     - number: 3
       slug: cli-rule-exemption
       title: CLI Rule Exemption
