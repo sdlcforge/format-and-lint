@@ -99,3 +99,12 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'New docs/architecture.md (added this task) is not yet reachable from README.md, so the link-chain reachability rule flags it as an orphan. The task that authored it was explicitly forbidden from hand-editing README.md (a generated artifact, built from src/docs/README.01.md + README.02.md via `make build`), so wiring in the link requires either an src/docs/*.md edit or a dedicated follow-up task. Judgment call for the maintainer: add a pointer from src/docs/README.0x.md (regenerate README.md via `make README.md`), or otherwise establish reachability.'
+    - title: 'test glob mismatch: _tests_ vs __tests__'
+      id: yN81
+      date: "2026-09-23"
+      tags:
+        - type:bug
+        - plan/phase:add-architecture-doc
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Verified discrepancy in src/lib/default-config/eslint-config.mjs: the `test` component''s `files` glob is `**/_tests_/**` (single underscores), while the `jsdoc`/`tsJsdoc` components'' `ignores` use `**/__tests__/**/*` (double underscores) — these do not match the same directory name. Surfaced while authoring docs/architecture.md (documented as-is there, not fixed — out of that task''s scope, no production source changes permitted). Needs a maintainer decision on which spelling is correct and a source fix.'
