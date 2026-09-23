@@ -1,15 +1,5 @@
 version: 2
 items:
-    - title: src/lib/format-and-lint.mjs's JSDoc on option
-      id: y0Tu
-      date: "2026-08-07"
-      tags:
-        - type:ambiguity
-        - plan/phase:typescript-support
-        - plan/slug:typescript-support
-        - priority:unspecified
-        - effort:unspecified
-      text: src/lib/format-and-lint.mjs's JSDoc on options.eslintConfigComponents still lists only the original 5 component keys, not tsJsdoc/ts — that file wasn't in this task's scope (task 003 was required to leave its JSDoc untouched). Worth a follow-up to update that JSDoc comment so the generated API reference lists all 7 keys.
     - title: eslint-config.mjs at max-lines cap
       id: t0xt
       date: "2026-08-07"
