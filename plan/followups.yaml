@@ -80,16 +80,6 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'Recommendation only, not actioned: a dedicated docs/architecture.md is now warranted for fandl. A full proposed outline is recorded in the task document''s Status section for the maintainer to act on or decline. Creating it was out of this task''s scope per the task doc''s own instruction.'
-    - title: 'Pre-existing, unrelated to this plan: phase-0'
-      id: xBLY
-      date: "2026-09-23"
-      tags:
-        - type:ambiguity
-        - plan/phase:doc-updates
-        - plan/slug:typescript-support
-        - priority:unspecified
-        - effort:unspecified
-      text: 'Pre-existing, unrelated to this plan: phase-03 (cli-rule-exemption) shows done: false in plan/TODO.yaml despite having a populated merge SHA and its commits already present in this branch''s history (86ea84c, 65e9c0d, f824625). Not something the task agent touched or investigated further, but the manager may want to reconcile TODO.yaml''s bookkeeping for that task.'
     - title: src/docs/*.md orphaned from README link chain
       id: TNYF
       date: "2026-09-23"
