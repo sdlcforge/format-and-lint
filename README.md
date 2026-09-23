@@ -246,4 +246,4 @@ Note, the component structure is essentially a prototype at this point. Future v
 - **No type-aware rules.** As noted above, TypeScript support is syntax-level linting and prettier formatting only. Fandl runs no TypeScript type checker, requires no `tsconfig.json`, and enables no type-aware lint rules; keep running `tsc --noEmit` (or equivalent) separately.
 - **Trailing commas in multiline `enum` bodies.** `@stylistic/comma-dangle`'s options don't name an `enums` node type, so a multiline `enum`'s last member loses its trailing comma even though fandl otherwise enforces trailing commas on multiline arrays and objects. Cosmetic only.
 
-See [DEVELOPER_NOTES.md](./DEVELOPER_NOTES.md) for maintainer-facing implementation notes and known gotchas.
+See [docs/architecture.md](./docs/architecture.md) for a full description of the component-composition model and the prettier-then-ESLint reformatting pipeline, and [DEVELOPER_NOTES.md](./DEVELOPER_NOTES.md) for maintainer-facing implementation notes and known gotchas.
