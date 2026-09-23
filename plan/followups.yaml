@@ -1,0 +1,132 @@
+version: 2
+items:
+    - title: 'PLAN-ARTIFACT DEFECT: plan/notes/typescript-r'
+      id: VtkJ
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'PLAN-ARTIFACT DEFECT: plan/notes/typescript-rule-conflicts.md and task 002''s own Requirement 2 prescribe ''TSEnumBody'' which is inert under @babel/eslint-parser (it emits TSEnumDeclaration, not TSEnumBody) - the implementer added TSEnumDeclaration instead. Task 005 (documentation) must describe the actual shipped fix (TSEnumDeclaration), not the plan note''s inert prescription.'
+    - title: Known limitation confirmed for task 005 to do
+      id: RwsR
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Known limitation confirmed for task 005 to document: no-unused-vars false-positives on TS constructor parameter properties (e.g. `constructor(public name: string)`) even though used via `this`; args:''none'' deliberately not added per the task''s own instruction to keep the default.'
+    - title: 'Minor: plan doc''s fixture-C ''expected output'''
+      id: LA4q
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Minor: plan doc''s fixture-C ''expected output'' pairing with a single-line source fixture isn''t reachable as prettier (printWidth 120) keeps that source on one line - output is still correct, just unpadded. Doc/fixture pairing is slightly off; not an implementation defect.'
+    - title: Follow-up candidate (out of scope for this ta
+      id: p06R
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Follow-up candidate (out of scope for this task): @stylistic/comma-dangle strips trailing commas from multiline enum bodies since fandl''s comma-dangle options don''t name ''enums'' (or ''generics''/''tuples''). Cosmetic only, file content byte-stable.'
+    - title: 'Minor robustness note (out of scope): src/lib'
+      id: 8Wi2
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Minor robustness note (out of scope): src/lib/default-config/eslint-config.mjs''s babelConfigPathTest fallback is a relative path that fails when the module is imported from outside this repo''s cwd; harmless for all shipped paths since the installed dist/ layout hits the absolute branch first.'
+    - title: plan/notes/typescript-rule-conflicts.md remai
+      id: EB9P
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: plan/notes/typescript-rule-conflicts.md remains stale on the TSEnumBody-vs-TSEnumDeclaration point; will be corrected as part of task 005's documentation pass.
+    - title: plan/notes/typescript-rule-conflicts.md still
+      id: azET
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: plan/notes/typescript-rule-conflicts.md still states TSEnumBody; shipped code uses TSEnumDeclaration. New user-facing docs are correct but the note itself wasn't in this task's file scope. Consider a follow-up to correct the note file directly.
+    - title: src/lib/format-and-lint.mjs's JSDoc on option
+      id: y0Tu
+      date: "2026-08-07"
+      tags:
+        - type:ambiguity
+        - plan/phase:typescript-support
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: src/lib/format-and-lint.mjs's JSDoc on options.eslintConfigComponents still lists only the original 5 component keys, not tsJsdoc/ts — that file wasn't in this task's scope (task 003 was required to leave its JSDoc untouched). Worth a follow-up to update that JSDoc comment so the generated API reference lists all 7 keys.
+    - title: eslint-config.mjs at max-lines cap
+      id: t0xt
+      date: "2026-08-07"
+      tags:
+        - type:enhancement
+        - priority:medium
+        - plan/phase:phase-03-cli-rule-exemption
+        - plan/slug:typescript-support
+        - effort:unspecified
+      text: 'src/lib/default-config/eslint-config.mjs is now at exactly 300 counted lines against its own ''max-lines'' rule cap (max: 300, skipBlankLines/skipComments) — landed at the edge by the phase-03 cli-rule-exemption task, which had to inline a files-array literal instead of hoisting a const specifically to stay under the cap. The next line of code added to this file will fail `make lint`. Split the file (e.g. extract each named config component — base/jsdoc/jsx/test/ts/tsJsdoc/cli — into its own module) before adding another component, rather than raising the cap.'
+    - title: cli-rule-exemption minor notes
+      id: iTol
+      date: "2026-08-07"
+      tags:
+        - type:enhancement
+        - priority:low
+        - plan/phase:phase-03-cli-rule-exemption
+        - plan/slug:typescript-support
+        - effort:unspecified
+      text: 'Two minor notes from the cli-rule-exemption task (informational, no action forced): (1) the `**/cli/**` glob matches everything under any `cli/` directory, not just entrypoint scripts -- e.g. library helpers like src/cli/lib/*.mjs also lose no-console/no-process-exit, which is what the task doc specified but is broader than the "entrypoints" framing implies; consumers with a large cli/ tree should be aware. (2) plan/phase-03-cli-rule-exemption/001-add-cli-rule-exemption.md''s requirement-2 code snippet shows a pre-phase-01 getEslintConfig signature (missing the ts/tsJsdoc components phase-01 added) -- stale if that doc is ever reused as a reference.'
+    - title: 'Recommendation only, not actioned: a dedicate'
+      id: uWT9
+      date: "2026-09-23"
+      tags:
+        - type:ambiguity
+        - plan/phase:doc-updates
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Recommendation only, not actioned: a dedicated docs/architecture.md is now warranted for fandl. A full proposed outline is recorded in the task document''s Status section for the maintainer to act on or decline. Creating it was out of this task''s scope per the task doc''s own instruction.'
+    - title: 'Pre-existing, unrelated to this plan: phase-0'
+      id: xBLY
+      date: "2026-09-23"
+      tags:
+        - type:ambiguity
+        - plan/phase:doc-updates
+        - plan/slug:typescript-support
+        - priority:unspecified
+        - effort:unspecified
+      text: 'Pre-existing, unrelated to this plan: phase-03 (cli-rule-exemption) shows done: false in plan/TODO.yaml despite having a populated merge SHA and its commits already present in this branch''s history (86ea84c, 65e9c0d, f824625). Not something the task agent touched or investigated further, but the manager may want to reconcile TODO.yaml''s bookkeeping for that task.'
+    - title: src/docs/*.md orphaned from README link chain
+      id: TNYF
+      date: "2026-09-23"
+      tags:
+        - type:documentation
+        - priority:unspecified
+        - effort:unspecified
+        - plan/phase:phase-02-doc-updates
+        - plan/slug:typescript-support
+      text: 'Phase-02 link-chain gate: src/docs/README.01.md and src/docs/README.02.md are not linked from README.md or any other project doc, so the link-chain reachability check flags them as orphans (minor, medium confidence). Structurally these are README build-source fragments (Makefile copies/cats them into the generated README.md), not separate reader-facing docs, so the content itself isn''t lost — but the literal link-chain rule keeps flagging them. Recommendation: either document (in README.md''s build/contributing notes, or in DEVELOPER_NOTES.md) that src/docs/*.md are generator-input fragments exempt from the link-chain rule the way plan/** is exempted, or add a lightweight link from README.md if a build/contributing section exists. Judgment call for the maintainer, not a mechanical fix.'
