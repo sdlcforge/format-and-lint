@@ -175,7 +175,6 @@ CLI entrypoints too.
 Note, the component structure is essentially a prototype at this point. Future versions will:
 - Break up 'base' (which is very large) into different semantic types such "correctness", "complexity", and "style".
 - Support arbitrary additional configuration components.
-- Support turning off individual configuration components.
 
 ## Reformatting process overview
 
