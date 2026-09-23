@@ -1,15 +1,5 @@
 version: 2
 items:
-    - title: 'Minor: plan doc''s fixture-C ''expected output'''
-      id: LA4q
-      date: "2026-08-07"
-      tags:
-        - type:ambiguity
-        - plan/phase:typescript-support
-        - plan/slug:typescript-support
-        - priority:unspecified
-        - effort:unspecified
-      text: 'Minor: plan doc''s fixture-C ''expected output'' pairing with a single-line source fixture isn''t reachable as prettier (printWidth 120) keeps that source on one line - output is still correct, just unpadded. Doc/fixture pairing is slightly off; not an implementation defect.'
     - title: Follow-up candidate (out of scope for this ta
       id: p06R
       date: "2026-08-07"
