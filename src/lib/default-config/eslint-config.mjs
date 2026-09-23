@@ -30,7 +30,11 @@ import { linebreakTypesExcept } from './lib/linebreak-types-except'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const babelConfigPathInstalled = join(__dirname, 'babel', 'babel.config.cjs')
-const babelConfigPathTest = join('dist', 'babel', 'babel.config.cjs')
+// Dev/test fallback: this file lives at 'src/lib/default-config/eslint-config.mjs', so three '..'
+// segments reach the repo root, where 'make' places the built babel config at
+// 'dist/babel/babel.config.cjs'. Anchored on '__dirname' (like 'babelConfigPathInstalled' above)
+// rather than 'process.cwd()' so it resolves correctly regardless of the caller's working directory.
+const babelConfigPathTest = join(__dirname, '..', '..', '..', 'dist', 'babel', 'babel.config.cjs')
 
 const babelConfigPath =
   existsSync(babelConfigPathInstalled) === true
@@ -133,6 +137,7 @@ const rules = {
       imports   : 'never',
       exports   : 'never',
       functions : 'never',
+      enums     : 'always-multiline',
     },
   ],
   '@stylistic/function-call-argument-newline'  : ['error', 'consistent'],
@@ -248,8 +253,7 @@ delete rules['block-spacing'] // redundant with @stylistic
 delete rules['brace-style'] // they want 1tbs, we want stroustrup
 delete rules['comma-dangle'] // they so no, we say multiline
 delete rules['eol-last'] // redundant with @stylistic
-delete rules.indent
-delete rules['indent-binary-ops']
+delete rules.indent; delete rules['indent-binary-ops']
 delete rules['key-spacing'] // redundant with @stylistic
 delete rules['operator-linebreak'] // they say after, we say before
 delete rules['no-trailing-spaces'] // doesn't conflict, but it's redundant with @stylistic
