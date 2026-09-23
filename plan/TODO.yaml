@@ -76,7 +76,7 @@ phases:
           slug: update-architecture-docs
           title: Update Architecture Docs
           path: phase-02-doc-updates/001-update-architecture-docs.md
-          done: false
+          done: true
           tier: sonnet-high
           digest: 'Conformance-reviewed fandl''s architecture/spec documentation (src/docs/README.01.md, src/docs/README.02.md, generated README.md, DEVELOPER_NOTES.md) against the shipped Phase 01 TypeScript/TSX work. Everything task 005 wrote was already accurate and cross-checks clean against the shipped source. Found and fixed one real staleness: a stale ''future work'' bullet in README.02.md. Regenerated README.md cleanly (one-line diff, no JSDoc churn); make test and make lint both pass.'
           git:
