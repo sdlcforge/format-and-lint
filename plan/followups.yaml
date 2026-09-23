@@ -1,15 +1,5 @@
 version: 2
 items:
-    - title: 'PLAN-ARTIFACT DEFECT: plan/notes/typescript-r'
-      id: VtkJ
-      date: "2026-08-07"
-      tags:
-        - type:ambiguity
-        - plan/phase:typescript-support
-        - plan/slug:typescript-support
-        - priority:unspecified
-        - effort:unspecified
-      text: 'PLAN-ARTIFACT DEFECT: plan/notes/typescript-rule-conflicts.md and task 002''s own Requirement 2 prescribe ''TSEnumBody'' which is inert under @babel/eslint-parser (it emits TSEnumDeclaration, not TSEnumBody) - the implementer added TSEnumDeclaration instead. Task 005 (documentation) must describe the actual shipped fix (TSEnumDeclaration), not the plan note''s inert prescription.'
     - title: 'Minor: plan doc''s fixture-C ''expected output'''
       id: LA4q
       date: "2026-08-07"
