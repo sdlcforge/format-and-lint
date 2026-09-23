@@ -80,15 +80,6 @@ items:
         - plan/phase:phase-02-doc-updates
         - plan/slug:typescript-support
       text: 'Phase-02 link-chain gate: src/docs/README.01.md and src/docs/README.02.md are not linked from README.md or any other project doc, so the link-chain reachability check flags them as orphans (minor, medium confidence). Structurally these are README build-source fragments (Makefile copies/cats them into the generated README.md), not separate reader-facing docs, so the content itself isn''t lost — but the literal link-chain rule keeps flagging them. Recommendation: either document (in README.md''s build/contributing notes, or in DEVELOPER_NOTES.md) that src/docs/*.md are generator-input fragments exempt from the link-chain rule the way plan/** is exempted, or add a lightweight link from README.md if a build/contributing section exists. Judgment call for the maintainer, not a mechanical fix.'
-    - title: docs/architecture.md not linked from README
-      id: JSvu
-      date: "2026-09-23"
-      tags:
-        - type:documentation
-        - plan/phase:add-architecture-doc
-        - priority:unspecified
-        - effort:unspecified
-      text: 'New docs/architecture.md (added this task) is not yet reachable from README.md, so the link-chain reachability rule flags it as an orphan. The task that authored it was explicitly forbidden from hand-editing README.md (a generated artifact, built from src/docs/README.01.md + README.02.md via `make build`), so wiring in the link requires either an src/docs/*.md edit or a dedicated follow-up task. Judgment call for the maintainer: add a pointer from src/docs/README.0x.md (regenerate README.md via `make README.md`), or otherwise establish reachability.'
     - title: 'test glob mismatch: _tests_ vs __tests__'
       id: yN81
       date: "2026-09-23"
