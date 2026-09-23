@@ -1,15 +1,5 @@
 version: 2
 items:
-    - title: Follow-up candidate (out of scope for this ta
-      id: p06R
-      date: "2026-08-07"
-      tags:
-        - type:ambiguity
-        - plan/phase:typescript-support
-        - plan/slug:typescript-support
-        - priority:unspecified
-        - effort:unspecified
-      text: 'Follow-up candidate (out of scope for this task): @stylistic/comma-dangle strips trailing commas from multiline enum bodies since fandl''s comma-dangle options don''t name ''enums'' (or ''generics''/''tuples''). Cosmetic only, file content byte-stable.'
     - title: src/lib/format-and-lint.mjs's JSDoc on option
       id: y0Tu
       date: "2026-08-07"
