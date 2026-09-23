@@ -96,5 +96,6 @@ phases:
           tier: opus-med
           git:
             branch: plan/typescript-support-03-001
-            commit: []
+            commit:
+                - 65e9c0d
             merge: 86ea84c1375014b4c52cd0995643e7429b2f51f4
