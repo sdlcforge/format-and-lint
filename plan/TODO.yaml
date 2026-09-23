@@ -92,7 +92,7 @@ phases:
           slug: add-cli-rule-exemption
           title: Add CLI Rule Exemption
           path: phase-03-cli-rule-exemption/001-add-cli-rule-exemption.md
-          done: false
+          done: true
           tier: opus-med
           digest: Added the cli ESLint config component (no-console/no-process-exit off for **/cli/** paths and *-cli basename files), wired into getEslintConfig between ts and additional ([base, jsdoc, tsJsdoc, jsx, test, ts, cli, additional]), pinned with six new fixture/unit tests (42 -> 48 total), and documented in the README source (regenerated, not hand-edited). make test and make lint both green.
           git:
