@@ -144,7 +144,7 @@ Positioned after `jsx` and `test` per the [ordering invariant](#component-orderi
 
 ### `cli`
 
-Default: `defaultCliConfig`. `files`: anything under a `cli/` path segment, or any file whose basename ends in `-cli` (across `allExts`) — covering both the `src/lib` + `src/cli` layout convention and single-file CLI scripts that don't warrant a full lib/cli split. Turns `no-console` and `no-process-exit` off, since printing to the console and exiting with a status code is exactly what a CLI entrypoint does; both rules stay at `error` for everything else via `base`. Positioned after `base` (and after every other named component) so these relaxations win.
+Default: `defaultCliConfig`. `files`: anything under a `cli/` path segment — every file there, not just entrypoint scripts, so helpers like `src/cli/lib/*.mjs` are covered too (the `src/lib` + `src/cli` layout convention) — plus any file whose basename ends in `-cli` (across `allExts`), a single-file CLI script that doesn't warrant a full lib/cli split. Turns `no-console` and `no-process-exit` off, since printing to the console and exiting with a status code is exactly what CLI code does; both rules stay at `error` for everything else via `base`. Positioned after `base` (and after every other named component) so these relaxations win.
 
 ### `additional`
 
