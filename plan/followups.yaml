@@ -37,3 +37,13 @@ items:
         - plan/phase:migrate-to-bun
         - plan/slug:npm-to-bun
       text: RELEASING.md line 48 suggests `npx @sdlcforge/format-and-lint@<version> --help`, but the CLI rejects --help with UNKNOWN_OPTION (also true before the migration); fix the doc suggestion or add a --help option.
+    - title: The `eslint-disable-next-line import/no-unres
+      id: 24KN
+      date: "2026-10-04"
+      tags:
+        - type:style
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+        - plan/slug:npm-to-bun
+      text: 'The `eslint-disable-next-line import/no-unresolved` on the bun:test import in src/lib/lib/test/process-gitignore.test.mjs:5 could be replaced by `ignore: [''^bun:'']` on import/no-unresolved in shipped src/lib/default-config/eslint-components/base-rules.mjs:134, but that changes consumer lint behaviour; decide whether to accept the disable comment or approve the config change.'
