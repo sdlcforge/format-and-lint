@@ -27,6 +27,15 @@ items:
         - effort:small
         - plan/phase:migrate-to-bun
       text: 'Makefile lines 19-21 run `bunx rollup` and `bunx jsdoc2md`. rollup is only a transitive dependency (via @sdlcforge/packjs); if a bin is not linked in node_modules/.bin, bunx falls back to fetching an unpinned package from the registry (npx behaved the same, so not a regression). Optional hardening: add rollup as an explicit devDependency or invoke ./node_modules/.bin/rollup / `bun x --no-install` so an unresolved bin fails instead of fetching. Agent-authored finding; confidence low.'
+    - title: process-package-ignores test relies on chdir
+      id: 0jh3
+      date: "2026-10-04"
+      tags:
+        - type:bug
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+      text: src/lib/lib/test/process-package-ignores.test.mjs (lines 5-24) uses process.chdir(tmpDir) in beforeAll and restores it in afterAll. bun test runs all files in one process, so a failure between hooks or a future --concurrent run could leak the changed cwd into other files using relative paths. No defect today. If concurrency is added, inject the package.json path instead of relying on process.cwd(). Agent-authored finding; confidence medium.
 closed:
     - id: aylA
       title: package ignores read devPkg, not _sdlc
