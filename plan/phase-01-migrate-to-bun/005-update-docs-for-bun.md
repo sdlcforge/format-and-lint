@@ -28,3 +28,7 @@ architectural_impact: false
 ## References
 
 - [bun migration findings](../notes/bun-migration-findings.md) decisions 2, 5, 6, 7.
+
+## Status
+
+succeeded, 2026-10-04. Edited `src/docs/README.01.md`, regenerated `README.md`, `DEVELOPER_NOTES.md`, `docs/architecture.md`, `src/lib/default-config/eslint-components/tests.mjs` (comments only). Validation: `make build` diff limited to source edits; `bun test ./src` 55 pass; `make lint` passed; jest/npm greps show only deliberate mentions.
