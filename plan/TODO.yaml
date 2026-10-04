@@ -27,7 +27,7 @@ phases:
           tier: sonnet-med
           digest: Ported the jest suite to bun:test. Module mock replaced by a real fixture file and temp-dir cwd for processPackageIgnores. bunfig.toml scopes discovery to ./src. 55 tests pass in one process and individually. A file importing from bun:test gets no injected globals, so process-gitignore.test.mjs imports describe/test/expect explicitly. Tests need gitignored dist/babel/*.cjs built by make (task 003 must build before test).
           git:
-            branch: null
+            branch: plan/npm-to-bun-01-002
             commit: []
             merge: null
         - number: 3
