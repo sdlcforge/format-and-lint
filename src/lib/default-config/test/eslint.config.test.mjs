@@ -54,6 +54,15 @@ describe('eslint-config.mjs', () => {
     // ESLint normalizes a rule setting to an array whose first element is the numeric severity.
     expect(config.rules['no-console'][0]).toBe(0)
     expect(config.rules['no-process-exit'][0]).toBe(0)
+    expect(config.rules['node/shebang'][0]).toBe(0)
+  })
+
+  test("'node/shebang' is an error for non-CLI files", async () => {
+    const eslint = new ESLint({ overrideConfigFile : true, overrideConfig : getEslintConfig() })
+
+    const config = await eslint.calculateConfigForFile('src/lib/default-config/test/data/cli-rules-apply/example.mjs')
+
+    expect(config.rules['node/shebang'][0]).toBe(2)
   })
 
   test("'cli' component can be overridden away like any other named component", async () => {
