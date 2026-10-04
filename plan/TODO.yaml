@@ -36,3 +36,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 4
+          slug: rewrite-assembler
+          title: Rewrite Assembler And Drop max-lines Disable
+          path: phase-01-split-eslint-config/004-rewrite-assembler.md
+          done: false
+          tier: sonnet-med
+          git:
+            branch: null
+            commit: []
+            merge: null
