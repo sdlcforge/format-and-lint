@@ -59,7 +59,7 @@ phases:
           slug: docs-and-ordering-test
           title: Update Docs And Add Ordering Test
           path: phase-01-split-eslint-config/005-docs-and-ordering-test.md
-          done: false
+          done: true
           tier: sonnet-med
           digest: Updated architecture and developer docs to point at eslint-components modules; added 3-test assembly-order and default-wiring test, mutation swap of order is caught. Optional engines-branch test skipped (needs module-isolated ESM re-import).
           git:
