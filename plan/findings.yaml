@@ -4,10 +4,10 @@ items:
       id: gC1A
       date: "2026-10-04"
       tags:
-        - type:ambiguity
+        - type:documentation
+        - priority:low
+        - effort:small
         - plan/phase:migrate-to-bun
-        - priority:unspecified
-        - effort:unspecified
       text: RELEASING.md line 48 suggests `npx @sdlcforge/format-and-lint@<version> --help`, but the CLI rejects --help with UNKNOWN_OPTION (also true before the migration); fix the doc suggestion or add a --help option.
     - title: The `eslint-disable-next-line import/no-unres
       id: 24KN
