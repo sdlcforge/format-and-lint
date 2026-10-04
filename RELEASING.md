@@ -4,14 +4,14 @@ The whole release is automated by [`scripts/release.sh`](./scripts/release.sh). 
 
 ## What the script does
 
-1. **Pre-flight.** Clean working tree; on the release branch (`main`, override with `RELEASE_BRANCH`); remote `origin` configured (override with `REMOTE`); credential checks `npm whoami` and `gh auth status` (warnings only in `--dry-run`); an interactive terminal for a real run.
-2. **Bump and verify.** `npm version <bump> --no-git-tag-version`, whose `preversion` hook runs `make test && make lint`, then `make build`. The build regenerates `README.md`; if that (or anything else) changes a tracked file besides the manifests, the script reverts the bump and stops.
-3. **Commit and tag.** A `release: <version>` commit containing only the `package.json`/`package-lock.json` bump, and an annotated tag `v<version>`.
+1. **Pre-flight.** Clean working tree; on the release branch (`main`, override with `RELEASE_BRANCH`); remote `origin` configured (override with `REMOTE`); `bun` and `npm` on PATH (`bun` is checked by the script); credential checks `npm whoami` and `gh auth status` (warnings only in `--dry-run`); an interactive terminal for a real run.
+2. **Bump and verify.** `npm version <bump> --no-git-tag-version`, whose `preversion` hook runs `make test && make lint`, then `make build`. The build regenerates `README.md`; if that (or anything else) changes a tracked file besides `package.json`, the script reverts the bump and stops.
+3. **Commit and tag.** A `release: <version>` commit containing only the `package.json` version bump, and an annotated tag `v<version>`.
 4. **Push.** `git push origin refs/heads/<branch>`, then `git push origin refs/tags/v<version>` (skipped if the remote tag already exists).
 5. **Publish.** `npm publish --access public --tag <dist-tag>` (skipped if that version is already on npm). See [Dist-tag](#dist-tag).
 6. **GitHub release.** `gh release create v<version> --repo <owner/repo> --verify-tag` with `--prerelease` for prerelease versions (skipped if the release exists).
 
-**Manifests:** `package.json` (`version`, primary) and `package-lock.json`. **Build:** `make build` (invoked by the `prepack` hook too); tests `make test`; lint `make lint`. **Artifacts:** everything under `dist/` (`dist/fandl-exec.js`, `dist/fandl.js`, source maps, `dist/babel/*`), per the `files` field of `package.json`. **Tag prefix:** `v` (matches every existing tag, e.g. `v1.0.0-alpha.31`).
+**Manifests:** `package.json` (`version`) only; `bun.lock` records no root version, so a bump does not touch it, and there is no npm lockfile. **Build:** `make build` (invoked by the `prepack` hook too); tests `make test`; lint `make lint`. **Artifacts:** everything under `dist/` (`dist/fandl-exec.js`, `dist/fandl.js`, source maps, `dist/babel/*`), per the `files` field of `package.json`. **Tag prefix:** `v` (matches every existing tag, e.g. `v1.0.0-alpha.31`).
 
 **Changelog.** There is no changelog file. Release notes are generated from first-parent git history since the previous `v*` tag (one line per merged branch, bookkeeping commits filtered by the `NOTES_SKIP_PATTERNS` list in the script, plus a compare link) and passed to `gh release create --notes-file`. User-facing change descriptions live in the README's release-notes section, which is generated from `src/docs/README.*.md`; update those sources in the feature branch, not at release time.
 
@@ -40,7 +40,8 @@ The package is on a prerelease line (`1.0.0-alpha.N`). Use `prerelease` to incre
 - Credential pre-flight: `npm whoami` and `gh auth status` must pass. If either fails, authenticate yourself in your own terminal (`npm login`, `gh auth login`) and re-run. The script never accepts a credential as an argument.
 - npm publish may require an interactive one-time code (2FA). The publish step is **user-run**: run the script from an interactive terminal and let npm prompt for the code.
 - Confirm the exact version and dist-tag with the user before the first non-dry run. Run `--dry-run` first.
-- Dependencies installed (`npm ci`); the build and tests need them.
+- Both `npm` and `bun` must be installed. bun is the dev runtime and the test/build agent (`make test`, `make lint`, `make build` run under it); npm remains the publish agent because the package is published to the npm registry and the script relies on the npm CLI for versioning, `npm whoami`/2FA one-time-code prompting, dist-tag handling, and `npm view`/`npm pack`/`npm publish` idempotency checks.
+- Dependencies installed (`bun install --frozen-lockfile`); the build and tests need them.
 
 ## Verification
 
@@ -49,6 +50,6 @@ After a real run: `npm view @sdlcforge/format-and-lint dist-tags version`, `git 
 ## Rollback and recovery
 
 - **Interrupted release:** re-run with the explicit version; every step whose result already exists is skipped. The script refuses if the tag exists but is not at `HEAD`.
-- **Failed before the commit** (test, lint, or build failure): the bump is left uncommitted in `package.json`/`package-lock.json`; restore with `git restore package.json package-lock.json`, fix the problem, and re-run.
+- **Failed before the commit** (test, lint, or build failure): the bump is left uncommitted in `package.json`; restore with `git restore package.json`, fix the problem, and re-run.
 - **Published versions are never unpublished, and tags are never deleted or force-moved, without an explicit user instruction.** Fix forward: release the next version. If a bad version must be withdrawn, the user decides between `npm deprecate` and `npm unpublish` and runs it themselves.
 - **Wrong dist-tag:** `npm dist-tag add @sdlcforge/format-and-lint@<version> <tag>` (user-run, needs 2FA).

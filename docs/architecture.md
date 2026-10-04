@@ -132,7 +132,7 @@ Default: `defaultJsxConfig`. `files`: `jsxLikeExts` (`.jsx` and `.tsx`). Adds br
 
 ### `test`
 
-Default: `defaultTestsConfig`. `files`: `**/__tests__/**/*` and `**/*.test{allExts}` — the directory glob now matches the same double-underscore `__tests__` convention the `jsdoc`/`tsJsdoc` components' `ignores` use (a prior single-underscore `_tests_` typo was corrected). Adds Jest global variables and relaxes size limits for test files: `max-lines-per-function` off, `max-lines` raised to 500.
+Default: `defaultTestsConfig`. `files`: `**/__tests__/**/*` and `**/*.test{allExts}` — the directory glob now matches the same double-underscore `__tests__` convention the `jsdoc`/`tsJsdoc` components' `ignores` use (a prior single-underscore `_tests_` typo was corrected). Adds the `globals` package's `jest` global names (which also cover `describe`/`test`/`expect`/`beforeAll`/... as provided by `bun:test`; shipped behavior is unchanged) and relaxes size limits for test files: `max-lines-per-function` off, `max-lines` raised to 500.
 
 ### `ts`
 
