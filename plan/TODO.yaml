@@ -18,7 +18,7 @@ phases:
             branch: plan/eslint-config-split-01-001
             commit:
                 - c1f52cb
-            merge: null
+            merge: 206c2a615d7b87af82d000b096e0658c1afdac25
         - number: 2
           slug: base-rules-and-base
           title: Extract Base Rules And Base Component
