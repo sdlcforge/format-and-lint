@@ -52,6 +52,8 @@ say "Pre-flight"
   || { echo "Must be on branch '$RELEASE_BRANCH' (override with RELEASE_BRANCH)." >&2; exit 1; }
 [[ -z "$(git status --porcelain)" ]] || { echo "Working tree is not clean." >&2; exit 1; }
 git remote get-url "$REMOTE" >/dev/null || { echo "Remote '$REMOTE' not configured." >&2; exit 1; }
+# bun is the dev runtime: the preversion (make test && make lint) and prepack (make build) hooks need it.
+command -v bun >/dev/null 2>&1 || { echo "bun not found on PATH; install bun (https://bun.sh) — make test/lint/build require it." >&2; exit 1; }
 # Credential checks are hard failures for a real release, warnings for a dry run.
 preflight_fail() {
   if (( DRY_RUN )); then warn "$1 (a real release would stop here)"; else echo "$1" >&2; exit 1; fi
@@ -83,25 +85,25 @@ if (( ! RESUME )); then
   NEW=$(node -p "require('./package.json').version")
   TAG="v$NEW"
   if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-    echo "Tag $TAG already exists." >&2; git checkout -- package.json package-lock.json; exit 1
+    echo "Tag $TAG already exists." >&2; git checkout -- package.json; exit 1
   fi
   say "Building"
   make build
   # The build regenerates README.md; anything beyond the manifests changing means the committed docs were stale.
-  DIRTY=$(git status --porcelain | grep -v -E ' (package\.json|package-lock\.json)$' || true)
+  DIRTY=$(git status --porcelain | grep -v -E ' package\.json$' || true)
   if [[ -n "$DIRTY" ]]; then
     echo "Build modified tracked files other than the manifests; commit or fix these first:" >&2
     echo "$DIRTY" >&2
-    git checkout -- package.json package-lock.json
+    git checkout -- package.json
     exit 1
   fi
 
   if (( DRY_RUN )); then
     say "Dry run: test, lint and build passed for $NEW; checking package contents, then reverting local edits"
     npm pack --dry-run 2>&1 | tail -n 15; PACKED=1
-    git checkout -- package.json package-lock.json
+    git checkout -- package.json
   else
-    git add package.json package-lock.json
+    git add package.json
     git commit -m "release: $NEW"
     git tag -a "$TAG" -m "$TAG"
   fi
