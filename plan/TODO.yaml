@@ -46,3 +46,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 5
+          slug: update-docs-for-bun
+          title: Update README Sources, Developer Notes, and Architecture Docs for Bun
+          path: phase-01-migrate-to-bun/005-update-docs-for-bun.md
+          done: false
+          tier: sonnet-low
+          git:
+            branch: null
+            commit: []
+            merge: null
