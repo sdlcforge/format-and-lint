@@ -68,3 +68,11 @@ Move `baseIndentOptions` (lines 95-119) unchanged, including its explanatory com
 - [Plan overview](../overview.md) and [research findings](../notes/split-research-findings.md), risks 1, 2, 3.
 - `src/lib/default-config/eslint-config.mjs` (source of the moved code).
 - `src/lib/default-config/test/eslint.config.test.mjs` (existing integration test, shows how tests call `getEslintConfig`).
+
+## Status
+
+- Outcome: succeeded (2026-10-04).
+- Baseline: `plan/resources/config-snapshot.baseline.json` written from untouched source via `src/lib/default-config/test/zz-config-snapshot.test.mjs` (`CONFIG_SNAPSHOT=write|compare`); compare passes, a deliberate edit to `eslint-config.mjs` fails it (reverted).
+- New modules: `src/lib/default-config/eslint-components/shared.mjs` (four `..` depth verified under Jest), `src/lib/default-config/eslint-components/indent-options.mjs`.
+- `make test` passes (snapshot suite skipped when unset). `make lint` reports 3 pre-existing errors in unrelated files (`select-files-from-options.mjs`, `mock-read-file.mjs`, `process-gitignore.test.mjs`); new files are clean.
+- `eslint-config.mjs` untouched.
