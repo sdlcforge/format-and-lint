@@ -27,3 +27,7 @@ architectural_impact: false
 ## References
 
 - [bun migration findings](../notes/bun-migration-findings.md) decisions 3 and 4.
+
+## Status
+
+Outcome: succeeded (2026-10-04). `bun.lock` generated from `package-lock.json`, `package-lock.json` removed, `jest` and `@liquid-labs/sdlc-resource-jest` dropped from `package.json`. Validation passed: no jest references in `package.json`/`bun.lock`; `bun install --frozen-lockfile` exit 0 after `rm -rf node_modules`; hoisted packjs rollup config and `.bin/rollup`, `.bin/jsdoc2md` present. Versions unchanged from the old lock for eslint 9.39.4, prettier 3.8.1, packjs 1.0.0-beta.2, rollup 4.60.1, jsdoc-to-markdown 9.1.3, dmd-readme-api 1.0.0-beta.8, command-line-args 6.0.2 (no drift). `_sdlc` block and `.gitignore` unchanged.
