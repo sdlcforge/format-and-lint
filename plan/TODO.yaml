@@ -5,6 +5,7 @@ phases:
     - number: 1
       slug: migrate-to-bun
       title: Migrate Development Runtime from npm and Jest to Bun
+      diff_base: d0e39a54d19d80b86328da0550225d556ee506fb
       tasks:
         - number: 1
           slug: switch-lockfile-and-dev-deps
