@@ -1,5 +1,5 @@
 # @sdlcforge/format-and-lint
-[![coverage: 97%](./.readme-assets/coverage.svg)](https://github.com/liquid-labs/format-and-lint/pulls?q=is%3Apr+is%3Aclosed)
+[![coverage: 97%](./.readme-assets/coverage.svg)](https://github.com/sdlcforge/format-and-lint/pulls?q=is%3Apr+is%3Aclosed)
 
 Pre-configured formatting and lint tool combining the best of prettier and eslint. Aka, fandl.
 
