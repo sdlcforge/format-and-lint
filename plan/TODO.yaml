@@ -57,11 +57,13 @@ phases:
           slug: update-docs-for-bun
           title: Update README Sources, Developer Notes, and Architecture Docs for Bun
           path: phase-01-migrate-to-bun/005-update-docs-for-bun.md
-          done: false
+          done: true
           tier: sonnet-low
+          digest: Docs updated for bun with consumer npm install text preserved and bun equivalents added beside it. README regenerated cleanly via make build. DEVELOPER_NOTES.md gained a Development setup section; architecture.md defaultTestsConfig sentence fixed; tests.mjs change is comments only. Remaining jest mentions deliberate (consumer globals).
           git:
-            branch: null
-            commit: []
+            branch: plan/npm-to-bun-01-005
+            commit:
+                - 33b2316
             merge: null
         - number: 6
           slug: verify-bun-migration-end-to-end
