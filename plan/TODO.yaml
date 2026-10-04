@@ -15,5 +15,6 @@ phases:
           digest: Added single .flow/ entry to .gitignore; nothing tracked under .flow.
           git:
             branch: plan/migrate-sdlcforge-06-001
-            commit: []
+            commit:
+                - f6bb4c2
             merge: null
