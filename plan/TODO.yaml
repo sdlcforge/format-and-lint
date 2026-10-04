@@ -46,3 +46,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 5
+          slug: docs-and-ordering-test
+          title: Update Docs And Add Ordering Test
+          path: phase-01-split-eslint-config/005-docs-and-ordering-test.md
+          done: false
+          tier: sonnet-med
+          git:
+            branch: null
+            commit: []
+            merge: null
