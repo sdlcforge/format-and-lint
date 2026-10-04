@@ -56,3 +56,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 6
+          slug: verify-bun-migration-end-to-end
+          title: Verify Bun Migration End to End Including Node Compatibility
+          path: phase-01-migrate-to-bun/006-verify-bun-migration-end-to-end.md
+          done: false
+          tier: sonnet-low
+          git:
+            branch: null
+            commit: []
+            merge: null
