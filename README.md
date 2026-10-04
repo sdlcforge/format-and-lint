@@ -247,4 +247,4 @@ Note, the component structure is essentially a prototype at this point. Future v
 
 Fixed: multiline `enum` bodies used to lose the trailing comma on their last member because `@stylistic/comma-dangle`'s options didn't name an `enums` node type; the config now sets `enums: 'always-multiline'` alongside `arrays`/`objects`, so trailing commas are enforced there too.
 
-See [docs/architecture.md](./docs/architecture.md) for a full description of the component-composition model and the prettier-then-ESLint reformatting pipeline, and [DEVELOPER_NOTES.md](./DEVELOPER_NOTES.md) for maintainer-facing implementation notes and known gotchas.
+See [docs/architecture.md](./docs/architecture.md) for a full description of the component-composition model and the prettier-then-ESLint reformatting pipeline, [DEVELOPER_NOTES.md](./DEVELOPER_NOTES.md) for maintainer-facing implementation notes and known gotchas, and [RELEASING.md](./RELEASING.md) for the release procedure.
