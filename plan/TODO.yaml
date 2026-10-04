@@ -5,4 +5,14 @@ phases:
     - number: 1
       slug: migrate-to-bun
       title: Migrate Development Runtime from npm and Jest to Bun
-      tasks: []
+      tasks:
+        - number: 1
+          slug: switch-lockfile-and-dev-deps
+          title: Switch Lockfile to bun.lock and Remove Jest Dev Dependencies
+          path: phase-01-migrate-to-bun/001-switch-lockfile-and-dev-deps.md
+          done: false
+          tier: sonnet-med
+          git:
+            branch: null
+            commit: []
+            merge: null
