@@ -1,14 +1,5 @@
 version: 2
 items:
-    - title: Pin rollup; avoid bunx registry fallback
-      id: en6s
-      date: "2026-10-04"
-      tags:
-        - type:security
-        - priority:low
-        - effort:small
-        - plan/phase:migrate-to-bun
-      text: 'Makefile lines 19-21 run `bunx rollup` and `bunx jsdoc2md`. rollup is only a transitive dependency (via @sdlcforge/packjs); if a bin is not linked in node_modules/.bin, bunx falls back to fetching an unpinned package from the registry (npx behaved the same, so not a regression). Optional hardening: add rollup as an explicit devDependency or invoke ./node_modules/.bin/rollup / `bun x --no-install` so an unresolved bin fails instead of fetching. Agent-authored finding; confidence low.'
     - title: process-package-ignores test relies on chdir
       id: 0jh3
       date: "2026-10-04"
@@ -38,4 +29,9 @@ closed:
       title: The `eslint-disable-next-line import/no-unres
       disposition: promoted
       ref: 24KN
+      date: "2026-10-04"
+    - id: en6s
+      title: Pin rollup; avoid bunx registry fallback
+      disposition: promoted
+      ref: en6s
       date: "2026-10-04"
