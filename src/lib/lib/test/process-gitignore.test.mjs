@@ -1,9 +1,8 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-// lint thinks this is extraneous because 'jest' is a defined global; but just only pushes into the global space for
-// tests, not tests libraries so we have to disable the check.
-import { jest } from '@jest/globals' // eslint-disable-line node/no-extraneous-import
+// bun only injects the test globals into files that do not import from 'bun:test', so everything used here is imported.
+import { afterAll, afterEach, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 
 import { processGitignore } from '../process-gitignore'
 
@@ -13,7 +12,7 @@ describe('processGitignore', () => {
   let stderr, msg
 
   beforeEach(() => {
-    stderr = jest.spyOn(process.stderr, 'write').mockImplementation((warn) => {
+    stderr = spyOn(process.stderr, 'write').mockImplementation((warn) => {
       msg = warn
     })
   })
