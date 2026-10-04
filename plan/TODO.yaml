@@ -64,7 +64,7 @@ phases:
             branch: plan/npm-to-bun-01-005
             commit:
                 - 33b2316
-            merge: null
+            merge: 0b81db1709168cf24335033d6e7bc16544ad8b5a
         - number: 6
           slug: verify-bun-migration-end-to-end
           title: Verify Bun Migration End to End Including Node Compatibility
