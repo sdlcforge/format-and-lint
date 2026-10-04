@@ -49,6 +49,7 @@ phases:
           path: phase-01-split-eslint-config/004-rewrite-assembler.md
           done: false
           tier: sonnet-med
+          digest: Replaced 443-line eslint-config.mjs with a 40-line assembler, dropped the max-lines disable. Baseline snapshot matches exactly; make test, make lint and built-bundle smoke test (incl. shebang semantics) pass.
           git:
             branch: null
             commit: []
