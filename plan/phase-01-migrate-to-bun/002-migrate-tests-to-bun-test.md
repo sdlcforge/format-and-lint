@@ -40,3 +40,10 @@ architectural_impact: false
 - After the gitignore spy port and mock helper removal.
 - After the three fixture-based tests pass.
 - After `bunfig.toml` and the full `bun test` run.
+
+## Status
+
+- Outcome: succeeded (2026-10-04). `bun test` from the worktree root: 55 pass, 0 fail across 12 files; each test file also passes alone.
+- Changed: `bunfig.toml` (new), `src/lib/lib/test/mock-read-file.mjs` (deleted), `src/lib/lib/test/data/patterns/test-patterns.txt` (new fixture), the three fixture-based tests, and `process-gitignore.test.mjs` (`spyOn`).
+- Note: a file that imports from `bun:test` no longer receives the injected globals, so `process-gitignore.test.mjs` imports `describe`/`test`/`expect`/hooks explicitly alongside `spyOn`.
+- Note: `src/lib/default-config/eslint-components/shared.mjs` needs `dist/babel/babel.config.cjs` (built by make, task 003); a copy of the main checkout's `dist/` was used locally (gitignored) for verification.
