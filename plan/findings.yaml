@@ -13,7 +13,7 @@ items:
       date: "2026-10-04"
       tags:
         - type:documentation
-        - priority:unspecified
-        - effort:unspecified
+        - priority:low
+        - effort:small
       text: .sdlc-data.yaml registers the @liquid-labs/sdlc-projects-badges-coverage builder that produces .readme-assets/coverage.svg, presumably from jest coverage output under qa/coverage (Makefile). After the bun:test migration the coverage format is lcov/text; confirm the badge builder still works or switch its input, otherwise the README coverage badge goes stale.
 closed: []
