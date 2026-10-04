@@ -67,3 +67,11 @@ items:
         - plan/phase:migrate-to-bun
         - plan/slug:npm-to-bun
       text: src/lib/lib/test/process-package-ignores.test.mjs (lines 5-24) uses process.chdir(tmpDir) in beforeAll and restores it in afterAll. bun test runs all files in one process, so a failure between hooks or a future --concurrent run could leak the changed cwd into other files using relative paths. No defect today. If concurrency is added, inject the package.json path instead of relying on process.cwd(). Agent-authored finding; confidence medium.
+    - title: Test publishing with bun publish
+      id: YXMj
+      date: "2026-10-04"
+      tags:
+        - type:optimization
+        - priority:low
+        - effort:medium
+      text: 'Release publishing still uses npm (npm version, npm publish) in scripts/release.sh and RELEASING.md. Evaluate `bun publish` as a replacement: confirm it supports the existing OTP/2FA prompt, --access public, dist-tags (--tag), and a dry run; check it produces a tarball equivalent to `npm pack` (same files list, no bun.lock or bunfig.toml shipped); and that the `preversion`/`prepack` hooks and `engines.node` handling behave the same. Test with a dry run or a prerelease before changing the release flow.'
