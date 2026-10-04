@@ -9,3 +9,12 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'The source-code comment directly above `defaultCliConfig` in src/lib/default-config/eslint-config.mjs (around lines 404-407) says "A CLI entrypoint is identified by either of two independent signals: a ''cli/'' path segment ... or a ''-cli'' basename suffix" -- the same imprecision just corrected in README.md/docs/architecture.md (the path-segment branch actually exempts every file under cli/, not just entrypoints, e.g. library helpers like src/cli/lib/*.mjs). Technically accurate as intent/design commentary, but inconsistent with the now-corrected docs. Left untouched during the doc-only fix (out of that task''s scope). Consider rewording for consistency.'
+    - title: package ignores read devPkg, not _sdlc
+      id: aylA
+      date: "2026-10-04"
+      tags:
+        - type:bug
+        - priority:medium
+        - effort:medium
+        - plan/slug:npm-to-bun
+      text: src/lib/lib/process-package-ignores.mjs reads package.json:devPkg.linting.ignores (also named in src/cli/cli-spec.mjs), but this repo's own package.json keeps its lint ignores under _sdlc.linting.ignores, so the ignores are likely never applied. Decide on the canonical key (or support both) and update code, test, and docs.
