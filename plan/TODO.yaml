@@ -11,11 +11,13 @@ phases:
           slug: switch-lockfile-and-dev-deps
           title: Switch Lockfile to bun.lock and Remove Jest Dev Dependencies
           path: phase-01-migrate-to-bun/001-switch-lockfile-and-dev-deps.md
-          done: false
+          done: true
           tier: sonnet-med
+          digest: Migrated the lockfile with bun install while package-lock.json was still present, then deleted it and removed the jest and sdlc-resource-jest devDependencies. Frozen install passes; key versions identical to old lock. bun reported 'Blocked 1 postinstall' (untrusted-script protection); no effect on lock.
           git:
-            branch: null
-            commit: []
+            branch: plan/npm-to-bun-01-001
+            commit:
+                - 65f3fd8
             merge: null
         - number: 2
           slug: migrate-tests-to-bun-test
