@@ -16,8 +16,8 @@ const scrub = (str) => str.split(root).join('<ROOT>')
 // Large function-bearing objects (plugins, parsers) are reduced to their key list plus 'meta'.
 const summarizeOpaque = (value, ancestors) => ({
   '[Opaque]' : true,
-  keys       : Object.keys(value).sort(),
-  meta       : value.meta === undefined ? null : normalize(value.meta, ancestors, false),
+  'keys'     : Object.keys(value).sort(),
+  'meta'     : value.meta === undefined ? null : normalize(value.meta, ancestors, false),
 })
 
 const normalize = (value, ancestors = [], walkOpaque = true) => {
@@ -45,17 +45,15 @@ const normalize = (value, ancestors = [], walkOpaque = true) => {
       for (const pluginName of Object.keys(child).sort()) {
         out[key][pluginName] = summarizeOpaque(child[pluginName], next)
       }
-    } else if (
-      walkOpaque === true &&
-      key === 'parser' &&
-      child !== null &&
-      typeof child === 'object'
-    ) {
+    }
+    else if (walkOpaque === true && key === 'parser' && child !== null && typeof child === 'object') {
       out[key] = summarizeOpaque(child, next)
-    } else {
+    }
+    else {
       out[key] = normalize(child, next, walkOpaque)
     }
   }
+
   return out
 }
 
@@ -82,6 +80,7 @@ const describeDiff = (expected, actual) => {
       }
     }
   }
+
   return lines.join('\n')
 }
 
@@ -93,6 +92,7 @@ maybeDescribe('config snapshot', () => {
     if (mode === 'write') {
       mkdirSync(dirname(baselinePath), { recursive : true })
       writeFileSync(baselinePath, actual)
+
       return
     }
     const expected = readFileSync(baselinePath, { encoding : 'utf8' })
