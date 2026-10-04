@@ -26,3 +26,11 @@ architectural_impact: false
 ## Assumptions
 
 - Tasks 001 to 005 complete and merged into the plan branch.
+
+## Status
+
+- Outcome: succeeded (2026-10-04). Verification only; no source changes.
+- Clean install/qa/build pass (55 tests, 12 files, 0 fail; coverage All files 99.23% lines / 98.53% branches). Fresh dist is byte-identical to a dist built from `main` with npm-installed deps (the earlier dist difference was a stale baseline, not the migration).
+- `node dist/fandl-exec.js --help` errors (UNKNOWN_OPTION) identically on the pre-migration build; the CLI has no `--help`. Import of `dist/fandl.js` works under Node (exports: formatAndLint, linebreakTypesExcept).
+- Tarball: 8 files (dist/, package.json, README.md); no bun.lock/bunfig.toml/tests. Leftover sweep hits are all deliberate. `package.json` diff vs `main`: only the two devDependency removals; `engines` unchanged.
+- `RELEASE_BRANCH=<branch> scripts/release.sh --dry-run prerelease` completes (needs RELEASE_BRANCH off `main`); worktree left clean.
