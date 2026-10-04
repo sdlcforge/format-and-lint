@@ -23,7 +23,7 @@ scripts/release.sh prerelease             # e.g. 1.0.0-alpha.31 -> 1.0.0-alpha.3
 scripts/release.sh 1.0.0-alpha.32         # explicit version; also resumes a partly finished release
 ```
 
-The bump argument is any `npm version` argument (`patch`, `minor`, `major`, `prerelease`) or an explicit version. The script never publishes without a bump argument and without `--dry-run` being absent; a real run also requires an interactive terminal.
+The bump argument is any `npm version` argument (`patch`, `minor`, `major`, `prerelease`) or an explicit version. The script only publishes when invoked with a bump argument and without `--dry-run`; a real run also requires an interactive terminal.
 
 ## Version bump rules
 
