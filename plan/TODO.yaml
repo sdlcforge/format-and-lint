@@ -25,6 +25,7 @@ phases:
           path: phase-01-split-eslint-config/002-base-rules-and-base.md
           done: false
           tier: sonnet-med
+          digest: Extracted base rules table and base component into base-rules.mjs and base.mjs via verbatim line-range moves; eslint-config.mjs untouched, snapshot equivalence left to task 004. make lint and make test pass.
           git:
             branch: null
             commit: []
