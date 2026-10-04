@@ -61,7 +61,7 @@ phases:
           tier: sonnet-low
           digest: Docs updated for bun with consumer npm install text preserved and bun equivalents added beside it. README regenerated cleanly via make build. DEVELOPER_NOTES.md gained a Development setup section; architecture.md defaultTestsConfig sentence fixed; tests.mjs change is comments only. Remaining jest mentions deliberate (consumer globals).
           git:
-            branch: null
+            branch: plan/npm-to-bun-01-005
             commit: []
             merge: null
         - number: 6
