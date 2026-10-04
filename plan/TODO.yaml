@@ -30,7 +30,7 @@ phases:
             branch: plan/eslint-config-split-01-002
             commit:
                 - bd9ca3b
-            merge: null
+            merge: 3d9e345a94a96984b460213d0b96f8539df5f1dd
         - number: 3
           slug: remaining-components
           title: Extract Remaining Config Components
