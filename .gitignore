@@ -6,3 +6,5 @@
 /qa
 /test-staging
 /yalc.lock
+# Flow per-machine runtime state; durable state lives in plan/ and flow/.
+.flow/
