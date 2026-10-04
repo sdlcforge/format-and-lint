@@ -44,3 +44,7 @@ Constraints:
 
 - [Plan overview](../overview.md), [research findings](../notes/split-research-findings.md).
 - `src/lib/default-config/js-extensions.mjs` (the extension string exports).
+
+## Status
+
+- Outcome: succeeded (2026-10-04). Six component files created under `src/lib/default-config/eslint-components/` (`jsdoc`, `ts-jsdoc`, `jsx`, `tests`, `ts`, `cli`), each const moved verbatim and exported by name via trailing `export { ... }` (repo style). `make lint` and `make test` pass; bodies verified identical to HEAD source lines; `baseIndentOptions` defined once and used in `ts.mjs`; `node/shebang` is `'off'` in `cli.mjs`.
