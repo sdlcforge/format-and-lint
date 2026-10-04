@@ -23,11 +23,13 @@ phases:
           slug: migrate-tests-to-bun-test
           title: Migrate Test Suite to bun:test
           path: phase-01-migrate-to-bun/002-migrate-tests-to-bun-test.md
-          done: false
+          done: true
           tier: sonnet-med
+          digest: Ported the jest suite to bun:test. Module mock replaced by a real fixture file and temp-dir cwd for processPackageIgnores. bunfig.toml scopes discovery to ./src. 55 tests pass in one process and individually. A file importing from bun:test gets no injected globals, so process-gitignore.test.mjs imports describe/test/expect explicitly. Tests need gitignored dist/babel/*.cjs built by make (task 003 must build before test).
           git:
-            branch: null
-            commit: []
+            branch: plan/npm-to-bun-01-002
+            commit:
+                - 548c086
             merge: null
         - number: 3
           slug: update-makefile-for-bun
