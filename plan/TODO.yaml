@@ -35,7 +35,7 @@ phases:
           slug: remaining-components
           title: Extract Remaining Config Components
           path: phase-01-split-eslint-config/003-remaining-components.md
-          done: false
+          done: true
           tier: sonnet-low
           digest: Moved six remaining components verbatim into eslint-components/ with minimal imports; eslint-config.mjs untouched; lint and tests pass.
           git:
