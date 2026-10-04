@@ -78,4 +78,4 @@ phases:
             branch: plan/npm-to-bun-01-006
             commit:
                 - a8a8602
-            merge: null
+            merge: 04c3375be87c1f31622ef847e6d40c0eaa6b6970
