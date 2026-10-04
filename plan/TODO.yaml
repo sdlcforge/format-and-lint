@@ -71,7 +71,7 @@ phases:
           slug: verify-bun-migration-end-to-end
           title: Verify Bun Migration End to End Including Node Compatibility
           path: phase-01-migrate-to-bun/006-verify-bun-migration-end-to-end.md
-          done: false
+          done: true
           tier: sonnet-low
           digest: Verification-only; every check passes with no source changes. Clean install, make qa (55 pass), make build, Node import and CLI lint run, npm pack/install smoke test, leftover-reference sweep, and release dry-run (npm publish retained) all pass. Fresh bun-built dist is byte-identical to a dist built from main with npm, so earlier baseline diff was staleness.
           git:
