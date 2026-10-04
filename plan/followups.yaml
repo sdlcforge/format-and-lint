@@ -27,3 +27,13 @@ items:
         - effort:small
         - plan/slug:npm-to-bun
       text: .sdlc-data.yaml registers the @liquid-labs/sdlc-projects-badges-coverage builder that produces .readme-assets/coverage.svg, presumably from jest coverage output under qa/coverage (Makefile). After the bun:test migration the coverage format is lcov/text; confirm the badge builder still works or switch its input, otherwise the README coverage badge goes stale.
+    - title: RELEASING.md line 48 suggests `npx @sdlcforge
+      id: gC1A
+      date: "2026-10-04"
+      tags:
+        - type:documentation
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+        - plan/slug:npm-to-bun
+      text: RELEASING.md line 48 suggests `npx @sdlcforge/format-and-lint@<version> --help`, but the CLI rejects --help with UNKNOWN_OPTION (also true before the migration); fix the doc suggestion or add a --help option.
