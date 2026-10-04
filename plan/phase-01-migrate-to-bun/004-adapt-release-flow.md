@@ -35,3 +35,9 @@ architectural_impact: false
 
 - After `release.sh` edits and the dry run.
 - After `RELEASING.md` edits.
+
+## Status
+
+- Outcome: succeeded (2026-10-04).
+- `scripts/release.sh`: removed all lockfile references (reverts/add/dirty filter now `package.json` only), added `bun` PATH pre-flight. `RELEASING.md` updated per requirements.
+- Validation: no `package-lock` hits; `bash -n` passes; shellcheck shows only 2 pre-existing warnings; `RELEASE_BRANCH=<branch> scripts/release.sh --dry-run prerelease` printed "Done (dry run)", pack listed 8 files (dist/ + package.json/README), tree clean afterward. `npm version` created no package-lock.json and bun.lock was unaffected.
