@@ -42,7 +42,7 @@ phases:
             branch: plan/eslint-config-split-01-003
             commit:
                 - 7f7c902
-            merge: null
+            merge: 8cd0beab7ce7afe18b9d4aad7e9183456ed98577
         - number: 4
           slug: rewrite-assembler
           title: Rewrite Assembler And Drop max-lines Disable
