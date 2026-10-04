@@ -26,3 +26,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 3
+          slug: remaining-components
+          title: Extract Remaining Config Components
+          path: phase-01-split-eslint-config/003-remaining-components.md
+          done: false
+          tier: sonnet-low
+          git:
+            branch: null
+            commit: []
+            merge: null
