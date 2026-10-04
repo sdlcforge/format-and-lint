@@ -39,3 +39,11 @@ architectural_impact: false
 
 - After path discovery and rollup/jsdoc2md changes (`make build` green).
 - After the test target rewrite (`make test` green).
+
+## Status
+
+- Outcome: succeeded (2026-10-04).
+- Validation: no npm/npx/jest/JEST in Makefile; `make build`, `make test`, `make lint`, `make qa` pass; `qa/unit-test.txt`, `qa/.unit-test.passed`, `qa/coverage/lcov.info` produced; second `make test` is a no-op; `TEST=<path>` filter works; dist shebang unchanged; README.md regenerated with no diff.
+- `diff -r` vs baseline dist: the baseline (built Apr 9) differs in fandl.js and fandl-exec.js (and maps) in import ordering and minified identifier names, plus size (9372 vs 8274 bytes, 15338 vs 14180), and the baseline has an extra CLAUDE.md. Attributable to a different dependency tree and source since the baseline.
+- Folded in: `// eslint-disable-next-line import/no-unresolved` above the `bun:test` import in `src/lib/lib/test/process-gitignore.test.mjs` so `make lint` passes.
+- Files: [Makefile](../../Makefile).

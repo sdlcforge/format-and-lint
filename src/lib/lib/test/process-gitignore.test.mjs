@@ -2,6 +2,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 // bun only injects the test globals into files that do not import from 'bun:test', so everything used here is imported.
+// eslint-disable-next-line import/no-unresolved
 import { afterAll, afterEach, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 
 import { processGitignore } from '../process-gitignore'
