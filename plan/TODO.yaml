@@ -16,3 +16,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 2
+          slug: migrate-tests-to-bun-test
+          title: Migrate Test Suite to bun:test
+          path: phase-01-migrate-to-bun/002-migrate-tests-to-bun-test.md
+          done: false
+          tier: sonnet-med
+          git:
+            branch: null
+            commit: []
+            merge: null
