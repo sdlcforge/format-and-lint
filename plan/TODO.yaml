@@ -17,4 +17,4 @@ phases:
             branch: plan/migrate-sdlcforge-06-001
             commit:
                 - f6bb4c2
-            merge: null
+            merge: 83d2bd9
