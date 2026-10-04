@@ -30,7 +30,7 @@ phases:
             branch: plan/npm-to-bun-01-002
             commit:
                 - 548c086
-            merge: null
+            merge: 5a0a579e5057108e366731f7e7f1674c07dc06be
         - number: 3
           slug: update-makefile-for-bun
           title: Update Makefile for Bun Build and Test Targets
