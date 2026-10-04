@@ -49,6 +49,7 @@ phases:
           path: phase-01-migrate-to-bun/004-adapt-release-flow.md
           done: false
           tier: sonnet-med
+          digest: Removed package-lock.json handling from release.sh, added a bun PATH pre-flight; RELEASING.md updated (bun dev runtime, npm publish agent, both required). Dry-run release passed; npm version creates no lockfile and bun.lock unaffected by a bump. bun publish deliberately not used.
           git:
             branch: null
             commit: []
