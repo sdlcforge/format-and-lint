@@ -40,3 +40,10 @@ Depends on tasks 001, 002 and 003.
 - [Plan overview](../overview.md), [research findings](../notes/split-research-findings.md) risks 1, 4, 6.
 - Followup `t0xt` (resolved by this task).
 - `Makefile` targets `build`, `test`, `lint`.
+
+## Status
+
+- Outcome: succeeded (2026-10-04).
+- `src/lib/default-config/eslint-config.mjs` rewritten as a 40-line assembler (disable comment removed; `getEslintConfig` and ordering comment verbatim). Temporary snapshot test removed; baseline kept in `plan/resources/`.
+- Validation: snapshot equivalence (CONFIG_SNAPSHOT=compare) passed; `make test` 12 suites/53 tests passed; `make lint` passed; no `eslint-disable` left under `src/lib/default-config/`; all files well under 300 lines; `make build` ok, no `eslint-components` string in dist bundles; dist smoke test (check and fix modes, shebang) behaved as expected.
+- Followup `t0xt` is resolved by this task.
