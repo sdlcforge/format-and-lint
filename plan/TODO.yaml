@@ -28,7 +28,8 @@ phases:
           digest: Extracted base rules table and base component into base-rules.mjs and base.mjs via verbatim line-range moves; eslint-config.mjs untouched, snapshot equivalence left to task 004. make lint and make test pass.
           git:
             branch: plan/eslint-config-split-01-002
-            commit: []
+            commit:
+                - bd9ca3b
             merge: null
         - number: 3
           slug: remaining-components
