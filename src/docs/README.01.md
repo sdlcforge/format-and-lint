@@ -16,6 +16,7 @@ Pre-configured formatting and lint tool combining the best of prettier and eslin
 
 ```bash
 npm i @sdlcforge/format-and-lint
+# or: bun add @sdlcforge/format-and-lint
 ```
 
 ## Usage
@@ -25,7 +26,7 @@ Note this is an ESM only package. We would [like to support CJS](https://github.
 ### CLI
 
 ```bash
-npx fandl lint # runs lint checks only with no changes to files
+npx fandl lint # runs lint checks only with no changes to files (with bun: bunx fandl lint)
 npx fandl # fixes what it can and reports on the rest
 npx fandl --files '**/weird-src/**/*.{js,cjs,mjs,jsx,ts,mts,cts,tsx}' # specify files pattern
 ```

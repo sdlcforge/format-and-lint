@@ -4,10 +4,10 @@ import { allExtsStr } from '../js-extensions'
 
 const defaultTestsConfig = {
   files           : ['**/__tests__/**/*', `**/*.test{${allExtsStr}}`],
-  // adds correct globals when processing jest tests
+  // adds correct globals when processing jest-compatible tests (jest, bun:test)
   languageOptions : { globals : globalsPkg.jest },
   rules           : {
-    // override default check for tests; Jest 'describe' functions can get very long, and that's OK
+    // override default check for tests; Jest-compatible (jest, bun:test) 'describe' functions can get very long, and that's OK
     'max-lines-per-function' : 'off',
     'max-lines'              : ['error', { max : 500, skipBlankLines : true, skipComments : true }],
   },
