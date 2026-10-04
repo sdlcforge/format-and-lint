@@ -24,10 +24,10 @@ This has been captured in [issue #2](https://github.com/liquid-labs/catalyst-res
 
 ## `eslint-config-standard-kit`'s `typescript: true` flag is a no-op
 
-`eslint-config.mjs` calls `standardConfig({ ..., typescript: true })` and consumes the result as
+`eslint-components/base-rules.mjs` calls `standardConfig({ ..., typescript: true })` and consumes the result as
 `standardPlugin.rules`. As of `eslint-config-standard-kit@1.0.0`, `standardConfig()` returns a
 **flat-config array**, not a plugin object -- the export shape changed in the 0.x -> 1.0.0 upgrade
-and this call site was never updated for it. `standardPlugin.rules` on an array is `undefined`, so
+and this call site was never updated for it (a `CAUTION` comment at the call site in `base-rules.mjs` says so). `standardPlugin.rules` on an array is `undefined`, so
 `...standardPlugin.rules` spreads nothing, and none of standard-kit's 244 rules (108 base
 Standard.js rules, 7 node, 23 jsx, 8 react, 1 sortImports, 97 TypeScript) actually reach fandl's
 effective configuration. The `delete rules['block-spacing']` / `delete rules['brace-style']` / etc.
