@@ -34,12 +34,12 @@ const fandl = async ({ argv = process.argv, stdout = process.stdout } = {}) => {
 
     const eslintConfig = eslintConfigPath === undefined ? undefined : await processConfigFile(eslintConfigPath)
 
-    const eslintComfigComponents =
+    const eslintConfigComponents =
       eslintConfigComponentsPath === undefined ? undefined : await processConfigFile(eslintConfigComponentsPath)
 
     const prettierConfig = prettierConfigPath === undefined ? undefined : await processConfigFile(prettierConfigPath)
 
-    const eslint = getEslint({ check, eslintConfig, eslintComfigComponents })
+    const eslint = getEslint({ check, eslintConfig, eslintConfigComponents })
 
     const { lintResults } = await formatAndLint({
       ...remainderOptions, // must come first; will commonly specify 'files'
