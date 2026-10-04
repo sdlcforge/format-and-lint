@@ -16,7 +16,8 @@ phases:
           digest: Migrated the lockfile with bun install while package-lock.json was still present, then deleted it and removed the jest and sdlc-resource-jest devDependencies. Frozen install passes; key versions identical to old lock. bun reported 'Blocked 1 postinstall' (untrusted-script protection); no effect on lock.
           git:
             branch: plan/npm-to-bun-01-001
-            commit: []
+            commit:
+                - 65f3fd8
             merge: null
         - number: 2
           slug: migrate-tests-to-bun-test
