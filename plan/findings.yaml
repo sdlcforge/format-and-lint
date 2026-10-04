@@ -5,8 +5,8 @@ items:
       date: "2026-10-04"
       tags:
         - type:bug
-        - priority:unspecified
-        - effort:unspecified
+        - priority:medium
+        - effort:medium
       text: src/lib/lib/process-package-ignores.mjs reads package.json:devPkg.linting.ignores (also named in src/cli/cli-spec.mjs), but this repo's own package.json keeps its lint ignores under _sdlc.linting.ignores, so the ignores are likely never applied. Decide on the canonical key (or support both) and update code, test, and docs.
     - title: Coverage badge builder assumes jest output
       id: hFOz
