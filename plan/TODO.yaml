@@ -40,7 +40,8 @@ phases:
           digest: Moved six remaining components verbatim into eslint-components/ with minimal imports; eslint-config.mjs untouched; lint and tests pass.
           git:
             branch: plan/eslint-config-split-01-003
-            commit: []
+            commit:
+                - 7f7c902
             merge: null
         - number: 4
           slug: rewrite-assembler
