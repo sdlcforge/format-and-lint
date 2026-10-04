@@ -18,7 +18,7 @@ phases:
             branch: plan/npm-to-bun-01-001
             commit:
                 - 65f3fd8
-            merge: null
+            merge: 89180648a8e24265d83edaaeef2fc9e48ebb6088
         - number: 2
           slug: migrate-tests-to-bun-test
           title: Migrate Test Suite to bun:test
