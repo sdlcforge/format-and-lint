@@ -8,6 +8,7 @@
  * Our one exception to the standard style is implementing aligned colons on multiline
  * 'key-spacing'. We think it makes things more readable. We also add a preference for regex literals where possible.
  */
+/* eslint-disable max-lines -- config file is a flat list of rule tables; splitting it would hurt readability */
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -306,6 +307,7 @@ if (engines?.node !== undefined) {
     'node/prefer-promises/dns'               : 'error',
     'node/prefer-promises/fs'                : 'error',
     'node/no-missing-import'                 : 'off', // 'import/no-unresolved' is used instead
+    'node/shebang'                           : 'error', // never auto-fixed (get-eslint.mjs); fandl must not change behavior
   })
 }
 
@@ -413,6 +415,7 @@ const defaultCliConfig = {
     // 'files' glob) keeps both rules at 'error' via the base component.
     'no-console'      : 'off',
     'no-process-exit' : 'off',
+    'node/shebang'    : 'off', // CLI entrypoints legitimately carry shebangs/execute bits
   },
 }
 

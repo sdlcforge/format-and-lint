@@ -3,6 +3,10 @@ import { ArgumentInvalidError } from 'standard-error-set'
 
 import { getEslintConfig } from '../default-config/eslint-config'
 
+// 'node/shebang' fixes add/remove shebangs, which changes runtime behavior. fandl must never change behavior on its
+// own, so that rule is report-only; everything else is fixed unless we're in 'check' mode.
+const buildFixPredicate = (check) => (message) => check === false && message.ruleId !== 'node/shebang'
+
 const getEslint = ({ check, eslintConfig, eslintConfigComponents }) => {
   if (eslintConfig !== undefined && eslintConfigComponents !== undefined) {
     throw new ArgumentInvalidError({
@@ -15,7 +19,7 @@ const getEslint = ({ check, eslintConfig, eslintConfigComponents }) => {
   }
 
   return new ESLint({
-    fix                : check === false,
+    fix                : buildFixPredicate(check),
     // this keeps eslint from insisting on an eslint config file
     overrideConfigFile : true,
     overrideConfig     : eslintConfig,
