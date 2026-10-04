@@ -5,6 +5,7 @@ phases:
     - number: 1
       slug: split-eslint-config
       title: Split ESLint Config Into Components
+      diff_base: 75c552272762da21b58d68f7645a6221a0dea6e7
       tasks:
         - number: 1
           slug: snapshot-shared-indent
