@@ -35,11 +35,13 @@ phases:
           slug: update-makefile-for-bun
           title: Update Makefile for Bun Build and Test Targets
           path: phase-01-migrate-to-bun/003-update-makefile-for-bun.md
-          done: false
+          done: true
           tier: sonnet-med
+          digest: 'Makefile migrated from npm/npx/jest to bun: package paths from node_modules, rollup and jsdoc2md via bunx, test target uses bun test with coverage into qa/coverage. build/test/lint/qa pass; README unchanged. Added one eslint-disable-next-line import/no-unresolved on the bun:test import in process-gitignore.test.mjs (task 002 file) so make lint passes; a lint-config fix for bun:* may be preferred. dist differs from stale baseline in import order/identifier names only (cause not proven; task 006 should verify).'
           git:
-            branch: null
-            commit: []
+            branch: plan/npm-to-bun-01-003
+            commit:
+                - 8f35940
             merge: null
         - number: 4
           slug: adapt-release-flow
