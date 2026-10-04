@@ -1,0 +1,8 @@
+slug: eslint-config-split
+version: 1
+title: ""
+phases:
+    - number: 1
+      slug: split-eslint-config
+      title: Split ESLint Config Into Components
+      tasks: []
