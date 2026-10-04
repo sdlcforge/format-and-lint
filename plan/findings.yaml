@@ -1,5 +1,14 @@
 version: 2
-items: []
+items:
+    - title: RELEASING.md line 48 suggests `npx @sdlcforge
+      id: gC1A
+      date: "2026-10-04"
+      tags:
+        - type:ambiguity
+        - plan/phase:migrate-to-bun
+        - priority:unspecified
+        - effort:unspecified
+      text: RELEASING.md line 48 suggests `npx @sdlcforge/format-and-lint@<version> --help`, but the CLI rejects --help with UNKNOWN_OPTION (also true before the migration); fix the doc suggestion or add a --help option.
 closed:
     - id: aylA
       title: package ignores read devPkg, not _sdlc
