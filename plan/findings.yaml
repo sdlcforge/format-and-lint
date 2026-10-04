@@ -1,14 +1,5 @@
 version: 2
 items:
-    - title: The `eslint-disable-next-line import/no-unres
-      id: 24KN
-      date: "2026-10-04"
-      tags:
-        - type:style
-        - priority:low
-        - effort:small
-        - plan/phase:migrate-to-bun
-      text: 'The `eslint-disable-next-line import/no-unresolved` on the bun:test import in src/lib/lib/test/process-gitignore.test.mjs:5 could be replaced by `ignore: [''^bun:'']` on import/no-unresolved in shipped src/lib/default-config/eslint-components/base-rules.mjs:134, but that changes consumer lint behaviour; decide whether to accept the disable comment or approve the config change.'
     - title: Pin rollup; avoid bunx registry fallback
       id: en6s
       date: "2026-10-04"
@@ -42,4 +33,9 @@ closed:
       title: RELEASING.md line 48 suggests `npx @sdlcforge
       disposition: promoted
       ref: gC1A
+      date: "2026-10-04"
+    - id: 24KN
+      title: The `eslint-disable-next-line import/no-unres
+      disposition: promoted
+      ref: 24KN
       date: "2026-10-04"
