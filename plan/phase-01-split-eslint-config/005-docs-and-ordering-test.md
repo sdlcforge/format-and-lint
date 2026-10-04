@@ -44,3 +44,10 @@ Add `src/lib/default-config/test/eslint-config-assembly.test.mjs` (extensionless
 
 - [Plan overview](../overview.md), [research findings](../notes/split-research-findings.md) (docs list, risks 3 and 4).
 - `docs/architecture.md`, `DEVELOPER_NOTES.md`.
+
+## Status
+
+- Outcome: succeeded (2026-10-04).
+- Docs updated: `docs/architecture.md`, `DEVELOPER_NOTES.md`. README.md contains no `eslint-config` reference.
+- Added `src/lib/default-config/test/eslint-config-assembly.test.mjs` (ordering and default-wiring tests). The optional `engines` branch test was skipped (needs module-isolated re-import under ESM Jest; not forced).
+- Validation: `make test` (55 passed), `make lint` passed, mutation swap of `jsx`/`tsJsdoc` made the ordering test fail and was reverted.
