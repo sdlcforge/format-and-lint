@@ -16,7 +16,8 @@ phases:
           digest: Captured deterministic baseline of resolved eslint config (3 variants) from untouched source, verified harness catches a one-char change; added shared.mjs (four-.. babel path depth fix, single package.json read) and indent-options.mjs, not yet imported. make test passes; make lint has 3 pre-existing errors in unrelated files.
           git:
             branch: plan/eslint-config-split-01-001
-            commit: []
+            commit:
+                - c1f52cb
             merge: null
         - number: 2
           slug: base-rules-and-base
