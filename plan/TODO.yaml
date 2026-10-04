@@ -16,3 +16,13 @@ phases:
             branch: null
             commit: []
             merge: null
+        - number: 2
+          slug: base-rules-and-base
+          title: Extract Base Rules And Base Component
+          path: phase-01-split-eslint-config/002-base-rules-and-base.md
+          done: false
+          tier: sonnet-med
+          git:
+            branch: null
+            commit: []
+            merge: null
