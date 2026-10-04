@@ -51,7 +51,7 @@ phases:
           tier: sonnet-med
           digest: Replaced 443-line eslint-config.mjs with a 40-line assembler, dropped the max-lines disable. Baseline snapshot matches exactly; make test, make lint and built-bundle smoke test (incl. shebang semantics) pass.
           git:
-            branch: null
+            branch: plan/eslint-config-split-01-004
             commit: []
             merge: null
         - number: 5
