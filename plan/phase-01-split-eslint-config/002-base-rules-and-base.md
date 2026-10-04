@@ -48,3 +48,9 @@ Move `plugins` (lines 85-93), `reactSettings` (line 81), and `defaultBaseConfig`
 
 - [Plan overview](../overview.md), [research findings](../notes/split-research-findings.md) (shared state and cycle avoidance; risks 3, 5).
 - `DEVELOPER_NOTES.md` (the `typescript: true` no-op entry, whose referenced file task 005 updates).
+
+## Status
+
+- Outcome: succeeded (2026-10-04).
+- Created `src/lib/default-config/eslint-components/base-rules.mjs` (187 lines) and `src/lib/default-config/eslint-components/base.mjs` (79 lines); `eslint-config.mjs` untouched.
+- Validation: rules table text identical to HEAD (lines 121-264); `node/shebang` is `'error'`; no `readFileSync`/`package.json` in base files; imports limited to `shared`, `base-rules`, `indent-options`; `make lint` and `make test` pass.
