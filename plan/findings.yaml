@@ -1,14 +1,5 @@
 version: 2
-items:
-    - title: process-package-ignores test relies on chdir
-      id: 0jh3
-      date: "2026-10-04"
-      tags:
-        - type:bug
-        - priority:low
-        - effort:small
-        - plan/phase:migrate-to-bun
-      text: src/lib/lib/test/process-package-ignores.test.mjs (lines 5-24) uses process.chdir(tmpDir) in beforeAll and restores it in afterAll. bun test runs all files in one process, so a failure between hooks or a future --concurrent run could leak the changed cwd into other files using relative paths. No defect today. If concurrency is added, inject the package.json path instead of relying on process.cwd(). Agent-authored finding; confidence medium.
+items: []
 closed:
     - id: aylA
       title: package ignores read devPkg, not _sdlc
@@ -34,4 +25,9 @@ closed:
       title: Pin rollup; avoid bunx registry fallback
       disposition: promoted
       ref: en6s
+      date: "2026-10-04"
+    - id: 0jh3
+      title: process-package-ignores test relies on chdir
+      disposition: promoted
+      ref: 0jh3
       date: "2026-10-04"
