@@ -54,7 +54,7 @@ phases:
             branch: plan/eslint-config-split-01-004
             commit:
                 - 2fc5737
-            merge: null
+            merge: 982ce64fce4fd158031d2759b5699b163805c179
         - number: 5
           slug: docs-and-ordering-test
           title: Update Docs And Add Ordering Test
