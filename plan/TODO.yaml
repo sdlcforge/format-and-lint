@@ -42,7 +42,7 @@ phases:
             branch: plan/npm-to-bun-01-003
             commit:
                 - 8f35940
-            merge: null
+            merge: ea5fea932200ee7834d1e3f80e1a17c026188daf
         - number: 4
           slug: adapt-release-flow
           title: Adapt Release Script and RELEASING.md to bun.lock
