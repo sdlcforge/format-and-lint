@@ -8,7 +8,7 @@ projects:
           priority: 0
           content: >-
             [![coverage:
-            97%](./.readme-assets/coverage.svg)](https://github.com/liquid-labs/format-and-lint/pulls?q=is%3Apr+is%3Aclosed)
+            97%](./.readme-assets/coverage.svg)](https://github.com/sdlcforge/format-and-lint/pulls?q=is%3Apr+is%3Aclosed)
           path: >-
             .readme-assets/coverage.svg
           purpose: Test coverage badge for README.md.
