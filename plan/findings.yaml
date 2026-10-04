@@ -18,6 +18,15 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'The `eslint-disable-next-line import/no-unresolved` on the bun:test import in src/lib/lib/test/process-gitignore.test.mjs:5 could be replaced by `ignore: [''^bun:'']` on import/no-unresolved in shipped src/lib/default-config/eslint-components/base-rules.mjs:134, but that changes consumer lint behaviour; decide whether to accept the disable comment or approve the config change.'
+    - title: Pin rollup; avoid bunx registry fallback
+      id: en6s
+      date: "2026-10-04"
+      tags:
+        - type:security
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+      text: 'Makefile lines 19-21 run `bunx rollup` and `bunx jsdoc2md`. rollup is only a transitive dependency (via @sdlcforge/packjs); if a bin is not linked in node_modules/.bin, bunx falls back to fetching an unpinned package from the registry (npx behaved the same, so not a regression). Optional hardening: add rollup as an explicit devDependency or invoke ./node_modules/.bin/rollup / `bun x --no-install` so an unresolved bin fails instead of fetching. Agent-authored finding; confidence low.'
 closed:
     - id: aylA
       title: package ignores read devPkg, not _sdlc
