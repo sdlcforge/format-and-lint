@@ -54,7 +54,7 @@ phases:
             branch: plan/npm-to-bun-01-004
             commit:
                 - ea3a298
-            merge: null
+            merge: eb7965118eba0027da2e7ba8ec0afd3d7bb8decc
         - number: 5
           slug: update-docs-for-bun
           title: Update README Sources, Developer Notes, and Architecture Docs for Bun
