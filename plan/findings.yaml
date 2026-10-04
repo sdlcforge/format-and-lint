@@ -1,14 +1,5 @@
 version: 2
 items:
-    - title: RELEASING.md line 48 suggests `npx @sdlcforge
-      id: gC1A
-      date: "2026-10-04"
-      tags:
-        - type:documentation
-        - priority:low
-        - effort:small
-        - plan/phase:migrate-to-bun
-      text: RELEASING.md line 48 suggests `npx @sdlcforge/format-and-lint@<version> --help`, but the CLI rejects --help with UNKNOWN_OPTION (also true before the migration); fix the doc suggestion or add a --help option.
     - title: The `eslint-disable-next-line import/no-unres
       id: 24KN
       date: "2026-10-04"
@@ -46,4 +37,9 @@ closed:
       title: Coverage badge builder assumes jest output
       disposition: promoted
       ref: hFOz
+      date: "2026-10-04"
+    - id: gC1A
+      title: RELEASING.md line 48 suggests `npx @sdlcforge
+      disposition: promoted
+      ref: gC1A
       date: "2026-10-04"
