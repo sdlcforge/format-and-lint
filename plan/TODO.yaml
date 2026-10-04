@@ -63,6 +63,6 @@ phases:
           tier: sonnet-med
           digest: Updated architecture and developer docs to point at eslint-components modules; added 3-test assembly-order and default-wiring test, mutation swap of order is caught. Optional engines-branch test skipped (needs module-isolated ESM re-import).
           git:
-            branch: null
+            branch: plan/eslint-config-split-01-005
             commit: []
             merge: null
