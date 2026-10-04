@@ -1,16 +1,13 @@
 version: 2
-items:
-    - title: Coverage badge builder assumes jest output
-      id: hFOz
-      date: "2026-10-04"
-      tags:
-        - type:documentation
-        - priority:low
-        - effort:small
-      text: .sdlc-data.yaml registers the @liquid-labs/sdlc-projects-badges-coverage builder that produces .readme-assets/coverage.svg, presumably from jest coverage output under qa/coverage (Makefile). After the bun:test migration the coverage format is lcov/text; confirm the badge builder still works or switch its input, otherwise the README coverage badge goes stale.
+items: []
 closed:
     - id: aylA
       title: package ignores read devPkg, not _sdlc
       disposition: promoted
       ref: aylA
+      date: "2026-10-04"
+    - id: hFOz
+      title: Coverage badge builder assumes jest output
+      disposition: promoted
+      ref: hFOz
       date: "2026-10-04"
