@@ -9,3 +9,61 @@ items:
         - priority:unspecified
         - effort:unspecified
       text: 'The source-code comment directly above `defaultCliConfig` in src/lib/default-config/eslint-config.mjs (around lines 404-407) says "A CLI entrypoint is identified by either of two independent signals: a ''cli/'' path segment ... or a ''-cli'' basename suffix" -- the same imprecision just corrected in README.md/docs/architecture.md (the path-segment branch actually exempts every file under cli/, not just entrypoints, e.g. library helpers like src/cli/lib/*.mjs). Technically accurate as intent/design commentary, but inconsistent with the now-corrected docs. Left untouched during the doc-only fix (out of that task''s scope). Consider rewording for consistency.'
+    - title: package ignores read devPkg, not _sdlc
+      id: aylA
+      date: "2026-10-04"
+      tags:
+        - type:bug
+        - priority:medium
+        - effort:medium
+        - plan/slug:npm-to-bun
+      text: src/lib/lib/process-package-ignores.mjs reads package.json:devPkg.linting.ignores (also named in src/cli/cli-spec.mjs), but this repo's own package.json keeps its lint ignores under _sdlc.linting.ignores, so the ignores are likely never applied. Decide on the canonical key (or support both) and update code, test, and docs.
+    - title: Coverage badge builder assumes jest output
+      id: hFOz
+      date: "2026-10-04"
+      tags:
+        - type:documentation
+        - priority:low
+        - effort:small
+        - plan/slug:npm-to-bun
+      text: .sdlc-data.yaml registers the @liquid-labs/sdlc-projects-badges-coverage builder that produces .readme-assets/coverage.svg, presumably from jest coverage output under qa/coverage (Makefile). After the bun:test migration the coverage format is lcov/text; confirm the badge builder still works or switch its input, otherwise the README coverage badge goes stale.
+    - title: RELEASING.md line 48 suggests `npx @sdlcforge
+      id: gC1A
+      date: "2026-10-04"
+      tags:
+        - type:documentation
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+        - plan/slug:npm-to-bun
+      text: RELEASING.md line 48 suggests `npx @sdlcforge/format-and-lint@<version> --help`, but the CLI rejects --help with UNKNOWN_OPTION (also true before the migration); fix the doc suggestion or add a --help option.
+    - title: The `eslint-disable-next-line import/no-unres
+      id: 24KN
+      date: "2026-10-04"
+      tags:
+        - type:style
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+        - plan/slug:npm-to-bun
+      text: 'The `eslint-disable-next-line import/no-unresolved` on the bun:test import in src/lib/lib/test/process-gitignore.test.mjs:5 could be replaced by `ignore: [''^bun:'']` on import/no-unresolved in shipped src/lib/default-config/eslint-components/base-rules.mjs:134, but that changes consumer lint behaviour; decide whether to accept the disable comment or approve the config change.'
+    - title: Pin rollup; avoid bunx registry fallback
+      id: en6s
+      date: "2026-10-04"
+      tags:
+        - type:security
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+        - plan/slug:npm-to-bun
+      text: 'Makefile lines 19-21 run `bunx rollup` and `bunx jsdoc2md`. rollup is only a transitive dependency (via @sdlcforge/packjs); if a bin is not linked in node_modules/.bin, bunx falls back to fetching an unpinned package from the registry (npx behaved the same, so not a regression). Optional hardening: add rollup as an explicit devDependency or invoke ./node_modules/.bin/rollup / `bun x --no-install` so an unresolved bin fails instead of fetching. Agent-authored finding; confidence low.'
+    - title: process-package-ignores test relies on chdir
+      id: 0jh3
+      date: "2026-10-04"
+      tags:
+        - type:bug
+        - priority:low
+        - effort:small
+        - plan/phase:migrate-to-bun
+        - plan/slug:npm-to-bun
+      text: src/lib/lib/test/process-package-ignores.test.mjs (lines 5-24) uses process.chdir(tmpDir) in beforeAll and restores it in afterAll. bun test runs all files in one process, so a failure between hooks or a future --concurrent run could leak the changed cwd into other files using relative paths. No defect today. If concurrency is added, inject the package.json path instead of relying on process.cwd(). Agent-authored finding; confidence medium.
