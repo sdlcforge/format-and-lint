@@ -64,6 +64,7 @@ fi
 
 # --- resolve version / resume -------------------------------------------------
 RESUME=0
+PACKED=0
 if [[ "$BUMP" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then NEW="$BUMP"; else NEW=''; fi
 if [[ -n "$NEW" && "$NEW" != "$CURRENT" ]] && git rev-parse -q --verify "refs/tags/v$NEW" >/dev/null; then
   echo "Tag v$NEW already exists but package.json is at $CURRENT; refusing (resume only from the tagged commit)." >&2; exit 1
@@ -96,7 +97,8 @@ if (( ! RESUME )); then
   fi
 
   if (( DRY_RUN )); then
-    say "Dry run: test, lint and build passed for $NEW; reverting local edits"
+    say "Dry run: test, lint and build passed for $NEW; checking package contents, then reverting local edits"
+    npm pack --dry-run 2>&1 | tail -n 15; PACKED=1
     git checkout -- package.json package-lock.json
   else
     git add package.json package-lock.json
@@ -141,8 +143,8 @@ fi
 # --- publish ------------------------------------------------------------------
 say "Publishing $PKG_NAME@$NEW to npm (dist-tag: $DIST_TAG)"
 if (( DRY_RUN )); then
-  echo "[dry-run] would run: npm publish --access public --tag $DIST_TAG; checking package contents"
-  npm pack --dry-run 2>&1 | tail -n 15
+  echo "[dry-run] would run: npm publish --access public --tag $DIST_TAG"
+  (( PACKED )) || npm pack --dry-run 2>&1 | tail -n 15
 elif [[ -n "$(npm view "$PKG_NAME@$NEW" version 2>/dev/null)" ]]; then
   echo "Already published; skipping."
 else
