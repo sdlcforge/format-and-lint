@@ -11,11 +11,13 @@ phases:
           slug: snapshot-shared-indent
           title: Capture Baseline Snapshot, Add Shared And Indent Modules
           path: phase-01-split-eslint-config/001-snapshot-shared-indent.md
-          done: false
+          done: true
           tier: sonnet-med
+          digest: Captured deterministic baseline of resolved eslint config (3 variants) from untouched source, verified harness catches a one-char change; added shared.mjs (four-.. babel path depth fix, single package.json read) and indent-options.mjs, not yet imported. make test passes; make lint has 3 pre-existing errors in unrelated files.
           git:
-            branch: null
-            commit: []
+            branch: plan/eslint-config-split-01-001
+            commit:
+                - c1f52cb
             merge: null
         - number: 2
           slug: base-rules-and-base
